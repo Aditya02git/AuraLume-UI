@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import './badge.css';
+import './Badge.css';
 
 const Badge = forwardRef(({
   children,
