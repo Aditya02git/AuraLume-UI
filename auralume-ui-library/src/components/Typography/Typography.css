@@ -1,0 +1,58 @@
+/* Typography Component Styles */
+.typography-container {
+  display: inline-block;
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: pre-wrap;
+  word-break: break-word;
+  position: relative;
+}
+
+.typography-char {
+  display: inline-block;
+  position: relative;
+  white-space: pre;
+  opacity: 1; /* Default to visible */
+  transform: none; /* Default transform */
+}
+
+/* Ensure spaces are preserved */
+.typography-char:empty {
+  width: 0.25em;
+}
+
+/* Prevent text selection during animation */
+.typography-container.animating {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Smooth transitions for manual triggers */
+.typography-container[data-trigger="click"],
+.typography-container[data-trigger="hover"] {
+  transition: all 0.2s ease;
+}
+
+.typography-container[data-trigger="click"]:hover,
+.typography-container[data-trigger="hover"]:hover {
+  opacity: 0.8;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .typography-char {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .typography-container {
+    text-shadow: none;
+  }
+}

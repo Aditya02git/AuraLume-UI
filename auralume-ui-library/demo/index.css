@@ -1,0 +1,557 @@
+@import "tailwindcss";
+/* For Chrome, Edge, Safari */
+
+/* .sidebar-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: inherit !important;
+} */
+
+/* === MAIN SIDEBAR BUTTON === */
+.sidebar-main-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-start;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  border-radius: 6px;
+}
+
+/* Compact sidebar mode */
+.sidebar-main-button.closed {
+  padding: 1rem 0.5rem;
+  justify-content: center;
+  gap: 0;
+}
+
+/* Text colors */
+.sidebar-main-button.light {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.sidebar-main-button.dark {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hover effect (only for non-expanded sections) */
+.sidebar-main-button.light:hover:not(.expanded) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-main-button.dark:hover:not(.expanded) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Active/expanded section */
+.sidebar-main-button.expanded {
+  background: rgba(0, 245, 255, 0.15);
+  color: #00f5ff;
+}
+
+/* === ICONS === */
+.sidebar-main-button .icon {
+  font-size: 1.2rem;
+}
+
+/* Text label (only visible when sidebar is open) */
+.sidebar-main-button .label {
+  flex: 1;
+  text-align: left;
+  background: transparent;
+}
+
+/* Dropdown icon */
+.dropdown-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-icon.rotated {
+  transform: rotate(0deg);
+}
+
+.dropdown-icon:not(.rotated) {
+  transform: rotate(-180deg);
+}
+
+/* Dark mode invert */
+.dropdown-icon.dark {
+  filter: invert(100%) brightness(100%);
+}
+
+
+
+/* ------------------------------------------------------------ */
+/* Base button style */
+.sidebar-expandedbutton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  margin: 0.25rem 0;
+  border-left: 3px solid transparent;
+}
+
+/* Light and Dark text colors */
+.sidebar-expandedbutton.light {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.sidebar-expandedbutton.dark {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hover (only affects inactive buttons) */
+.sidebar-expandedbutton.light:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-expandedbutton.dark:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Active state */
+.sidebar-expandedbutton.active {
+  background: rgba(0, 245, 255, 0.2);
+  color: #00f5ff;
+  border-left: 3px solid #00f5ff;
+}
+
+/* Optional icon style */
+.sidebar-expandedbutton .icon {
+  font-size: 1rem;
+}
+
+
+/* -----------------------Sidebar Link Button----------------------- */
+
+
+/* Sidebar button base style */
+.sidebar-linkbutton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-start;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  border-radius: 8px; /* optional for smoother hover effect */
+}
+
+/* Compact mode (when sidebar is closed) */
+.sidebar-linkbutton.compact {
+  padding: 1rem 0.5rem;
+  gap: 0;
+  justify-content: center;
+}
+
+/* Hover effect for light mode */
+.sidebar-linkbutton.light:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Hover effect for light mode */
+.sidebar-linkbutton.dark:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Light mode style */
+.sidebar-linkbutton.light {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Dark mode style */
+.sidebar-linkbutton.dark {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hover effect for dark mode */
+.sidebar-linkbutton.dark:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Icon size inside button */
+.sidebar-linkbutton .icon {
+  font-size: 1.2rem;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Sidebar navigation button base */
+.sidebar-nav-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-start;
+  font-size: 1rem;
+  border-left: 3px solid transparent;
+  margin-bottom: 0.25rem;
+  border-radius: 8px; /* optional for smooth hover */
+}
+
+/* Light mode style */
+.sidebar-nav-button.light {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Dark mode style */
+.sidebar-nav-button.dark {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Compact mode (sidebar closed) */
+.sidebar-nav-button.compact {
+  padding: 1rem 0.5rem;
+  gap: 0;
+  justify-content: center;
+}
+
+/* Hover effect (light mode) */
+.sidebar-nav-button.light:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode hover */
+.sidebar-nav-button.dark:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Active section (selected item) */
+.sidebar-nav-button.active {
+  background: rgba(0, 245, 255, 0.2);
+  color: #00f5ff;
+  border-left: 3px solid #00f5ff;
+}
+
+/* Icon size */
+.sidebar-nav-button .icon {
+  font-size: 1.2rem;
+}
+
+
+
+
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px; /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 245, 255, 0.1); /* subtle cyan tint */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00f5ff, #ff006e); /* matching gradient */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #00d4e6, #e6005c); /* darker gradient on hover */
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px; /* thinner scrollbar on mobile */
+  }
+}
+
+.halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.halo::before, 
+.halo::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  left: -120px;
+  top: -120px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #00f5ff, #ff006e);
+  filter: blur(20px);
+  animation: Grow 10s infinite linear;
+  -webkit-animation: Grow 10s infinite linear;
+}
+
+.halo::after {
+  filter: blur(40px);
+  animation-delay: 5s;
+}
+
+.halo img {
+  position: relative;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes Grow {
+  0% {
+    transform: scale(0.1);
+    -webkit-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    -webkit-transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.image-fade {
+  position: relative;
+  display: block;
+  width: 40%;
+  height: auto;
+
+  /* Fade out at bottom */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+
+/* .{
+  background: #00883b;
+
+} */
+
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* :global(body) {
+  --text-color: #f0f0f0;
+  --background-color: #5f5c58;
+  --link-color: #e2bd7d;
+  --link-hover-color: #e2bd7d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #ddd;
+  color: var(--text-color);
+  background: #000;
+  background: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+} */
+
+.demo {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* header {
+  position: absolute;
+  display: inline-block;
+  margin: 0 1em 0.5em 0;
+  padding: 1rem 3rem 1rem 1rem;
+  z-index: 10;
+  max-width: 50vw;
+  color: #5f5c58;
+}
+
+header b {
+  font-weight: 900;
+  color: #3399ff;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+}
+
+header h2 {
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: #3399ff;
+}
+
+header span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: block;
+}
+
+header button {
+  border: 0;
+  background: #3399ff;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+header button:hover {
+  background: #2288ee;
+} */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background: radial-gradient(transparent, white);
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#scene {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  header {
+    max-width: 80vw;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+  }
+}
+
+html, body {
+  /* overflow: hidden; */
+  width: 100%;
+}
+
+
+        @keyframes moveGrid {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(50px, 50px); }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* .grid-item:hover {
+          transform: scale(1.1) !important;
+          box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5) !important;
+          z-index: 10 !important;
+        } */
+
+        .hero-title {
+          animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-text {
+          animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero-button {
+          animation: fadeInUp 1s ease-out 0.4s backwards;
+          transition: transform 0.3s ease;
+        }
+
+        .hero-button:hover {
+          transform: scale(1.05);
+        }
+
+        .animated-bg {
+          animation: moveGrid 20s linear infinite;
+        }
+
+/* Hero Section Explore button */
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+button:hover .arrow {
+  transform: translateX(5px); /* moves arrow right on hover */
+}
+
+/* --------------------Shake Button-------------------- */
+
+.shake-button {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.shake-button:hover {
+    animation: shake 0.5s ;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.shake-button:active {
+    transform: scale(0.95);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* ----------------------------------------------------- */

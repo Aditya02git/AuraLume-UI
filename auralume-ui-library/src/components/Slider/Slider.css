@@ -1,0 +1,219 @@
+/* Base Slider Styles */
+.slider {
+  --slider-height: 6px;
+  --disabled-color: #9ca3af;
+  --disabled-thumb: #d1d5db;
+  
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.slider__container {
+  position: relative;
+  width: 100%;
+}
+
+/* Track Styles */
+.slider__track {
+  position: relative;
+  height: var(--slider-height);
+  background-color: var(--track-color, #e5e7eb);
+  border-radius: calc(var(--slider-height) / 2);
+  overflow: visible;
+}
+
+/* Fill Track */
+.slider__fill {
+  position: absolute;
+  height: 100%;
+  background-color: var(--fill-color, #000000);
+  border-radius: calc(var(--slider-height) / 2);
+  transition: none; /* No transition for instant response */
+  pointer-events: none;
+}
+
+/* Input Styles */
+.slider__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--slider-height);
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  z-index: 2;
+}
+
+.slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb-size, 20px);
+  height: var(--thumb-size, 20px);
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.slider__input::-moz-range-thumb {
+  width: var(--thumb-size, 20px);
+  height: var(--thumb-size, 20px);
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Thumb Styles */
+.slider__thumb {
+  position: absolute;
+  top: 50%;
+  width: var(--thumb-size, 20px);
+  height: var(--thumb-size, 20px);
+  background-color: var(--thumb-color, #fff);
+  border: 2px solid var(--thumb-border-color, var(--fill-color, #000));
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: none; /* No transition for instant movement */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+.slider__thumb:hover {
+  box-shadow: 0 0 3px 4px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease;
+}
+
+/* Dual Range Specific Styles */
+.slider--dual .slider__input--second {
+  z-index: 3;
+}
+
+.slider--dual .slider__thumb--second {
+  z-index: 2;
+}
+
+/* Active States */
+.slider--dragging {
+  user-select: none;
+}
+
+.slider--dragging .slider__track {
+  cursor: grabbing;
+}
+
+/* RTL Support */
+.slider--rtl .slider__thumb {
+  transform: translate(50%, -50%);
+}
+
+.slider--rtl .slider__thumb--active,
+.slider--rtl .slider--dragging .slider__thumb:hover {
+  transform: translate(50%, -50%) scale(1.1);
+}
+
+/* Disabled State */
+.slider--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.slider--disabled .slider__fill {
+  background-color: var(--disabled-color);
+}
+
+.slider--disabled .slider__thumb {
+  background-color: var(--disabled-thumb);
+  border-color: var(--disabled-color);
+  cursor: not-allowed;
+}
+
+/* Output Styles */
+.slider__output {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--output-color, #374151);
+}
+
+.slider__output-dual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slider__output-dual span:nth-child(2) {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Light Theme */
+.slider-light {
+  --thumb-size: 20px;
+  --thumb-color: #ffffff;
+  --track-color: #e5e7eb;
+  --fill-color: #2563eb;
+  --output-color: #374151;
+}
+
+.slider-light .slider__output-dual span:nth-child(2) {
+  color: #6b7280;
+}
+
+/* Dark Theme */
+.slider-dark {
+  --thumb-size: 20px;
+  --thumb-color: #1f2937;
+  --track-color: #374151;
+  --fill-color: #60a5fa;
+  --output-color: #f3f4f6;
+}
+
+.slider-dark .slider__output {
+  color: #f3f4f6;
+}
+
+.slider-dark .slider__output-dual span:nth-child(2) {
+  color: #9ca3af;
+}
+
+.slider-dark.slider--disabled .slider__fill {
+  background-color: #6b7280;
+}
+
+.slider-dark.slider--disabled .slider__thumb {
+  background-color: #4b5563;
+  border-color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .slider {
+    --thumb-size: 24px;
+  }
+  
+  .slider-light {
+    --thumb-size: 24px;
+  }
+  
+  .slider-dark {
+    --thumb-size: 24px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .slider__thumb,
+  .slider__fill {
+    transition: none !important;
+  }
+}

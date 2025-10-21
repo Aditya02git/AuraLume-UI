@@ -1,0 +1,15 @@
+/* TextMask.css */
+.text-mask {
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  line-height: 1.2;
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .text-mask {
+    color: transparent !important;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}

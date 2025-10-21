@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.vhs-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: "VT323", monospace;
+}
+
+/* VHS Frame */
+.vhs-frame {
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  padding: 0;
+  pointer-events: none;
+  right: 0;
+  top: 0;
+  z-index: 8;
+}
+
+.vhs-frame p {
+  font-size: var(--text-size, 20px);
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-color, rgb(255, 105, 105));
+}
+
+@media (max-width: 1199px) {
+  .vhs-frame p {
+    font-size: var(--text-size, 24px);
+  }
+}
+
+.vhs-play,
+.vhs-sequence,
+.vhs-year,
+.vhs-date {
+  position: absolute;
+  flex: none;
+  z-index: 1;
+  width: auto;
+}
+
+.vhs-play {
+  height: auto;
+  left: 100px;
+  top: 100px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: vhs-blink 1s infinite linear;
+}
+
+@media (max-width: 1199px) {
+  .vhs-play {
+    height: 15px;
+    left: 40px;
+    top: 40px;
+    gap: 1px;
+    align-items: stretch;
+  }
+
+  .vhs-play svg {
+    transform: scale(0.65);
+  }
+}
+
+.vhs-sequence {
+  bottom: 100px;
+  height: auto;
+  left: 100px;
+}
+
+@media (max-width: 1199px) {
+  .vhs-sequence {
+    height: 15px;
+    left: 40px;
+    bottom: 40px;
+  }
+}
+
+.vhs-year {
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  transform: none;
+  bottom: 100px;
+  height: auto;
+  right: 100px;
+  white-space: pre;
+}
+
+@media (max-width: 1199px) {
+  .vhs-year {
+    height: 15px;
+    bottom: 40px;
+    right: 40px;
+  }
+}
+
+.vhs-date {
+  align-content: flex-end;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 2px;
+  height: min-content;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  right: 100px;
+  top: 100px;
+}
+
+.vhs-date p {
+  line-height: 0.75;
+}
+
+@media (max-width: 1199px) {
+  .vhs-date {
+    right: 40px;
+    top: 40px;
+  }
+}
+
+.vhs-tl,
+.vhs-tr,
+.vhs-bl,
+.vhs-br {
+  position: absolute;
+  flex: none;
+  width: 37px;
+  height: 37px;
+  overflow: hidden;
+  z-index: 8;
+}
+
+.vhs-tl {
+  top: 32px;
+  left: 32px;
+}
+
+@media (max-width: 1199px) {
+  .vhs-tl {
+    top: 16px;
+    left: 16px;
+  }
+}
+
+.vhs-tr {
+  top: 32px;
+  right: 32px;
+  transform: rotate(90deg);
+}
+
+@media (max-width: 1199px) {
+  .vhs-tr {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+.vhs-bl {
+  bottom: 32px;
+  left: 32px;
+  transform: rotate(270deg);
+}
+
+@media (max-width: 1199px) {
+  .vhs-bl {
+    bottom: 16px;
+    left: 16px;
+  }
+}
+
+.vhs-br {
+  bottom: 32px;
+  right: 32px;
+  transform: rotate(180deg);
+}
+
+@media (max-width: 1199px) {
+  .vhs-br {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+.vhs-top,
+.vhs-bottom,
+.vhs-bottom-right {
+  position: absolute;
+  overflow: hidden;
+  background-color: #fff;
+  flex: none;
+}
+
+.vhs-bottom,
+.vhs-bottom-right {
+  height: var(--vhs-framHeight, 24px);
+  left: 0;
+  width: var(--vhs-frameWidth, 1px);
+}
+
+.vhs-top {
+  height: 1px;
+  left: 0;
+  top: 0;
+  width: 24px;
+}
+
+.vhs-bottom {
+  top: 0;
+}
+
+.vhs-bottom-right {
+  top: 1px;
+}
+
+.vhs-vignette {
+  background: radial-gradient(
+    62.1% 77.8% at 50% 50%,
+    rgba(0, 0, 0, 0.05) 57.45706644144144%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  flex: none;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 5;
+}
+
+@keyframes vhs-blink {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.30;
+  }
+  50% {
+    opacity: 0.50;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* VHS Static */
+.vhs-static {
+  flex: none;
+  height: 100%;
+  left: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+/* Film Grain */
+.vhs-film-grain {
+  flex: none;
+  height: 100%;
+  left: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
+
+.vhs-film-grain-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.vhs-film-grain-image {
+  background: url("https://res.cloudinary.com/dhcl0fsay/image/upload/v1758365148/deadmeat-horror-awards-24/film-grain_lo7znv.png");
+  opacity: 0.5;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  position: absolute;
+}
+
+/* Content */
+.vhs-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}

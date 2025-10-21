@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;900&display=swap');
+
+.cardscape-section {
+  width: 100%;
+  padding: 40px 20px;
+  font-family: "Lato", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.cardscape-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cardscape-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.cardscape-hover-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(0, 0);
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), width 0.28s,
+    height 0.28s, opacity 0.2s;
+  background: radial-gradient(
+      80% 120% at 50% 50%,
+      rgba(147, 51, 234, 0.25),
+      rgba(59, 130, 246, 0.18) 50%,
+      rgba(13, 17, 23, 0) 70%
+    ),
+    linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(236, 72, 153, 0.18));
+  border: 1px solid rgba(147, 197, 253, 0.16);
+  backdrop-filter: blur(2px);
+  z-index: 0;
+}
+
+.cardscape-card {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+.cardscape-card-main {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #161b22;
+  border-radius: 20px;
+  padding: 28px;
+  min-height: 240px;
+  overflow: hidden;
+}
+
+.cardscape-card:hover {
+  transform: translateY(-6px);
+}
+
+.cardscape-card h3 {
+  font-size: 24px;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  color: #fafafa;
+  font-weight: 700;
+}
+
+.cardscape-card p {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #c9d1d9;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Zoom state */
+.cardscape-card.is-zoomed {
+  position: fixed;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%) !important;
+  width: min(92vw, 1000px);
+  height: 85vh;
+  z-index: 1000;
+}
+
+.cardscape-card.is-zoomed .cardscape-card-main {
+  height: 100%;
+  overflow: auto;
+}
+
+.cardscape-card.is-zoomed p {
+  -webkit-line-clamp: unset;
+}
+
+.cardscape-card.fade-out {
+  opacity: 0.12;
+  filter: blur(1px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+
+.cardscape-expanded-content {
+  margin-top: 20px;
+  color: #c9d1d9;
+  line-height: 1.6;
+}
+
+.cardscape-expanded-content h4 {
+  color: #fafafa;
+  font-size: 18px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.cardscape-expanded-content ul,
+.cardscape-expanded-content ol {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.cardscape-expanded-content li {
+  margin-bottom: 8px;
+}
+
+/* Body overflow class for zoom state */
+body.cardscape-overflow {
+  overflow: hidden;
+}
+
+body.cardscape-overflow .cardscape-hover-bg {
+  opacity: 0 !important;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .cardscape-card-main {
+    padding: 22px;
+    min-height: 220px;
+  }
+  
+  .cardscape-card h3 {
+    font-size: 22px;
+  }
+  
+  .cardscape-card p {
+    font-size: 15px;
+  }
+  
+  .cardscape-card.is-zoomed {
+    width: 95vw;
+    height: 90vh;
+  }
+}
+
+/* Light theme support */
+.cardscape-light {
+  color: #1f2937;
+}
+
+.cardscape-light .cardscape-card-main {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cardscape-light .cardscape-card h3 {
+  color: #111827;
+}
+
+.cardscape-light .cardscape-card p {
+  color: #4b5563;
+}
+
+.cardscape-light .cardscape-hover-bg {
+  background: radial-gradient(
+      80% 120% at 50% 50%,
+      rgba(147, 51, 234, 0.15),
+      rgba(59, 130, 246, 0.12) 50%,
+      rgba(255, 255, 255, 0) 70%
+    ),
+    linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(236, 72, 153, 0.12));
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}

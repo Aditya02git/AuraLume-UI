@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+
+/* Base breadcrumb styles */
+.breadcrumb-wrapper {
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--font-size, 15px);
+  font-weight: var(--font-weight, 300);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.breadcrumb-nav {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 30px;
+}
+
+/* Individual breadcrumb item */
+.breadcrumb-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 0 auto;
+  flex-shrink: 1000;
+  display: inline-block;
+  padding: 10px 5px 15px 0;
+  border-bottom: 1px solid transparent;
+  position: relative;
+  transition: transform ease-in-out .3s;
+}
+
+.breadcrumb-wrap:hover {
+  flex: 1 0 auto;
+  opacity: 1;
+  transform: translatey(-2px);
+  transition: none;
+  opacity: 1;
+  transition: transform ease-in-out .4s;
+}
+
+.breadcrumb-wrap:hover ~ .breadcrumb-wrap {
+  transition: transform ease-in-out .4s;
+}
+
+/* First breadcrumb */
+.breadcrumb-wrap:first-child {
+  flex: 0 0 auto;
+  flex-shrink: 0.5;
+  font-weight: normal;
+  opacity: 1;
+}
+
+.breadcrumb-wrap:first-child:after {
+  left: 0;
+}
+
+.breadcrumb-wrap:first-child .sep {
+  display: none;
+}
+
+/* Last breadcrumb */
+.breadcrumb-wrap:last-child {
+  flex: 1 0 auto !important;
+  font-weight: normal;
+}
+
+.breadcrumb-wrap:last-child:hover {
+  transform: translateY(0);
+  flex: 1 0 auto !important;
+}
+
+.breadcrumb-wrap:last-child:hover:after {
+  display: none;
+}
+
+.breadcrumb-wrap:hover:after {
+  transform: scale3d(1,1,1);
+  opacity: 1;
+  transition: opacity ease-in-out .1s, transform ease-in-out .2s;
+}
+
+/* Breadcrumb content */
+.breadcrumb {
+  flex: 0 1 auto;
+}
+
+.breadcrumb a,
+.breadcrumb span {
+  text-decoration: none;
+  transition: color ease-in-out .3s, background ease-in-out .2s;
+}
+
+/* Separator */
+.sep {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sep i.fa:before {
+  transition: transform ease-in-out .2s;
+}
+
+.breadcrumb-wrap:hover .sep i {
+  transform: translatex(8px);
+  transition: transform ease-in-out .3s;
+}
+
+/* Background effect (disabled by default) */
+.breadcrumb-wrap:before {
+  content:'';
+  background-image: linear-gradient(-33deg, #ff0d64 0, #9c3483 100%);
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  transition: transform ease-in-out .5s;
+  transform: scalex(0);
+  transform-origin: left top;
+  display: none;
+}
+
+.breadcrumb-wrap:hover:before {
+  transform: scalex(1);
+}
+
+/* LIGHT THEME */
+.breadcrumb-light {
+  --main-color: #767676;
+  --hover-color: #000000;
+  --border-color: #ddd;
+  --text-color: #333;
+  --bg-color: #fff;
+}
+
+.breadcrumb-light .breadcrumb-wrap {
+  color: var(--main-color);
+}
+
+.breadcrumb-light .breadcrumb-wrap:hover {
+  color: var(--hover-color);
+}
+
+.breadcrumb-light .breadcrumb-wrap:hover a {
+  color: var(--hover-color);
+}
+
+.breadcrumb-light .breadcrumb-wrap:hover .sep i {
+  color: var(--hover-color);
+}
+
+.breadcrumb-light .breadcrumb-wrap:first-child {
+  color: var(--hover-color);
+}
+
+.breadcrumb-light .breadcrumb-wrap:last-child a {
+  color: var(--hover-color);
+}
+
+.breadcrumb-light .breadcrumb-wrap:after {
+  background: var(--hover-color);
+}
+
+.breadcrumb-light .breadcrumb a,
+.breadcrumb-light .breadcrumb span {
+  color: var(--main-color);
+}
+
+/* DARK THEME */
+.breadcrumb-dark {
+  --main-color: #94a3b8;
+  --hover-color: #e2e8f0;
+  --border-color: #374151;
+  --text-color: #f8fafc;
+  --bg-color: #1f2937;
+}
+
+.breadcrumb-dark .breadcrumb-wrap {
+  color: var(--main-color);
+}
+
+.breadcrumb-dark .breadcrumb-wrap:hover {
+  color: var(--hover-color);
+}
+
+.breadcrumb-dark .breadcrumb-wrap:hover a {
+  color: var(--hover-color);
+}
+
+.breadcrumb-dark .breadcrumb-wrap:hover .sep i {
+  color: var(--hover-color);
+}
+
+.breadcrumb-dark .breadcrumb-wrap:first-child {
+  color: var(--hover-color);
+}
+
+.breadcrumb-dark .breadcrumb-wrap:last-child a {
+  color: var(--hover-color);
+}
+
+.breadcrumb-dark .breadcrumb-wrap:after {
+  background: var(--hover-color);
+}
+
+.breadcrumb-dark .breadcrumb a,
+.breadcrumb-dark .breadcrumb span {
+  color: var(--main-color);
+}
+
+/* Custom theme support */
+.breadcrumb-wrapper[data-theme] {
+  /* Allows for dynamic theme injection */
+}

@@ -1,0 +1,100 @@
+/* ============================================ */
+/* SpotlightBackground.css */
+/* ============================================ */
+
+.spotlight-wrapper {
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background: black;
+  overflow: hidden;
+}
+
+.spotlight-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.spotlight-stage-floor {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  height: 150%;
+  transform: scale(1.0,0.3);
+}
+
+.spotlight-stage-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.spotlight-swivel {
+}
+
+.spotlight-lamp {
+  position: absolute;
+  width: 40vh;
+  height: 400vh;
+  top: -220vh;
+  left: 50%;
+  transform: translateX(-50%) perspective(23vh) rotateX(30deg);
+}
+
+.spotlight-beam {
+  opacity: 0.5;
+  transform: scale(1.5,3);
+  position: absolute;
+  top: -20vh;
+  left: 50%;
+  transform: translateX(-50%) scale(1.5,3);
+}
+
+.spotlight-beam::after {
+  content: '';
+  position: absolute;
+  top: -50vh;
+  background-image: radial-gradient(ellipse closest-corner at 75% 75%, var(--spotlight-color), rgba(55,89,138,0));
+  border-radius: 100%;
+  width: var(--spotlight-size);
+  height: var(--spotlight-size);
+  clip: rect(50vh, 100vh, 100vh, 50vh);
+  transform: rotate(45deg);
+}
+
+.spotlight-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.spotlight-content h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.spotlight-content p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  line-height: 1.6;
+  opacity: 0.9;
+}

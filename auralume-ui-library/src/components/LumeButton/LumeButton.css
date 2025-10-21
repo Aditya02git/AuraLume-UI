@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+.lume-button {
+  --speed: 0.8; /* lower is faster */
+  --radius: 8px; /* button border radius */
+  --size: 2.5px; /* glow size */
+  --color: #F0ABFC; /* glow color */
+  --btn-background: #1F2124; /* button background color */
+  position: relative;
+  border: none;
+  overflow: hidden;
+  background: transparent;
+  padding: var(--size);
+  cursor: pointer;
+  transition: 0.3s all;
+  font-family: 'Roboto', sans-serif;
+}
+
+.lume-button:hover {
+  filter: drop-shadow(0 0 1px var(--color));
+}
+
+.lume-text {
+  border-radius: var(--radius);
+  color: #fff;
+  background: var(--btn-background);
+  font-size: 14px;
+  padding: 6px 16px;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.lume-glow-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: calc(var(--radius) + var(--size));
+  overflow: hidden;
+  opacity: 1;
+}
+
+.lume-glow {
+  height: 100%;
+  aspect-ratio: 1;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: calc(var(--radius) + var(--size));
+  filter: blur(5px);
+  animation: lume-slide calc(var(--speed) * 1s) ease-in-out infinite alternate;
+}
+
+.lume-glow::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(
+    from 90deg,
+    transparent 35%,
+    var(--color) 35%,
+    var(--color) 55%,
+    #1cbab5 65%,
+    transparent 65%
+  );
+  filter: blur(5px);
+  animation: lume-spin calc(var(--speed) * 2s) ease-in-out infinite;
+}
+
+@keyframes lume-slide {
+  0% {
+    left: 0;
+    transform: translateX(0);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes lume-spin {
+  0% {
+    rotate: 0deg;
+  }
+  15%, 35% {
+    rotate: 90deg;
+  }
+  65%, 85% {
+    rotate: 270deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}

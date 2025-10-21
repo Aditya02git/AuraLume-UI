@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Base styles */
+.auth-container {
+  font-family: 'Ubuntu', sans-serif;
+  box-sizing: border-box;
+  background-color: var(--form-bg-color, #FFFFFF);
+  border-radius: 10px;
+  box-shadow: 0 14px 28px var(--form-shadow-color, rgba(0,0,0,0.25)), 0 10px 10px var(--form-shadow-light, rgba(0,0,0,0.22));
+  width: 400px;
+  max-width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-container *,
+.auth-container *::before,
+.auth-container *::after {
+  box-sizing: inherit;
+}
+
+.auth-container h1 {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--form-text-primary, #333);
+}
+
+.auth-container p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+  color: var(--form-text-primary, #333);
+}
+
+.auth-container span {
+  font-size: 12px;
+  color: var(--form-text-primary, #333);
+}
+
+.auth-container a {
+  color: var(--form-text-primary, #333);
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+.auth-form-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form styles */
+.auth-form {
+  background-color: var(--form-bg-color, #FFFFFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+.auth-form input {
+  background-color: var(--form-input-color, #eee);
+  border: none;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin: 8px 0;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+  color: var(--form-text-primary, #333);
+}
+
+.auth-form input:focus {
+  background-color: var(--form-focus-color, #e0e0e0);
+}
+
+/* Button styles */
+.auth-submit-btn {
+  border-radius: 20px;
+  border: 1px solid var(--form-btn-border, #bcbcbc);
+  background-color: var(--form-btn-color, #000000);
+  color: var(--form-text-color, #FFFFFF);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  outline: none;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in, background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.auth-submit-btn:hover {
+  background-color: var(--form-btn-hover, #4b4b4b);
+}
+
+.auth-submit-btn:active {
+  transform: scale(0.95);
+}
+
+.auth-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--form-btn-color, #777777);
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 5px;
+  transition: color 0.2s ease;
+}
+
+.auth-toggle-btn:hover {
+  color: var(--form-btn-hover, #373737);
+}
+
+/* Social buttons */
+.auth-social-container {
+  margin: 20px 0;
+}
+
+.auth-social {
+  border: 1px solid var(--form-social-border, #DDDDDD);
+  border-radius: 50%;
+  background: var(--form-social-bg, #FFFFFF);
+  color: var(--form-text-primary, #333);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.auth-social:hover {
+  background-color: var(--form-social-hover, #f5f5f5);
+  transform: translateY(-2px);
+}
+
+.auth-divider {
+  display: block;
+  margin: 15px 0;
+  color: var(--form-text-secondary, #666);
+}
+
+.auth-forgot-password {
+  transition: letter-spacing .3s ease-in-out;
+  color: var(--form-text-primary, #333);
+}
+
+.auth-forgot-password:hover {
+  letter-spacing: 1px;
+}
+
+.auth-toggle {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--form-text-secondary, #666);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-container {
+    width: 100%;
+    margin: 20px;
+    min-height: 400px;
+  }
+  
+  .auth-form {
+    padding: 20px;
+  }
+  
+  .auth-form h1 {
+    font-size: 1.2rem;
+  }
+  
+  .auth-form input {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  
+  .auth-submit-btn {
+    padding: 8px 25px;
+    font-size: 10px;
+  }
+}

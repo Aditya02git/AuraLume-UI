@@ -1,0 +1,70 @@
+.threed-card {
+  font-weight: bold;
+  padding: 1em;
+  text-align: right;
+  color: #181a1a;
+  
+  box-shadow: 0 1px 5px #00000099;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  
+  position: relative;
+  
+  transition-duration: 300ms;
+  transition-property: transform, box-shadow;
+  transition-timing-function: ease-out;
+  transform: rotate3d(0);
+  
+  /* Default background if none provided */
+  background: var(--bg-color, gray);
+}
+
+.threed-card:hover {
+  transition-duration: 150ms;
+  box-shadow: 0 5px 20px 5px #00000044;
+}
+
+/* .threed-card-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+  
+  background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
+  pointer-events: none;
+} */
+
+/* Variants */
+.threed-card--small {
+  width: 200px;
+  height: 280px;
+}
+
+.threed-card--medium {
+  width: 300px;
+  height: 400px;
+}
+
+.threed-card--large {
+  width: 400px;
+  height: 520px;
+}
+
+.threed-card--rounded {
+  border-radius: 20px;
+}
+
+.threed-card--rounded .threed-card-glow {
+  border-radius: 20px;
+}
+
+.threed-card--square {
+  border-radius: 4px;
+}
+
+.threed-card--square .threed-card-glow {
+  border-radius: 4px;
+}

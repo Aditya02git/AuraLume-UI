@@ -1,0 +1,293 @@
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base Container Styles */
+.endlessreview-container {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.endlessreview-wrapper {
+  width: 100%;
+  max-width: 80rem;
+}
+
+/* Header Styles */
+.endlessreview-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.endlessreview-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--gradient-color-1, #60a5fa), var(--gradient-color-2, #a855f7));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+}
+
+.endlessreview-subtitle {
+  font-size: 1.125rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Grid Layout */
+.endlessreview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* Column Styles */
+.endlessreview-column {
+  overflow: hidden;
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+.endlessreview-column-md {
+  display: none;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+.endlessreview-column-lg {
+  display: none;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+/* Scroll Container */
+.endlessreview-scroll {
+  display: flex;
+  flex-direction: column;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.endlessreview-scroll-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+/* Card Styles */
+.endlessreview-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px var(--card-shadow-color, rgba(0, 0, 0, 0.1)), 
+              0 4px 6px -2px var(--card-shadow-color, rgba(0, 0, 0, 0.05));
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid var(--card-border-color, #1f2937);
+}
+
+.endlessreview-card:hover {
+  /* transform: scale(1.01); */
+  box-shadow: 0 20px 25px -5px var(--card-shadow-color-hover, rgba(0, 0, 0, 0.2)), 
+              0 10px 10px -5px var(--card-shadow-color-hover, rgba(0, 0, 0, 0.1));
+  border-color: var(--card-hover-border, #60a5fa);
+}
+
+.endlessreview-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.endlessreview-avatar {
+  font-size: 1.875rem;
+  margin-right: 0.75rem;
+}
+
+.endlessreview-name {
+  font-weight: 600;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--name-accent-color, #ffffff);
+}
+
+.endlessreview-role {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.endlessreview-stars {
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.endlessreview-text {
+  font-style: italic;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Mask Styles */
+.endlessreview-mask-tb {
+  mask-image: linear-gradient(to bottom, transparent, white 20%, white 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, white 20%, white 80%, transparent);
+}
+
+.endlessreview-mask-bt {
+  mask-image: linear-gradient(to top, transparent, white 20%, white 80%, transparent);
+  -webkit-mask-image: linear-gradient(to top, transparent, white 20%, white 80%, transparent);
+}
+
+/* Animation Keyframes */
+@keyframes scroll-top-to-bottom {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-bottom-to-top {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Animation Classes */
+.endlessreview-scroll-t2b {
+  animation-name: scroll-top-to-bottom;
+}
+
+.endlessreview-scroll-b2t {
+  animation-name: scroll-bottom-to-top;
+}
+
+/* Hover Pause */
+.endlessreview-container:hover .endlessreview-scroll {
+  animation-play-state: paused;
+}
+
+/* Dark Theme */
+.endlessreview-dark {
+  background-color: #030712;
+  color: #ffffff;
+}
+
+.endlessreview-dark .endlessreview-subtitle {
+  color: #9ca3af;
+}
+
+.endlessreview-dark .endlessreview-card {
+  background-color: #111827;
+}
+
+.endlessreview-dark .endlessreview-role {
+  color: #6b7280;
+}
+
+.endlessreview-dark .endlessreview-text {
+  color: #d1d5db;
+}
+
+/* Light Theme */
+.endlessreview-light {
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+.endlessreview-light .endlessreview-subtitle {
+  color: #6b7280;
+}
+
+.endlessreview-light .endlessreview-card {
+  background-color: #ffffff;
+}
+
+.endlessreview-light .endlessreview-name {
+  color: var(--name-accent-color, #111827);
+}
+
+.endlessreview-light .endlessreview-role {
+  color: #6b7280;
+}
+
+.endlessreview-light .endlessreview-text {
+  color: #374151;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .endlessreview-title {
+    font-size: 3.75rem;
+  }
+  
+  .endlessreview-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .endlessreview-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .endlessreview-column-md {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .endlessreview-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .endlessreview-column-lg {
+    display: block;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .endlessreview-scroll {
+    animation: none;
+  }
+  
+  .endlessreview-card {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .endlessreview-container {
+    min-height: auto;
+    padding: 2rem 1rem;
+  }
+  
+  .endlessreview-scroll {
+    animation: none;
+  }
+  
+  .endlessreview-column {
+    overflow: visible;
+    height: auto !important;
+  }
+  
+  .endlessreview-column-md,
+  .endlessreview-column-lg {
+    display: block;
+  }
+}

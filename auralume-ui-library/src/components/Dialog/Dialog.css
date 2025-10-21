@@ -1,0 +1,242 @@
+/* Base Dialog Styles */
+.dialog {
+  max-inline-size: 460px;
+  margin: auto;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  position: relative;
+  font-family: system-ui, -apple-system, sans-serif;
+  width: var(--dialogbox-width);
+}
+
+.dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--background-overlay); 
+  backdrop-filter: var(--background-blur);       
+  -webkit-backdrop-filter: var(--background-blur); 
+  z-index: 999; /* sits above everything */
+  pointer-events: auto; /* intercepts clicks */
+}
+
+.dialog[open] {
+  z-index: 1000; /* above backdrop */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Dialog Content */
+.dialog-content {
+  margin-bottom: 1.5rem;
+}
+
+.dialog-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.dialog-body {
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.dialog-body:last-child {
+  margin-bottom: 0;
+}
+
+/* Close Button (X) */
+.dialog-close-x {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+/* Action Buttons */
+.dialog-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dialog-countdown {
+  font-size: 0.9rem;
+  margin-right: auto;
+  opacity: 0.7;
+}
+
+/* Button Base Styles */
+.btn {
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.btn.primary {
+  color: white;
+  background-color: var(--btn-bgcolor, oklch(60% 0.15 315));
+}
+
+.btn.primary:hover,
+.btn.primary:focus-visible {
+  background-color: oklch(56% 0.12 315);
+  opacity: 0.1;
+  box-shadow: 0px 3px 9px -1px oklch(28% 0.12 315 / 50%); 
+}
+
+.btn.secondary {
+  background-color: transparent;
+  border: 1px solid oklch(70% 0 0);
+  color: oklch(20% 0 0);
+}
+
+.btn.secondary:hover,
+.btn.secondary:focus-visible {
+  border-color: oklch(60% 0.15 315);
+  box-shadow: 0px 3px 9px -1px oklch(28% 0.12 315 / 25%);
+}
+
+/* Light Theme */
+.dialog-light {
+  background-color: var(--background-color-light, white);
+  color: var(--text-color-light, oklch(20% 0 0));
+  box-shadow: 0px 8px 32px oklch(0% 0 0 / 15%);
+}
+
+.dialog-light .dialog-close-x {
+  color: oklch(40% 0 0);
+}
+
+.dialog-light .dialog-close-x:hover,
+.dialog-light .dialog-close-x:focus-visible {
+  background-color: oklch(95% 0 0);
+  color: oklch(20% 0 0);
+}
+
+.dialog-light .btn.secondary {
+  border-color: oklch(80% 0 0);
+  color: oklch(20% 0 0);
+}
+
+.dialog-light .btn.secondary:hover,
+.dialog-light .btn.secondary:focus-visible {
+  border-color: oklch(69.926% 0.00008 271.152);
+  background-color: oklch(98% 0.02 315);
+}
+
+/* Dark Theme */
+.dialog-dark {
+  background-color: var(--background-color-dark, oklch(15% 0.02 315));
+  color: var(--text-color-dark,oklch(90% 0 0));
+  box-shadow: 0px 8px 32px oklch(0% 0 0 / 40%);
+}
+
+.dialog-dark::backdrop {
+  background-color: oklch(0% 0 0 / 50%);
+}
+
+.dialog-dark .dialog-close-x {
+  color: oklch(70% 0 0);
+}
+
+.dialog-dark .dialog-close-x:hover,
+.dialog-dark .dialog-close-x:focus-visible {
+  background-color: oklch(25% 0.02 315);
+  color: oklch(90% 0 0);
+}
+
+.dialog-dark .btn.secondary {
+  border-color: oklch(40% 0 0);
+  color: oklch(90% 0 0);
+}
+
+.dialog-dark .btn.secondary:hover,
+.dialog-dark .btn.secondary:focus-visible {
+  border-color: oklch(69.926% 0.00008 271.152);
+  background-color: oklch(20% 0.05 315);
+}
+
+/* Variant-specific styles */
+.dialog-cross .dialog-content {
+  padding-right: 2rem;
+}
+
+.dialog-auto-close .dialog-countdown {
+  font-weight: 500;
+  color: oklch(74.763% 0.00008 271.152);
+}
+
+.dialog-dark .dialog-auto-close .dialog-countdown {
+  color: oklch(74.763% 0.00008 271.152);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .dialog {
+    max-inline-size: calc(100vw - 2rem);
+    /* Remove margin override - keep the fixed positioning */
+    /* margin: 1rem; */
+  }
+  
+  /* Ensure dialog stays centered on mobile */
+  .dialog[open] {
+    /* Keep the same centering, but adjust for mobile constraints */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Add constraints to prevent dialog from going off-screen */
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+  
+  .dialog-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+  
+  .dialog-actions .btn {
+    width: 100%;
+  }
+  
+  .dialog-countdown {
+    order: -1;
+    text-align: center;
+    margin-right: 0;
+  }
+}

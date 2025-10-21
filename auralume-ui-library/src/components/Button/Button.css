@@ -1,0 +1,804 @@
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+/* Base Button Styles */
+.my-ui-btn {
+  /* Remove the aggressive border/background overrides */
+  border: 1px solid transparent; /* Default border instead of none */
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  text-transform: none;
+  letter-spacing: 0.025em;
+}
+
+/* Text and Icon Styles */
+.my-ui-btn__text {
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.my-ui-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+}
+
+.my-ui-btn__text--loading {
+  opacity: 0.7;
+}
+
+/* Loading Spinner */
+.my-ui-btn__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Sizes */
+.my-ui-btn--small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  min-height: 36px;
+  border-radius: 8px;
+}
+
+.my-ui-btn--medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  min-height: 44px;
+  border-radius: 12px;
+}
+
+.my-ui-btn--large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  min-height: 52px;
+  border-radius: 14px;
+}
+
+/* Primary Variants */
+.my-ui-btn--primary {
+  background: var(--btn-color, oklch(60% 0.15 315));
+  color: var(--btn-textcolor, white);
+}
+
+
+.my-ui-btn--secondary {
+  background: var(--btn-color, transparent);
+  color: var(--btn-textcolor, oklch(60% 0.15 315));
+  border: var(--btn-borderweight, 2px) solid var(--btn-bordercolor, oklch(60% 0.15 315));
+}
+
+.my-ui-btn--secondary:hover {
+  background: var(--btn-color, oklch(60% 0.15 315));
+  color: var(--btn-textcolor, oklch(100% 0.00011 271.152));
+}
+
+
+/* ----------------------------------------------------------------- */
+
+
+/* Neon Variants */
+.my-ui-btn--neon {
+  background: transparent;
+  border: 2px solid var(--neon-color);
+  color: var(--neon-color);
+  text-shadow: 0 0 10px currentColor;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.1),
+    0 0 20px currentColor;
+}
+
+.my-ui-btn--neon:hover:not(.my-ui-btn--disabled) {
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.2),
+    0 0 40px currentColor,
+    0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------------------------------------------------------- */
+
+/* Glassmorphism Variants */
+.my-ui-btn--glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--btn-textcolor, #ffffff);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.my-ui-btn--glass:hover:not(.my-ui-btn--disabled) {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------------------------------- */
+
+/* Gradient Variants */
+/* .my-ui-btn--gradient {
+  background: linear-gradient(45deg, var(--gradient-color-1), var(--gradient-color-2), var(--gradient-color-3));
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+  color: var(--btn-textcolor, #ffffff);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.my-ui-btn--gradient:hover:not(.my-ui-btn--disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+} */
+
+/* ------------------------------------------------------------------- */
+
+/* Loading State */
+.my-ui-btn--loading {
+  pointer-events: none;
+}
+
+.my-ui-btn--loading .my-ui-btn__text {
+  opacity: 0.7;
+}
+
+/* Disabled State */
+.my-ui-btn--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.my-ui-btn--disabled:hover {
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .my-ui-btn--large {
+    padding: 16px 32px;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+  
+  .my-ui-btn--medium {
+    padding: 14px 28px;
+    font-size: 0.9rem;
+    min-height: 40px;
+  }
+  
+  .my-ui-btn--small {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    min-height: 34px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .my-ui-btn {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .my-ui-btn,
+  .my-ui-btn::before,
+  .my-ui-btn::after,
+  .my-ui-btn__spinner,
+  .my-ui-btn__particles,
+  .my-ui-btn__ripple {
+    animation: none;
+    transition: none;
+  }
+  
+  .my-ui-btn:hover {
+    transform: none;
+  }
+}
+
+
+/* --------------------------------------------------- */
+
+
+/* CSS Variables for consistent theming */
+
+/* ===== SHADOW EFFECTS ===== */
+
+/* Default */
+.my-ui-btn--default {
+position: relative;
+border-color: var(--btn-color, #979695);
+color: var(--btn-color, #979695);
+background: transparent;
+transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.my-ui-btn--default:hover {
+transform: translateY(-0.25em);
+border-color: var(--btn-hovercolor, #5e5e5e);
+color: var(--btn-hovercolor, #5e5e5e);
+}
+
+.my-ui-btn--default::before {
+content: "";
+position: absolute;
+width: 100%;
+height: 1em;
+left: 0;
+bottom: -1.35em;
+background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+opacity: 0;
+transition: all 0.65s;
+z-index: -1;
+}
+
+.my-ui-btn--default:hover::before {
+opacity: 1;
+}
+
+/* Shadow Colored */
+.my-ui-btn--shadow-colored {
+  border-color: var(--btn-color, #dd7e2a);
+  color: var(--btn-color, #dd7e2a);
+  background: transparent;
+}
+
+.my-ui-btn--shadow-colored:hover {
+  box-shadow: 0 0.25em 0.25em -0.1em var(--btn-hovercolor, #b5c952);
+  transform: translateY(-0.25em);
+  border-color: var(--btn-hovercolor, #b5c952);
+  color: var(--btn-hovercolor, #b5c952);
+}
+
+/* Shadow Glow */
+.my-ui-btn--shadow-glow {
+  border-color: var(--btn-color, #979695);
+  color: var(--btn-color, #979695);
+  background: transparent;
+}
+
+.my-ui-btn--shadow-glow:hover {
+  transform: translateY(-0.25em);
+  box-shadow: 0 0 0.5em 0em var(--btn-hovercolor, #5e5e5e);
+  border-color: var(--btn-hovercolor, #5e5e5e);
+  color: var(--btn-hovercolor, #5e5e5e);
+}
+
+/* Shadow Inset */
+.my-ui-btn--shadow-inset {
+  border-color: var(--btn-color, #716eef);
+  color: var(--btn-color, #716eef);
+  background: transparent;
+}
+
+.my-ui-btn--shadow-inset:hover {
+  box-shadow: inset 0 0 0.55em 0em var(--btn-hovercolor, #dd648a);
+  border-color: var(--btn-hovercolor, #dd648a);
+  color: var(--btn-hovercolor, #dd648a);
+}
+
+/* Shadow Offset */
+.my-ui-btn--shadow-offset {
+  border-color: var(--btn-color, #979695);
+  color: var(--btn-hovercolor, #979695);
+  box-shadow: 0.3em 0.3em 0 var(--btn-hovercolor, #dd6395);
+  background: transparent;
+}
+
+.my-ui-btn--shadow-offset:hover {
+  box-shadow: -0.3em -0.3em 0 var(--btn-color, #979695);
+  background-color: var(--btn-hovercolor, #dd6395);
+  border-color: var(--btn-hovercolor, #dd6395);
+  color: var(--btn-textcolor, #fff);
+}
+
+/* ===== BACKGROUND EFFECTS ===== */
+
+/* Background Dots */
+.my-ui-btn--bg-dots {
+  border-color: var(--btn-color, #716eef);
+  color: var(--btn-color, #716eef);
+  background: transparent;
+}
+
+.my-ui-btn--bg-dots:hover {
+  color: var(--btn-textcolor, #fff);
+  transition-delay: 0.2s;
+  animation: bg-dots-animation 0.6s forwards;
+  background: radial-gradient(circle, var(--btn-color, #716eef) 0.2em, transparent 0.3em) 6em 6em/1em 1em,
+              radial-gradient(circle, var(--btn-color, #716eef) 0.2em, transparent 0.3em) 0 0/1em 1em;
+}
+
+@keyframes bg-dots-animation {
+  100% {
+    background-size: 2.375em 2.375em, 0.1em 0.1em;
+  }
+}
+
+/* Background Gradient */
+.my-ui-btn--bg-gradient {
+  background-image: linear-gradient(to right, var(--gradient-color-1, #a1c4fd) 0%, var(--gradient-color-2, #c2e9fb) 51%, var(--gradient-color-1, #a1c4fd) 100%);
+  background-size: 200% auto;
+  background-position: left top;
+  border-color: transparent;
+  color: var(--btn-textcolor, #464646);
+}
+
+.my-ui-btn--bg-gradient:hover {
+  background-position: right bottom;
+  color: var(--btn-textcolor-hover, #000);
+}
+
+/* Background Horizontal */
+.my-ui-btn--bg-horizontal {
+  border-color: var(--btn-color, #dd6395);
+  color: var(--btn-color, #dd6395);
+  transition: all 0.5s ease;
+  background: transparent;
+}
+
+.my-ui-btn--bg-horizontal:hover {
+  box-shadow: inset 5em 0 0 0 var(--btn-hovercolor, #dd7e2a), inset -5em 0 0 0 var(--btn-hovercolor, #dd7e2a);
+  border-color: var(--btn-hovercolor, #dd7e2a);
+  color: var(--btn-textcolor, #fff);
+}
+
+/* Background Vertical */
+.my-ui-btn--bg-vertical {
+  border-color: var(--btn-color, #dd7e2a);
+  color: var(--btn-color, #dd7e2a);
+  transition: all 0.5s ease;
+  background: transparent;
+}
+
+.my-ui-btn--bg-vertical:hover {
+  box-shadow: inset 0 1.7em 0em 0em var(--btn-hovercolor, #dd648a), inset 0 -1.7em 0em 0em var(--btn-hovercolor, #dd648a);
+  border-color: var(--btn-hovercolor, #dd648a);
+  color: var(--btn-textcolor, #fff);
+}
+
+/* Background Circle */
+.my-ui-btn--bg-circle {
+  border-color: var(--btn-color, #716eef);;
+  color: var(--btn-color, #716eef);
+  background: transparent;
+  transition: all 0.5s ease; /* Added ease for smoother animation */
+}
+
+.my-ui-btn--bg-circle:hover {
+  box-shadow: inset 0 0 0 50px var(--btn-hovercolor, #dd648a); /* Use px instead of em */
+  border-color: var(--btn-hovercolor, #dd648a);
+  color: var(--btn-textcolor, #fff);
+}
+
+
+/* Background Diagonal */
+.my-ui-btn--bg-diagonal {
+  position: relative;
+  border-color: var(--btn-color, #dd7e2a);
+  color: var(--btn-color, #dd7e2a);
+  overflow: hidden;
+  background: transparent;
+  transition: color 0.3s ease;
+  z-index: 0; /* ✅ create a stacking context */
+}
+
+.my-ui-btn--bg-diagonal::before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 100%;
+  top: 50%;
+  left: 0;
+  background-color: var(--btn-color, #dd7e2a);
+  transform: rotateZ(-45deg) translate(-50%, -50%);
+  transition: all 0.3s ease;
+  z-index: -1; /* ✅ keep behind the text */
+}
+
+.my-ui-btn--bg-diagonal .my-ui-btn__text {
+  position: relative;
+  z-index: 1; /* ✅ text above background sweep */
+}
+
+.my-ui-btn--bg-diagonal:hover {
+  color: var(--btn-textcolor, #fff);
+}
+
+.my-ui-btn--bg-diagonal:hover::before {
+  width: 100%;
+  top: 0;
+  transform: none;
+}
+
+/* Background Sweep */
+.my-ui-btn--bg-sweep {
+  border-color: var(--btn-color, #dd6395);
+  color: var(--btn-color, #dd6395);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  transition: color 0.4s ease;
+  z-index: 0; /* ✅ Ensure a proper stacking context */
+}
+
+.my-ui-btn--bg-sweep::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--btn-color, #dd6395);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1; /* ✅ Place behind text */
+}
+
+.my-ui-btn--bg-sweep > * {
+  position: relative;
+  z-index: 1; /* ✅ Ensure text stays visible */
+}
+
+.my-ui-btn--bg-sweep:hover {
+  color: var(--btn-textcolor, #fff);
+}
+
+.my-ui-btn--bg-sweep:hover::before {
+  width: 100%;
+}
+
+/* Background Split */
+.my-ui-btn--bg-split {
+  border-color: var(--btn-color, #dd6395);
+  background-color: transparent;
+  color: var(--btn-color, #dd6395);
+  position: relative;
+  overflow: hidden;
+}
+
+.my-ui-btn--bg-split .my-ui-btn__text {
+  position: relative;
+  z-index: 2;
+}
+
+.my-ui-btn--bg-split::before,
+.my-ui-btn--bg-split::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  background-color: var(--btn-color, #dd6395);
+  transition: all 0.25s;
+  z-index: 1;
+}
+
+.my-ui-btn--bg-split::before {
+  top: 0;
+  transform: translate(-100%, 0);
+}
+
+.my-ui-btn--bg-split::after {
+  bottom: 0;
+  transform: translate(100%, 0);
+}
+
+.my-ui-btn--bg-split:hover {
+  color: var(--btn-textcolor-hover, #fff);
+}
+
+.my-ui-btn--bg-split:hover::before,
+.my-ui-btn--bg-split:hover::after {
+  transform: translate(0, 0);
+}
+
+/* ===== BORDER EFFECTS ===== */
+
+/* Border Draw */
+.my-ui-btn--border-draw {
+    position: relative;
+    border-color: var(--btn-color, #979695);
+    color: var(--btn-color, #979695);
+    background: transparent;
+    transition: border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.my-ui-btn--border-draw::before,
+.my-ui-btn--border-draw::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-color: var(--btn-hovercolor, #dd6395);
+    border-radius: inherit;
+    border-style: solid;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    content: "";
+    z-index: 1;
+    opacity: 0;
+}
+
+.my-ui-btn--border-draw::before {
+    width: 0;
+    height: 100%;
+    border-width: 1px 0 1px 0;
+}
+
+.my-ui-btn--border-draw::after {
+    width: 100%;
+    height: 0;
+    border-width: 0 1px 0 1px;
+}
+
+.my-ui-btn--border-draw > * {
+    position: relative;
+    z-index: 2;
+}
+
+.my-ui-btn--border-draw:hover {
+    border-color: var(--btn-hovercolor, #dd6395);
+    color: var(--btn-hovercolor, #dd6395);
+}
+
+.my-ui-btn--border-draw:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+.my-ui-btn--border-draw:hover::after {
+    height: 100%;
+    opacity: 1;
+}
+
+
+/* Border Reveal */
+.my-ui-btn--border-reveal {
+  border-color: transparent;
+  color: var(--btn-textcolor, #fff);
+  position: relative;
+  background: transparent;
+}
+
+.my-ui-btn--border-reveal::before,
+.my-ui-btn--border-reveal::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 0;
+  transition: all 0.3s;
+}
+
+.my-ui-btn--border-reveal::before {
+  width: 100%;
+  left: 0;
+  border-radius: 12px;
+  background-color: var(--btn-color, #716eef);
+  z-index: 1;
+}
+
+.my-ui-btn--border-reveal::after {
+  width: 0;
+  left: 50%;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  transform: translate(-50%, 0);
+  z-index: 2;
+}
+
+.my-ui-btn--border-reveal:hover {
+  color: var(--btn-color, #716eef);
+}
+
+.my-ui-btn--border-reveal:hover::before {
+  transform: scale(0, 1);
+}
+
+.my-ui-btn--border-reveal:hover::after {
+  width: 100%;
+  border-top-color: var(--btn-color, #716eef);
+  border-bottom-color: var(--btn-color, #716eef);
+  transition-delay: 0.2s;
+}
+
+/* ===== TRANSFORM EFFECTS ===== */
+
+/* Transform Slide */
+.my-ui-btn--transform-slide {
+  border-color: var(--btn-color, rgba(221, 99, 149, 1));
+  color: var(--btn-color, rgba(221, 99, 149, 1));
+  background: transparent;
+  position: relative;
+  transition-delay: 0.3s;
+  overflow: hidden;
+}
+
+.my-ui-btn--transform-slide:hover {
+  transform: translateY(-0.3em);
+  border-color: #dd2a73;
+  color: var(--btn-textcolor, rgba(221, 99, 149, 0));
+  transition-delay: 0s;
+}
+
+.my-ui-btn--transform-slide::before {
+  content: attr(data-hover);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  color: var(--btn-color, rgba(221, 99, 149, 1));
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-60%);
+  transition: all 0.4s;
+  z-index: 1;
+}
+
+.my-ui-btn--transform-slide:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.15s;
+}
+
+/* Transform Arrow */
+.my-ui-btn--transform-arrow {
+  background-color: var(--btn-color, #dd7e2a);
+  border-color: var(--btn-color, #dd7e2a);
+  color: var(--btn-textcolor, #fff);
+  position: relative;
+  overflow: hidden;
+}
+
+.my-ui-btn--transform-arrow::before {
+  content: "ᐅ";
+  font-family: "Font Awesome 6 Free";
+  font-weight: bold;
+  position: absolute;
+  width: 25px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  font-size: 15px;
+  color: var(--btn-textcolor, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 50% 50% 0;
+  background-color: var(--btn-hovercolor, rgba(223, 183, 148, 0.73));
+  transform: translate(-20%, 0) scale(0, 1);
+  transform-origin: left center;
+  transition: all 0.25s;
+  z-index: 1;
+}
+
+.my-ui-btn--transform-arrow:hover {
+  padding-left: 25px;
+}
+
+.my-ui-btn--transform-arrow:hover::before {
+  transform: translate(-20%, 0) scale(1, 1);
+}
+
+/* Transform 3D */
+.my-ui-btn--transform-3d {
+  background-color: var(--btn-color, #716eef);
+  border-width: 5px;
+  border-color: var(--btn-color, #716eef);
+  color: var(--btn-textcolor, #fff);
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.my-ui-btn--transform-3d::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 155%;
+  top: 50%;
+  left: 50%;
+  border-radius: 5px;
+  border: 1px solid var(--btn-hovercolor, #3936af);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.1);
+  transform-origin: center center;
+  transition: all 0.25s;
+}
+
+.my-ui-btn--transform-3d:hover {
+  background-color: var(--btn-hovercolor, #3936af);
+  /* border-color: #716eef; */
+  border-style: inset;
+  border-radius: 5px;
+}
+
+.my-ui-btn--transform-3d:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Transform Shine */
+.my-ui-btn--transform-shine {
+  background: var(--btn-color, #bf7b7b);
+  border-color: var(--btn-color, #bf7b7b);
+  color: var(--btn-textcolor, #fff);
+  position: relative;
+  overflow: hidden;
+}
+
+.my-ui-btn--transform-shine .my-ui-btn__text {
+  position: relative;
+  z-index: 1; 
+}
+
+.my-ui-btn--transform-shine::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 4.5px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--btn-hovercolor, #8b5252);
+  filter: brightness(30%);
+  transition: all 0.35s;
+  z-index: 3; 
+}
+
+.my-ui-btn--transform-shine::after {
+  content: attr(data-hover);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  background-color: var(--btn-hovercolor, #8b5252);
+  transform: translate(0, -100%);
+  transition: all 0.35s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; 
+}
+
+.my-ui-btn--transform-shine:hover::before {
+  width: 100%;
+}
+
+.my-ui-btn--transform-shine:hover::after {
+  transform: translate(0, 0);
+}
+
+/* --------------------------------------------------- */

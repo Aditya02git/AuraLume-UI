@@ -1,0 +1,177 @@
+@property --a {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: true;
+}
+
+@property --hue {
+  syntax: "<angle>";
+  initial-value: 170deg;
+  inherits: false;
+}
+
+@property --initial-hue {
+  syntax: "<angle>";
+  initial-value: 170deg;
+  inherits: false;
+}
+
+:root {
+  --spring-easing: linear(
+    0, 0.002, 0.01 0.9%, 0.038 1.8%, 0.156, 0.312 5.8%, 0.789 11.1%, 1.015 14.2%,
+    1.096, 1.157, 1.199, 1.224 20.3%, 1.231, 1.231, 1.226, 1.214 24.6%,
+    1.176 26.9%, 1.057 32.6%, 1.007 35.5%, 0.984, 0.968, 0.956, 0.949 42%,
+    0.946 44.1%, 0.95 46.5%, 0.998 57.2%, 1.007, 1.011 63.3%, 1.012 68.3%,
+    0.998 84%, 1
+  );
+  --spring-duration: 1.66s;
+}
+
+.fluid-button {
+  --a: 0%;
+  --hue: 170deg;
+  --initial-hue: 170deg;
+  --x: 50;
+  --y: 50;
+  --button: hsl(var(--hue), 66%, 66%); /* 🔥 this now updates live */
+  --edge: 20px;
+  --size: 2em;
+  --padding: 2em;
+  --animation-duration: 20s;
+
+  background: transparent;
+  color: hsl(var(--hue), 80%, 40%); /* sync with hue */
+  font-size: var(--size);
+  position: relative;
+  padding: calc(var(--size)) calc(var(--size) * 1.5);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  animation: fluid-color var(--animation-duration) linear infinite both;
+  transition: 
+    --a 0.5s ease-in-out,
+    scale var(--spring-duration) var(--spring-easing);
+  scale: 0.92;
+  isolation: isolate;
+  outline: none;
+  user-select: none;
+}
+
+.fluid-button::before {
+  content: "";
+  position: absolute;
+  inset: 0em;
+  filter: blur(12px) url(#goo) drop-shadow(0 0.25em 0.5em hsla(0deg, 0%, 0%, 0.8)); 
+background-image:
+  linear-gradient(0deg, var(--button), var(--button)), /* border portion */
+  radial-gradient(
+    40% 70% at calc(var(--x) * 1%) calc(var(--y) * 1%),
+    color-mix(in srgb, var(--button) var(--a), transparent) 0%,
+    transparent 90%
+  );
+
+  background-clip: content-box, border-box;
+  padding: 24px;
+  z-index: -1;
+  border: inherit;
+  animation: fluid-color var(--animation-duration) linear infinite both;
+  border-radius: inherit;
+}
+
+/* Disable hue animation when hueAnimation prop is false */
+.fluid-button.no-hue-animation {
+  animation: none;
+}
+
+.fluid-button.no-hue-animation::before {
+  animation: none;
+}
+
+.fluid-button:hover {
+  --a: 100%;
+  transition-duration: 0.5s, 1s;
+  box-shadow: none;
+  opacity: 1;
+  scale: 1;
+}
+
+.fluid-button:active {
+  scale: 0.95;
+  transition-duration: 0.1s, 0.1s;
+}
+
+.fluid-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.fluid-button:focus-visible {
+  outline: 2px solid hsla(var(--hue), 80%, 60%, 0.6);
+  outline-offset: 4px;
+}
+
+.fluid-button.static-color {
+  color: color-mix(in hsl, var(--btn-color) 70%, black 30%);
+}
+
+@keyframes fluid-color {
+  from {
+    --hue: var(--initial-hue);
+  }
+  to {
+    --hue: calc(var(--initial-hue) + 360deg);
+  }
+}
+
+/* Variants */
+.fluid-button--small {
+  --size: 1.2em;
+  --padding: 1.5em;
+}
+
+.fluid-button--medium {
+  --size: 1.8em;
+  --padding: 2em;
+}
+
+.fluid-button--large {
+  --size: 2.4em;
+  --padding: 2.5em;
+}
+
+/* Color variants */
+.fluid-button--primary {
+  --hue: 170deg;
+}
+
+.fluid-button--secondary {
+  --hue: 250deg;
+}
+
+.fluid-button--success {
+  --hue: 120deg;
+}
+
+.fluid-button--warning {
+  --hue: 40deg;
+}
+
+.fluid-button--danger {
+  --hue: 0deg;
+}
+
+.fluid-button--info {
+  --hue: 200deg;
+}
+
+/* Rounded variants */
+.fluid-button--rounded {
+  border-radius: 8px;
+}
+
+.fluid-button--pill {
+  border-radius: 9999px;
+}

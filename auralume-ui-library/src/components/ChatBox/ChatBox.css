@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+/* CSS Variables for easy customization */
+:root {
+  --body-bg-color: #7dd8ff;
+  --chat-bg-color: #fff;
+  --font-size: 16px;
+  --font-color: #2f2f2f;
+  --font-color-muted: #afafaf;
+  --standard-padding: 20px 15px;
+  --standard-radius: 13px;
+}
+
+/* Reset styles for chat component */
+.chat-box,
+.chat-box * {
+  box-sizing: border-box;
+}
+
+.chat-box h1,
+.chat-box h2,
+.chat-box h3,
+.chat-box h4,
+.chat-box h5,
+.chat-box h6,
+.chat-box p,
+.chat-box ul,
+.chat-box li,
+.chat-box button {
+  padding: 0;
+  margin: 0;
+}
+
+.flexbox {
+  width: 100%;
+  height: 100%;
+  background-color: var(--body-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Raleway, sans-serif;
+  font-size: var(--font-size);
+  color: var(--font-color);
+}
+
+.chat-box {
+  background-color: var(--chat-bg-color);
+  margin: 20px;
+  width: 100%;
+  height: 100%;
+  max-height: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--standard-radius);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.chat-box-header {
+  width: 100%;
+  padding: var(--standard-padding);
+  border-bottom: solid 1px #cfcfcf;
+}
+
+.chat-box-header h3 {
+  font-family: Raleway, sans-serif;
+  color: var(--font-color);
+}
+
+.chat-box-header h3 small {
+  color: var(--font-color-muted);
+  font-weight: normal;
+}
+
+.chat-box-body {
+  height: 100%;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+}
+
+#chat_messages {
+  width: 100%;
+  padding: var(--standard-padding);
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  width: 80%;
+  padding: var(--standard-padding);
+  margin: 2px 0;
+  overflow: hidden;
+  border-radius: var(--standard-radius);
+  transition: height 0.3s ease-in-out;
+  word-wrap: break-word;
+}
+
+.my-message {
+  color: #fff;
+  background-color: #006ae3;
+  align-self: flex-end;
+}
+
+.other-message {
+  background-color: #e2e2e2;
+  color: var(--font-color);
+}
+
+.profile {
+  margin: 2px 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.profile img {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.my-profile {
+  color: var(--font-color-muted);
+  align-self: flex-end;
+}
+
+.other-profile {
+  color: var(--font-color-muted);
+  align-self: flex-start;
+}
+
+.typing-indicator {
+  color: var(--font-color-muted);
+  width: 100%;
+  height: 0;
+  padding: 0 15px;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.3s height ease-in-out, 0.3s opacity ease-in-out;
+}
+
+.typing-indicator.active {
+  height: 80px;
+  opacity: 1;
+}
+
+.typing-indicator span:not(.n) {
+  background-color: var(--font-color-muted);
+  width: 10px;
+  height: 10px;
+  margin-top: 20px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 3px;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation: typing 1.2s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation: typing 1.2s infinite 0.1s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation: typing 1.2s infinite 0.2s;
+}
+
+.chat-box-footer {
+  width: 100%;
+  padding: var(--standard-padding);
+  border-top: solid 1px #cfcfcf;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input {
+  color: var(--font-color);
+  font-family: Raleway, sans-serif;
+  font-size: var(--font-size);
+  background-color: #d2d2d2;
+  width: 100%;
+  height: 40px;
+  max-height: 120px;
+  border: none;
+  padding: 10px 15px;
+  resize: none;
+  border-radius: var(--standard-radius);
+  transition: 0.3s background-color;
+  outline: none;
+}
+
+.chat-input:focus {
+  background-color: #efefef;
+}
+
+.send-button {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.send-button:hover {
+  background-color: #f0f0f0;
+}
+
+.send-button:active {
+  background-color: #e0e0e0;
+}
+
+@media (min-width: 480px) {
+  .chat-box {
+    width: 480px;
+  }
+}
+
+@keyframes typing {
+  0% { transform: translateY(0px); }
+  33.3333% { transform: translateY(-5px); }
+  66.6667% { transform: translateY(5px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Hide focus outline for buttons */
+.send-button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}

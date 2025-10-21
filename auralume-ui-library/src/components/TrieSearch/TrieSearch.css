@@ -1,0 +1,215 @@
+/* TrieSearch Component Styles */
+.trie-search-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+  --trie-accent-color: #007bff;
+  --trie-accent-color-light: rgba(0, 123, 255, 0.1);
+}
+
+.trie-search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.trie-search-input {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  font-size: 1em;
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+}
+
+.trie-search-input:focus {
+  border-color: var(--trie-accent-color);
+  box-shadow: 0 0 0 3px var(--trie-accent-color-light);
+}
+
+.trie-search-clear {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.trie-search-clear:hover {
+  color: #666;
+  background-color: #f0f0f0;
+}
+
+.trie-search-stats {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid var(--trie-accent-color);
+}
+
+.trie-search-results {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trie-search-result-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.15s ease;
+  font-family: 'Courier New', Courier, monospace;
+  color: #000000;
+}
+
+.trie-search-result-item:last-child {
+  border-bottom: none;
+}
+
+.trie-search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.trie-search-result-item:active {
+  background-color: #e9ecef;
+}
+
+.trie-search-no-results {
+  padding: 20px;
+  text-align: center;
+  color: #000000;
+  font-style: italic;
+}
+
+/* Scrollbar Styling */
+.trie-search-results::-webkit-scrollbar {
+  width: 8px;
+}
+
+.trie-search-results::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.trie-search-results::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.trie-search-results::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trie-search-container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  
+  .trie-search-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .trie-search-results {
+    max-height: 250px;
+  }
+}
+
+/* Dark Theme */
+.trie-search-container.search-dark .trie-search-input {
+  background-color: #2d3748;
+  border-color: #4a5568;
+  color: #e2e8f0;
+}
+
+.trie-search-container.search-dark .trie-search-input:focus {
+  border-color: var(--trie-accent-color);
+  box-shadow: 0 0 0 3px var(--trie-accent-color-light);
+}
+
+.trie-search-container.search-dark .trie-search-stats {
+  background-color: #2d3748;
+  color: #a0aec0;
+  border-left-color: var(--trie-accent-color);
+}
+
+.trie-search-container.search-dark .trie-search-results {
+  background-color: #2d3748;
+  border-color: #4a5568;
+}
+
+.trie-search-container.search-dark .trie-search-result-item {
+  color: #e2e8f0;
+  border-bottom-color: #4a5568;
+}
+
+.trie-search-container.search-dark .trie-search-result-item:hover {
+  background-color: #4a5568;
+}
+
+.trie-search-container.search-dark .trie-search-result-item:active {
+  background-color: #718096;
+}
+
+.trie-search-container.search-dark .trie-search-no-results {
+  color: #a0aec0;
+}
+
+.trie-search-container.search-dark .trie-search-clear {
+  color: #a0aec0;
+}
+
+.trie-search-container.search-dark .trie-search-clear:hover {
+  color: #e2e8f0;
+  background-color: #4a5568;
+}
+
+.trie-search-container.search-dark .trie-search-result-item .highlight {
+  background-color: #856404;
+  color: #fff3cd;
+}
+
+/* Loading State */
+.trie-search-container.loading .trie-search-input {
+  background-image: linear-gradient(90deg, transparent, var(--trie-accent-color-light), transparent);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Highlight matching text */
+.trie-search-result-item .highlight {
+  background-color: #fff3cd;
+  font-weight: bold;
+}

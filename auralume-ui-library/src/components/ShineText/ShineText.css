@@ -1,0 +1,194 @@
+/* Base ShineText styles */
+.shine-text {
+  display: inline-block;
+  font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: none;
+  animation: shine 3s infinite linear;
+  animation-fill-mode: forwards;
+  transition: opacity 0.3s ease;
+}
+
+/* Dark theme */
+.shine-text.shinetext-dark {
+  background: linear-gradient(to right, #4d4d4d 0%, #fff 10%, #4d4d4d 20%);
+  background-position: 0;
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Light theme */
+.shine-text.shinetext-light {
+  background: linear-gradient(to right, #9ca3af 0%, #1f2937 10%, #9ca3af 20%);
+  background-position: 0;
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Size variants */
+.shine-text--small {
+  font-size: 14px;
+  padding: 8px 24px;
+}
+
+.shine-text--medium {
+  font-size: 16px;
+  padding: 12px 32px;
+}
+
+.shine-text--large {
+  font-size: 18px;
+  padding: 16px 40px;
+}
+
+.shine-text--xl {
+  font-size: 24px;
+  padding: 20px 48px;
+}
+
+/* Disabled state */
+.shine-text--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.shine-text--disabled.shinetext-dark {
+  background: #4d4d4d;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.shine-text--disabled.shinetext-light {
+  background: #9ca3af;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hover effects */
+.shine-text:not(.shine-text--disabled):hover {
+  opacity: 0.8;
+}
+
+/* Button specific styles */
+button.shine-text {
+  outline: none;
+}
+
+button.shine-text:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Link specific styles */
+a.shine-text {
+  text-decoration: none;
+}
+
+a.shine-text:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Animation keyframes */
+@keyframes shine {
+  0% {
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
+}
+
+@-webkit-keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+@-moz-keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+@-o-keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shine-text--small {
+    font-size: 12px;
+    padding: 6px 20px;
+  }
+  
+  .shine-text--medium {
+    font-size: 14px;
+    padding: 10px 28px;
+  }
+  
+  .shine-text--large {
+    font-size: 16px;
+    padding: 14px 36px;
+  }
+  
+  .shine-text--xl {
+    font-size: 20px;
+    padding: 18px 44px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .shine-text {
+    animation: none;
+  }
+  
+  .shine-text.shinetext-dark {
+    background: #fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .shine-text.shinetext-light {
+    background: #1f2937;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+}

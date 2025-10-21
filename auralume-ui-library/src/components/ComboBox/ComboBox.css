@@ -1,0 +1,252 @@
+/* Base styles for all themes */
+.combo-wrapper *,
+.combo-wrapper *::before,
+.combo-wrapper *::after {
+  box-sizing: border-box;
+}
+
+.combo {
+  display: block;
+  margin-bottom: 1.5em;
+  max-width: 400px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.combo::after {
+  content: "";
+  display: block;
+  height: 12px;
+  pointer-events: none;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translate(0, -65%) rotate(45deg);
+  width: 12px;
+  transition: all 0.2s ease;
+}
+
+.combo-input {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  display: block;
+  font-size: 1em;
+  min-height: calc(1.4em + 26px);
+  padding: 12px 16px 14px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.combo-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.open .combo-input {
+  border-radius: 4px 4px 0 0;
+}
+
+.combo-label {
+  display: block;
+  font-size: 20px;
+  font-weight: 100;
+  margin-bottom: 0.25em;
+  transition: color 0.2s ease;
+}
+
+.combo-menu {
+  border: 1px solid;
+  border-radius: 0 0 4px 4px;
+  border-top: none;
+  display: none;
+  max-height: 300px;
+  overflow-y: scroll;
+  left: 0;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.open .combo-menu {
+  display: block;
+}
+
+.combo-option {
+  padding: 10px 12px 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.combo-option.option-current {
+  outline-offset: -3px;
+  transition: outline 0.15s ease;
+}
+
+.combo-option[aria-selected="true"] {
+  padding-right: 30px;
+  position: relative;
+}
+
+.combo-option[aria-selected="true"]::after {
+  content: "";
+  height: 16px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translate(0, -50%) rotate(45deg);
+  width: 8px;
+  transition: border-color 0.2s ease;
+}
+
+/* Light Theme */
+.combobox-light .combo::after {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+  border-right: 2px solid rgba(0, 0, 0, 0.6);
+}
+
+.combobox-light .combo-input {
+  background-color: #ffffff;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.combobox-light .combo-input:hover {
+  border-color: #9ca3af;
+}
+
+.combobox-light .combo-input:focus {
+  border-color: #9ca3af;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.combobox-light .combo-label {
+  color: #374151;
+}
+
+.combobox-light .combo-menu {
+  background-color: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.combobox-light .combo-option {
+  color: #374151;
+}
+
+.combobox-light .combo-option:hover {
+  background-color: #f3f4f6;
+}
+
+.combobox-light .combo-option.option-current {
+  outline: 1px solid #9ca3af;
+  background-color: #eff6ff;
+}
+
+.combobox-light .combo-option[aria-selected="true"]::after {
+  border-bottom: 2px solid #059669;
+  border-right: 2px solid #059669;
+}
+
+/* Dark Theme */
+.combobox-dark .combo::after {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.combobox-dark .combo-input {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #f3f4f6;
+}
+
+.combobox-dark .combo-input:hover {
+  border-color: #4b5563;
+}
+
+.combobox-dark .combo-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.combobox-dark .combo-label {
+  color: #f3f4f6;
+}
+
+.combobox-dark .combo-menu {
+  background-color: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.combobox-dark .combo-option {
+  color: #f3f4f6;
+}
+
+.combobox-dark .combo-option:hover {
+  background-color: #374151;
+}
+
+.combobox-dark .combo-option.option-current {
+  outline: 3px solid #60a5fa;
+  background-color: #1e3a8a;
+  background-color: rgba(96, 165, 250, 0.1);
+}
+
+.combobox-dark .combo-option[aria-selected="true"]::after {
+  border-bottom: 2px solid #10b981;
+  border-right: 2px solid #10b981;
+}
+
+/* Disabled states */
+.combobox-light .combo-input:disabled {
+  background-color: #f9fafb;
+  color: #9ca3af;
+}
+
+.combobox-dark .combo-input:disabled {
+  background-color: #111827;
+  color: #6b7280;
+}
+
+/* Scrollbar styling */
+.combobox-light .combo-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.combobox-light .combo-menu::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.combobox-light .combo-menu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.combobox-light .combo-menu::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.combobox-dark .combo-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.combobox-dark .combo-menu::-webkit-scrollbar-track {
+  background: #111827;
+  border-radius: 4px;
+}
+
+.combobox-dark .combo-menu::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+.combobox-dark .combo-menu::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}

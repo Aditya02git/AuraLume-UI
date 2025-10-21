@@ -1,0 +1,206 @@
+/* Base Counter Styles */
+.counter-container {
+  display: grid;
+  margin: 30px auto;
+  max-width: 1000px;
+  padding-inline: 16px;
+}
+
+.counter-stat {
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.counter-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.counter-odometer {
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.counter-type {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.counter-odometer.plus {
+  position: relative;
+}
+
+.counter-odometer.plus::after {
+  content: "+";
+  position: absolute;
+  top: 0;
+  right: -16px;
+  font-size: 0.4em;
+  opacity: 0.8;
+}
+
+/* Dark Theme */
+.counter-dark {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.counter-dark .counter-stat {
+  background: #16203d;
+  color:  #e0e7ef;
+  border: 1px solid rgba(255, 208, 236, 0.1);
+}
+
+.counter-dark .counter-stat:hover {
+  filter: brightness(110%);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Theme */
+.counter-light {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.counter-light .counter-stat {
+  background: var(--bg-color, #e3e9f1);
+  color: var(--text-color,#2D3748);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.counter-light .counter-stat:hover {
+  background: var(--bg-hover, #F7FAFC);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Blue Theme */
+.counter-blue {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.counter-blue .counter-stat {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.counter-blue .counter-stat:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Green Theme */
+.counter-green {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.counter-green .counter-stat {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.counter-green .counter-stat:hover {
+  background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+  box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+}
+
+/* Orange Theme */
+.counter-orange {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.counter-orange .counter-stat {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.counter-orange .counter-stat:hover {
+  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .counter-container {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding-inline: 12px;
+  }
+  
+  .counter-stat {
+    padding: 20px !important;
+  }
+  
+  .counter-odometer {
+    font-size: 40px !important;
+  }
+  
+  .counter-type {
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .counter-container {
+    margin: 20px auto;
+  }
+  
+  .counter-stat {
+    padding: 16px !important;
+  }
+  
+  .counter-odometer {
+    font-size: 20px !important;
+  }
+  
+  .counter-type {
+    font-size: 12px !important;
+  }
+}
+
+/* Animation Enhancements */
+.counter-stat {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.counter-stat:nth-child(1) { animation-delay: 0.1s; }
+.counter-stat:nth-child(2) { animation-delay: 0.2s; }
+.counter-stat:nth-child(3) { animation-delay: 0.3s; }
+.counter-stat:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Odometer Customization */
+.odometer {
+  font-family: inherit;
+}
+
+.odometer .odometer-digit {
+  vertical-align: top;
+}
+
+.odometer .odometer-formatting-mark {
+  color: inherit;
+}
+
+/* Loading State */
+.counter-loading .counter-odometer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

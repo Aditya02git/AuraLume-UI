@@ -1,0 +1,229 @@
+/* Base ProgressBar Styles */
+.progressbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Linear Progress Bar */
+.progressbar--linear .progressbar__track {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.progressbar--linear .progressbar__fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Spinner Progress Bar */
+.progressbar--spinner {
+  justify-content: center;
+  width: fit-content;
+}
+
+.progressbar__spinner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressbar__spinner-svg {
+  transform: rotate(-90deg);
+  transition: all 0.3s ease;
+}
+
+.progressbar__spinner-track {
+  opacity: 0.3;
+}
+
+.progressbar__spinner-fill {
+  transition: stroke-dasharray 0.3s ease;
+  stroke-linecap: round;
+}
+
+/* Label Styles */
+.progressbar__label {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.progressbar__label--center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+
+/* Size Variants */
+.progressbar--small .progressbar__track {
+  height: 4px;
+}
+
+.progressbar--small .progressbar__spinner-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.progressbar--small .progressbar__label {
+  font-size: 12px;
+}
+
+.progressbar--medium .progressbar__track {
+  height: 8px;
+}
+
+.progressbar--medium .progressbar__spinner-svg {
+  width: 32px;
+  height: 32px;
+}
+
+.progressbar--large .progressbar__track {
+  height: 12px;
+}
+
+.progressbar--large .progressbar__spinner-svg {
+  width: 48px;
+  height: 48px;
+}
+
+.progressbar--large .progressbar__label {
+  font-size: 16px;
+}
+
+/* Light Variant */
+.progressbar-light .progressbar__track {
+  background-color: #e5e7eb;
+}
+
+.progressbar-light .progressbar__fill {
+  background: linear-gradient(
+    90deg,
+    var(--progress-color, #3b82f6),
+    var(--progress-color-dark, #2563eb)
+  );
+}
+
+.progressbar-light .progressbar__spinner-track {
+  stroke: #e5e7eb;
+}
+
+.progressbar-light .progressbar__spinner-fill {
+  stroke: var(--progress-color, #3b82f6);
+}
+
+.progressbar-light .progressbar__label {
+  color: #374151;
+}
+
+.progressbar-light .progressbar__label--center {
+  color: var(--progress-text-on-color, #fff);
+}
+
+/* Dark Variant */
+.progressbar-dark .progressbar__track {
+  background-color: #374151;
+}
+
+.progressbar-dark .progressbar__fill {
+  background: linear-gradient(
+    90deg,
+    var(--progress-color, #3b82f6),
+    var(--progress-color-dark, #2563eb)
+  );
+}
+
+.progressbar-dark .progressbar__spinner-track {
+  stroke: #374151;
+}
+
+.progressbar-dark .progressbar__spinner-fill {
+  stroke: var(--progress-color-light, #60a5fa);
+}
+
+.progressbar-dark .progressbar__label {
+  color: #f9fafb;
+}
+
+.progressbar-dark .progressbar__label--center {
+  color: var(--progress-text-on-color, #fff);
+}
+
+/* Animation for indeterminate state */
+.progressbar__fill--indeterminate {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    currentColor,
+    transparent
+  );
+  background-size: 50% 100%;
+  animation: progressbar-indeterminate 2s infinite;
+}
+
+@keyframes progressbar-indeterminate {
+  0% {
+    background-position: -50% 0;
+  }
+  100% {
+    background-position: 150% 0;
+  }
+}
+
+/* Spinner animation for indeterminate state */
+.progressbar__spinner-fill--indeterminate {
+  animation: progressbar-spinner-rotate 1.5s linear infinite;
+}
+
+@keyframes progressbar-spinner-rotate {
+  0% {
+    stroke-dasharray: 1 126;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 63 126;
+    stroke-dashoffset: -31.5;
+  }
+  100% {
+    stroke-dasharray: 1 126;
+    stroke-dashoffset: -126;
+  }
+}
+
+/* Hover effects */
+.progressbar:hover .progressbar__fill {
+  filter: brightness(1.1);
+}
+
+.progressbar:hover .progressbar__spinner-fill {
+  filter: brightness(1.1);
+}
+
+/* Focus styles for accessibility */
+.progressbar:focus-visible {
+  outline: 2px solid var(--progress-focus-outline, #3b82f6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .progressbar__label {
+    font-size: 12px;
+  }
+  
+  .progressbar--large .progressbar__label {
+    font-size: 14px;
+  }
+}

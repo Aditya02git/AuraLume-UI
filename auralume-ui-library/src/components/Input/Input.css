@@ -1,0 +1,373 @@
+/* Container styles */
+.container {
+  width: 92%;
+  max-width: 768px;
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+/* Font stacks */
+:root {
+  --system-font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --inter-font-stack: "Inter UI", "Inter", Inter, "Inter UI", inter;
+  --font-family: var(--inter-font-stack), var(--system-font-stack);
+  
+  /* Light theme variables */
+  --light-text-primary: #45556C;
+  --light-text-secondary: #90A1B9;
+  --light-text-placeholder: #CAD5E2;
+  --light-border: #CAD5E2;
+  /* --light-border-focus: #6B7280; */
+  --light-bg-default: #F8FAFC;
+  --light-bg-hover: #F1F5F9;
+  --light-bg-active: #E2E8F0;
+  --light-bg-disabled: #F1F5F9;
+  --light-border-disabled: #E2E8F0;
+  --light-bg-error: #FEF2F2;
+  --light-border-error: #FFA2A2;
+  --light-text-error: #FB2C36;
+  --light-text-error-placeholder: #FFC9C9;
+  --light-outline-focus: #3b82f6;
+  --light-text-success: #00C950;
+  
+  /* Dark theme variables */
+  --dark-text-primary: #E2E8F0;
+  --dark-text-secondary: #94A3B8;
+  --dark-text-placeholder: #64748B;
+  --dark-border: #475569;
+  /* --dark-border-focus: #9CA3AF; */
+  --dark-bg-default: #1E293B;
+  --dark-bg-hover: #334155;
+  --dark-bg-active: #475569;
+  --dark-bg-disabled: #334155;
+  --dark-border-disabled: #475569;
+  --dark-bg-error: #450A0A;
+  --dark-border-error: #DC2626;
+  --dark-text-error: #F87171;
+  --dark-text-error-placeholder: #FCA5A5;
+  --dark-outline-focus: #3b82f6;
+  --dark-text-success: #4ADE80;
+}
+
+/* Input component base styles */
+.labeled-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 0;
+  margin: 0 auto 1.5em;
+  font-family: var(--font-family);
+}
+
+.labeled-input input {
+  appearance: none;
+  user-select: none;
+  transition: all 120ms;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.5;
+  border-radius: 0.5em;
+  padding: 0.75em 1em;
+  vertical-align: middle;
+  box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 0.25em;
+  outline: solid 3px transparent;
+  outline-offset: -3px;
+}
+
+/* Custom focus color override */
+.labeled-input.has-custom-focus input:focus {
+  outline-color: var(--custom-focus-color) !important;
+}
+
+.labeled-input label {
+  font-weight: 500;
+  font-family: inherit;
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 0 auto 0.25em;
+  display: block;
+  width: 100%;
+}
+
+.labeled-input .hint-and-status {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+.labeled-input .input-hint {
+  font-family: inherit;
+  font-size: small;
+  line-height: 1.5;
+  margin: 0 auto;
+  text-align: left;
+  max-width: 500px;
+  width: 500px;
+  transition: all 120ms;
+}
+
+.labeled-input .input-status {
+  font-family: inherit;
+  font-size: small;
+  font-weight: 500;
+  line-height: 1.5;
+  width: 100%;
+  text-align: right;
+  transition: all 120ms;
+}
+
+/* Light theme styles */
+.labeled-input.input-light input {
+  color: var(--light-text-primary);
+  border: 1px solid var(--light-border);
+  background-color: var(--light-bg-default);
+}
+
+.labeled-input.input-light input:hover:placeholder-shown,
+.labeled-input.input-light input:hover:valid,
+.labeled-input.input-light input:hover:empty {
+  background-color: var(--light-bg-hover);
+}
+
+.labeled-input.input-light input:focus {
+  outline-color: var(--light-outline-focus);
+  outline-offset: 0;
+  background-color: var(--light-bg-hover);
+}
+
+.labeled-input.input-light input:focus:placeholder-shown,
+.labeled-input.input-light input:focus:valid,
+.labeled-input.input-light input:focus:empty {
+  background-color: var(--light-bg-hover) !important;
+}
+
+.labeled-input.input-light input:active {
+  background-color: var(--light-bg-active);
+}
+
+.labeled-input.input-light input::placeholder {
+  color: var(--light-text-placeholder);
+}
+
+.labeled-input.input-light input:placeholder-shown,
+.labeled-input.input-light input:valid {
+  color: var(--light-text-primary);
+  border: 1px solid var(--light-border);
+  background-color: var(--light-bg-default);
+}
+
+.labeled-input.input-light input:placeholder-shown::placeholder,
+.labeled-input.input-light input:valid::placeholder {
+  color: var(--light-text-placeholder);
+}
+
+.labeled-input.input-light input:invalid:not(:placeholder-shown) {
+  background-color: var(--light-bg-error);
+  border-color: var(--light-border-error);
+  color: var(--light-text-error);
+}
+
+.labeled-input.input-light input:invalid:not(:placeholder-shown)::placeholder {
+  color: var(--light-text-error-placeholder);
+}
+
+.labeled-input.input-light input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--light-bg-disabled);
+  border-color: var(--light-border-disabled);
+}
+
+.labeled-input.input-light label {
+  color: var(--light-text-primary);
+}
+
+.labeled-input.input-light .input-hint {
+  color: var(--light-text-secondary);
+}
+
+.labeled-input.input-light .input-status {
+  color: var(--light-text-primary);
+}
+
+/* Dark theme styles */
+.labeled-input.input-dark input {
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+  background-color: var(--dark-bg-default);
+}
+
+.labeled-input.input-dark input:hover:placeholder-shown,
+.labeled-input.input-dark input:hover:valid,
+.labeled-input.input-dark input:hover:empty {
+  background-color: var(--dark-bg-hover);
+}
+
+.labeled-input.input-dark input:focus {
+  outline-color: var(--dark-outline-focus);
+  outline-offset: 0;
+  background-color: var(--dark-bg-hover);
+}
+
+.labeled-input.input-dark input:focus:placeholder-shown,
+.labeled-input.input-dark input:focus:valid,
+.labeled-input.input-dark input:focus:empty {
+  background-color: var(--dark-bg-hover) !important;
+}
+
+.labeled-input.input-dark input:active {
+  background-color: var(--dark-bg-active);
+}
+
+.labeled-input.input-dark input::placeholder {
+  color: var(--dark-text-placeholder);
+}
+
+.labeled-input.input-dark input:placeholder-shown,
+.labeled-input.input-dark input:valid {
+  color: var(--dark-text-primary);
+  border: 1px solid var(--dark-border);
+  background-color: var(--dark-bg-default);
+}
+
+.labeled-input.input-dark input:placeholder-shown::placeholder,
+.labeled-input.input-dark input:valid::placeholder {
+  color: var(--dark-text-placeholder);
+}
+
+.labeled-input.input-dark input:invalid:not(:placeholder-shown) {
+  background-color: var(--dark-bg-error);
+  border-color: var(--dark-border-error);
+  color: var(--dark-text-error);
+}
+
+.labeled-input.input-dark input:invalid:not(:placeholder-shown)::placeholder {
+  color: var(--dark-text-error-placeholder);
+}
+
+.labeled-input.input-dark input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--dark-bg-disabled);
+  border-color: var(--dark-border-disabled);
+}
+
+.labeled-input.input-dark label {
+  color: var(--dark-text-primary);
+}
+
+.labeled-input.input-dark .input-hint {
+  color: var(--dark-text-secondary);
+}
+
+.labeled-input.input-dark .input-status {
+  color: var(--dark-text-primary);
+}
+
+/* Status indicators */
+.labeled-input input:placeholder-shown + .hint-and-status .input-status {
+  display: inline;
+  content: '';
+  opacity: 0;
+}
+
+.labeled-input input:invalid:not(:placeholder-shown) + .hint-and-status .input-status {
+  opacity: 1;
+  display: inline !important;
+  position: relative;
+}
+
+.labeled-input.input-light input:invalid:not(:placeholder-shown) + .hint-and-status .input-status {
+  color: var(--light-text-error);
+}
+
+.labeled-input.input-dark input:invalid:not(:placeholder-shown) + .hint-and-status .input-status {
+  color: var(--dark-text-error);
+}
+
+.labeled-input input:invalid:not(:placeholder-shown) + .hint-and-status .input-status::before {
+  content: 'Invalid';
+  display: inline;
+  position: absolute;
+  right: 0;
+}
+
+.labeled-input.input-light input:invalid:not(:placeholder-shown) + .hint-and-status .input-status::before {
+  color: var(--light-text-error) !important;
+}
+
+.labeled-input.input-dark input:invalid:not(:placeholder-shown) + .hint-and-status .input-status::before {
+  color: var(--dark-text-error) !important;
+}
+
+.labeled-input input:valid:not(:placeholder-shown) + .hint-and-status .input-status {
+  color: transparent;
+  opacity: 1;
+  display: inline !important;
+  position: relative;
+}
+
+.labeled-input input:valid:not(:placeholder-shown) + .hint-and-status .input-status::before {
+  content: 'Valid';
+  display: inline;
+  position: absolute;
+  right: 1.75em;
+}
+
+.labeled-input.input-light input:valid:not(:placeholder-shown) + .hint-and-status .input-status::before {
+  color: var(--light-text-success) !important;
+}
+
+.labeled-input.input-dark input:valid:not(:placeholder-shown) + .hint-and-status .input-status::before {
+  color: var(--dark-text-success) !important;
+}
+
+.labeled-input input:valid:not(:placeholder-shown) + .hint-and-status .input-status::after {
+  content: '';
+  display: inline;
+  background-position: center center;
+  background-origin: 0 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
+  top: 0.11em;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.labeled-input.input-light input:valid:not(:placeholder-shown) + .hint-and-status .input-status::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%2300C950'%3E%3Cpath d='M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12C23.981,5.381,18.619,.019,12,0Zm7.207,7.707l-9,9c-.195,.195-.451,.293-.707,.293s-.512-.098-.707-.293l-4-4c-.391-.391-.391-1.023,0-1.414s1.023-.391,1.414,0l3.293,3.293L17.793,6.293c.391-.391,1.023-.391,1.414,0s.391,1.023,0,1.414Z' fill='%2300C950'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+}
+
+.labeled-input.input-dark input:valid:not(:placeholder-shown) + .hint-and-status .input-status::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%234ADE80'%3E%3Cpath d='M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12C23.981,5.381,18.619,.019,12,0Zm7.207,7.707l-9,9c-.195,.195-.451,.293-.707,.293s-.512-.098-.707-.293l-4-4c-.391-.391-.391-1.023,0-1.414s1.023-.391,1.414,0l3.293,3.293L17.793,6.293c.391-.391,1.023-.391,1.414,0s.391,1.023,0,1.414Z' fill='%234ADE80'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Size variants */
+.labeled-input.input-small { 
+  max-width: 200px; 
+}
+
+.labeled-input.input-medium { 
+  max-width: 400px; 
+}
+
+.labeled-input.input-large { 
+  max-width: 600px; 
+}
+
+.labeled-input.input-full { 
+  max-width: none; 
+}

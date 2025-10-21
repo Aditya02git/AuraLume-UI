@@ -1,0 +1,15 @@
+/* Global styles for the library */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* You can add global CSS variables here */
+:root {
+  --my-ui-primary: #007bff;
+  --my-ui-secondary: #6c757d;
+  --my-ui-danger: #dc3545;
+  --my-ui-success: #28a745;
+  --my-ui-warning: #ffc107;
+  --my-ui-border: #e9ecef;
+  --my-ui-text: #212529;
+}

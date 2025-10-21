@@ -1,0 +1,127 @@
+.aura-container {
+  position: relative;
+  display: inline-block;
+}
+
+.aura-svg {
+  background: transparent;
+  overflow: visible;
+}
+
+/* Animated gradient paths */
+.aura-path {
+  fill: transparent;
+  mix-blend-mode: screen;
+  animation: aura-rotate 10s linear infinite;
+}
+
+.aura-path-0 {
+  stroke: url(#aura-gradient-0);
+  animation-duration: 8s;
+}
+
+.aura-path-1 {
+  stroke: url(#aura-gradient-1);
+  animation-duration: 10s;
+  animation-direction: reverse;
+}
+
+.aura-path-2 {
+  stroke: url(#aura-gradient-2);
+  animation-duration: 12s;
+}
+
+.aura-path-3 {
+  stroke: url(#aura-gradient-3);
+  animation-duration: 14s;
+  animation-direction: reverse;
+}
+
+.aura-path-4 {
+  stroke: url(#aura-gradient-4);
+  animation-duration: 16s;
+}
+
+/* Gradient color animations */
+@keyframes aura-rotate {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    filter: hue-rotate(90deg) brightness(1.2);
+  }
+  50% {
+    filter: hue-rotate(180deg) brightness(1);
+  }
+  75% {
+    filter: hue-rotate(270deg) brightness(1.2);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(1);
+  }
+}
+
+/* Breathing effect for the container */
+.aura-container {
+  animation: aura-breathe 4s ease-in-out infinite;
+}
+
+@keyframes aura-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* Pulse effect on hover */
+.aura-container:hover {
+  animation: aura-pulse 1s ease-in-out;
+}
+
+@keyframes aura-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive scaling */
+@media (max-width: 768px) {
+  .aura-container {
+    transform: scale(0.8);
+  }
+}
+
+/* Custom size variants */
+.aura-small {
+  width: 100px;
+  height: 100px;
+}
+
+.aura-medium {
+  width: 200px;
+  height: 200px;
+}
+
+.aura-large {
+  width: 300px;
+  height: 300px;
+}
+
+/* Theme variants */
+.aura-theme-cool .aura-path-0 {
+  stroke: url(#aura-gradient-cool-0);
+}
+
+.aura-theme-warm .aura-path-0 {
+  stroke: url(#aura-gradient-warm-0);
+}

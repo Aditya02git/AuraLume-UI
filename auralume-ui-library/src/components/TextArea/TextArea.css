@@ -1,0 +1,206 @@
+/* Base TextArea Component Styles */
+.textarea-component {
+  width: 100%;
+  max-width: 600px;
+}
+
+.textarea-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.textarea-input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid var(--textarea-border-light, #d1d5db);
+  border-radius: 6px;
+  resize: vertical;
+  outline: none;
+  transition: all 0.2s ease;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.textarea-input:focus {
+  border-color: var(--textarea-focus-color, var(--textarea-primary, #6c757d));
+  box-shadow: 0 0 0 3px rgba(var(--textarea-focus-rgb, 108, 117, 125), 0.2);
+}
+
+/* Dark Theme Styles */
+.textarea-dark .textarea-input {
+  background: var(--textarea-bg-dark, #1f1f1f);
+  color: var(--textarea-text-dark, #eee);
+  border-color: var(--textarea-border-dark, #4a4a4a);
+}
+
+.textarea-dark .textarea-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--textarea-disabled-bg, #151515);
+  border-color: var(--textarea-border-dark, #4a4a4a);
+}
+
+.textarea-dark .textarea-input::placeholder {
+  color: var(--textarea-primary, #888);
+  opacity: 0.7;
+}
+
+.textarea-dark .textarea-counter {
+  color: var(--textarea-counter-color, #bcbcbc);
+}
+
+.textarea-dark.textarea-disabled .textarea-input {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--textarea-disabled-bg, #151515);
+}
+
+/* Light Theme Styles */
+.textarea-light .textarea-input {
+  background: var(--textarea-bg-light, #e9ecef);
+  color: var(--textarea-text-light, #000000);
+  border-color: var(--textarea-border-light, #d1d5db);
+}
+
+.textarea-light .textarea-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--textarea-disabled-bg, #e9ecef);
+  color: var(--textarea-text-light, #000000);
+  border-color: var(--textarea-border-light, #d1d5db);
+}
+
+.textarea-light .textarea-input::placeholder {
+  color: var(--textarea-primary, #6c757d);
+  opacity: 0.7;
+}
+
+.textarea-light .textarea-counter {
+  color: var(--textarea-counter-color, #bcbcbc);
+}
+
+.textarea-light.textarea-disabled .textarea-input {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--textarea-disabled-bg, #e9ecef);
+  color: var(--textarea-text-light, #000000);
+}
+
+.textarea-light.textarea-disabled .textarea-input:focus {
+  box-shadow: none;
+  background: var(--textarea-disabled-bg, #e9ecef);
+}
+
+/* Counter Variant Styles */
+.textarea-counter-variant .textarea-input,
+.textarea-component .textarea-input {
+  height: 160px;
+}
+
+.textarea-counter {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  text-align: right;
+  font-family: inherit;
+}
+
+.char-count,
+.word-count {
+  font-weight: 500;
+  color: var(--textarea-counter-color, #6c757d);
+}
+
+/* Auto-Expand Variant Styles */
+.textarea-auto-expand-variant {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 60px;
+}
+
+.textarea-auto-expand-variant .textarea-wrapper {
+  width: 90%;
+  max-width: 600px;
+}
+
+.textarea-auto-expand-variant .textarea-input {
+  min-height: 60px;
+  height: auto;
+  padding: 12px;
+  border-radius: 8px;
+  resize: none;
+  overflow: hidden;
+}
+
+/* Auto-expand functionality */
+.textarea-auto-expand .textarea-input {
+  resize: none;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .textarea-component {
+    max-width: 100%;
+  }
+  
+  .textarea-input {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+  
+  .textarea-counter {
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+}
+
+/* Custom Scrollbar for Dark Theme */
+.textarea-dark .textarea-input:not(.textarea-auto-expand .textarea-input) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--textarea-scrollbar, #bcbcbc) var(--textarea-bg-dark, #1f1f1f);
+}
+
+.textarea-dark .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar {
+  width: 6px;
+}
+
+.textarea-dark .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar-track {
+  background: var(--textarea-bg-dark, #1f1f1f);
+  border-radius: 3px;
+}
+
+.textarea-dark .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar-thumb {
+  background: var(--textarea-scrollbar, #bcbcbc);
+  border-radius: 3px;
+}
+
+.textarea-dark .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar-thumb:hover {
+  background: var(--textarea-primary, #bcbcbc);
+}
+
+/* Custom Scrollbar for Light Theme */
+.textarea-light .textarea-input:not(.textarea-auto-expand .textarea-input) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--textarea-scrollbar, #bcbcbc) var(--textarea-bg-light, #f8f9fa);
+}
+
+.textarea-light .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar {
+  width: 6px;
+}
+
+.textarea-light .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar-track {
+  background: var(--textarea-bg-light, #f8f9fa);
+  border-radius: 3px;
+}
+
+.textarea-light .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar-thumb {
+  background: var(--textarea-scrollbar, #bcbcbc);
+  border-radius: 3px;
+}
+
+.textarea-light .textarea-input:not(.textarea-auto-expand .textarea-input)::-webkit-scrollbar-thumb:hover {
+  background: var(--textarea-primary, #bcbcbc);
+}

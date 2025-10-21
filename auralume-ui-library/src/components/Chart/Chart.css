@@ -1,0 +1,345 @@
+/* Chart Wrapper */
+.chart-wrapper {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Light Theme */
+.chart-wrapper.chart-light {
+  background: #ffffff;
+  color: #333333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-wrapper.chart-light .chart-title {
+  color: #333333;
+}
+
+.chart-wrapper.chart-light .data-label {
+  fill: #333333;
+}
+
+.chart-wrapper.chart-light .axis-label {
+  fill: #666666;
+}
+
+.chart-wrapper.chart-light .legend-label {
+  color: #333333;
+}
+
+.chart-wrapper.chart-light .legend-value {
+  color: #666666;
+}
+
+.chart-wrapper.chart-light .legend-item {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.chart-wrapper.chart-light .legend-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.chart-wrapper.chart-light .pie-center {
+  fill: #ffffff;
+}
+
+.chart-wrapper.chart-light .data-point {
+  stroke: #ffffff;
+}
+
+/* Dark Theme */
+.chart-wrapper.chart-dark {
+  background: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.chart-wrapper.chart-dark .chart-title {
+  color: #ffffff;
+}
+
+.chart-wrapper.chart-dark .data-label {
+  fill: #ffffff;
+}
+
+.chart-wrapper.chart-dark .axis-label {
+  fill: #cccccc;
+}
+
+.chart-wrapper.chart-dark .legend-label {
+  color: #ffffff;
+}
+
+.chart-wrapper.chart-dark .legend-value {
+  color: #cccccc;
+}
+
+.chart-wrapper.chart-dark .legend-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chart-wrapper.chart-dark .legend-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.chart-wrapper.chart-dark .pie-center {
+  fill: #1a1a1a;
+}
+
+.chart-wrapper.chart-dark .data-point {
+  stroke: #1a1a1a;
+}
+
+/* Grid lines for dark theme */
+.chart-wrapper.chart-dark line[stroke="rgba(200, 200, 200, 0.3)"] {
+  stroke: rgba(100, 100, 100, 0.3);
+}
+
+.chart-title {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.chart-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Chart Visualization Container - RENAMED from chart-container */
+.chart-viz-container {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-viz-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Line Chart Styles */
+.line-chart .area-fill {
+  opacity: 0;
+  animation: fadeInArea 1s ease-out 0.5s forwards;
+}
+
+.line-chart .chart-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-out forwards;
+}
+
+.line-chart .data-point {
+  opacity: 0;
+  transform: scale(0);
+  animation: popIn 0.4s ease-out 1s forwards;
+}
+
+.line-chart .data-point:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+
+/* Pie Chart Styles */
+.pie-chart .pie-slice {
+  opacity: 0;
+  transform-origin: center;
+  animation: slideInPie 0.6s ease-out forwards;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pie-chart .pie-slice:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+.pie-chart .pie-center {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out 2s forwards;
+  transition: fill 0.3s ease;
+}
+
+/* Bar Chart Styles */
+.bar-chart .bar-item {
+  transform: scaleY(0);
+  transform-origin: bottom;
+  animation: growUp 0.8s ease-out forwards;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bar-chart .bar-item:hover {
+  filter: brightness(1.1);
+}
+
+/* Text Styles */
+.data-label {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out 1.5s forwards;
+  transition: fill 0.3s ease;
+}
+
+.axis-label {
+  font-size: 10px;
+  font-weight: 400;
+  transition: fill 0.3s ease;
+}
+
+/* Legend Styles */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+  max-width: 400px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.legend-value {
+  font-size: 11px;
+  font-weight: 400;
+  margin-left: 2px;
+  transition: color 0.3s ease;
+}
+
+/* Animations */
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInArea {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInPie {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes growUp {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chart-wrapper {
+    padding: 15px;
+    margin: 5px;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+  }
+  
+  .chart-legend {
+    max-width: 300px;
+    gap: 10px;
+  }
+  
+  .legend-label {
+    font-size: 11px;
+  }
+  
+  .legend-value {
+    font-size: 10px;
+  }
+}
+
+/* Fallback for systems without theme preference or older browsers */
+@media (prefers-color-scheme: dark) {
+  .chart-wrapper:not(.chart-light):not(.chart-dark) {
+    background: #1a1a1a;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .chart-title {
+    color: #ffffff;
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .data-label {
+    fill: #ffffff;
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .axis-label {
+    fill: #cccccc;
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .legend-label {
+    color: #ffffff;
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .legend-value {
+    color: #cccccc;
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .legend-item {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .chart-wrapper:not(.chart-light):not(.chart-dark) .legend-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

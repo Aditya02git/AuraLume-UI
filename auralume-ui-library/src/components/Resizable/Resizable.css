@@ -1,0 +1,114 @@
+/* Resizable Component Styles */
+.resizable {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.resizable.no-transition {
+  transition: none !important;
+}
+
+/* Base handle styles */
+.resize-handle {
+  position: absolute;
+  z-index: 10;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.resize-handle span {
+  position: absolute;
+  box-sizing: border-box;
+  display: block;
+  border: 1px solid #ccc;
+}
+
+/* Right and Left handles */
+.resize-handle.rg-right,
+.resize-handle.rg-left {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+}
+
+.resize-handle.rg-right span,
+.resize-handle.rg-left span {
+  border-width: 0 1px;
+  top: 50%;
+  margin-top: -10px;
+  margin-left: 3.5px;
+  height: 20px;
+  width: 7px;
+}
+
+/* Top and Bottom handles */
+.resize-handle.rg-top,
+.resize-handle.rg-bottom {
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+}
+
+.resize-handle.rg-top span,
+.resize-handle.rg-bottom span {
+  border-width: 1px 0;
+  left: 50%;
+  margin: 3.5px 0 0 -10px;
+  width: 20px;
+  height: 7px;
+}
+
+/* Handle positioning */
+.resize-handle.rg-top {
+  cursor: row-resize;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-top: -7px;
+}
+
+.resize-handle.rg-right {
+  cursor: col-resize;
+  height: 100%;
+  right: 0;
+  top: 0;
+  margin-right: -14px;
+}
+
+.resize-handle.rg-bottom {
+  cursor: row-resize;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin-bottom: -7px;
+}
+
+.resize-handle.rg-left {
+  cursor: col-resize;
+  height: 100%;
+  left: 0;
+  top: 0;
+  margin-left: -14px;
+}
+
+/* Handle hover effects */
+.resize-handle:hover span {
+  border-color: #999;
+}
+
+/* Active state */
+.resize-handle:active span,
+.resize-handle.dragging span {
+  border-color: #666;
+}
+
+/* Custom handle content support */
+.resize-handle .custom-handle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

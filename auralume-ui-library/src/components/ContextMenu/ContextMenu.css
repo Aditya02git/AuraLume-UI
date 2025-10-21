@@ -1,0 +1,110 @@
+/* Base styles for context menu */
+.context-menu {
+  position: fixed;
+  min-width: var(--min-width, 160px);
+  border-radius: 6px;
+  padding: 4px;
+  z-index: 9999;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.context-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.context-item.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.context-separator {
+  height: 1px;
+  margin: 6px 4px;
+}
+
+.arrow {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 2px;
+  z-index: 10000;
+}
+
+/* Light theme styles */
+.context-menu.contextmenu-light {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  color: #333;
+}
+
+.contextmenu-light .context-item:hover:not(.disabled) {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.contextmenu-light .context-separator {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.contextmenu-light .arrow {
+  color: #666;
+}
+
+/* Dark theme styles */
+.context-menu.contextmenu-dark {
+  background: #2d2d2d;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  color: #e0e0e0;
+}
+
+.contextmenu-dark .context-item:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contextmenu-dark .context-separator {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.contextmenu-dark .arrow {
+  color: #bbb;
+}
+
+.contextmenu-dark .context-item.disabled {
+  opacity: 0.4;
+  color: #666;
+}
+
+/* Default fallback (light theme) */
+.context-menu:not(.contextmenu-light):not(.contextmenu-dark) {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  color: #333;
+}
+
+.context-menu:not(.contextmenu-light):not(.contextmenu-dark) .context-item:hover:not(.disabled) {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.context-menu:not(.contextmenu-light):not(.contextmenu-dark) .context-separator {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.context-menu:not(.contextmenu-light):not(.contextmenu-dark) .arrow {
+  color: #666;
+}

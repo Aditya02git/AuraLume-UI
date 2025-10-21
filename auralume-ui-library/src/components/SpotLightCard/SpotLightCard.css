@@ -1,0 +1,97 @@
+.spotlight-cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 90%;
+  padding: 2rem;
+}
+
+.spotlight-cards:hover .spotlight-card {
+  background: radial-gradient(
+    100rem circle at var(--xPos, 50%) var(--yPos, 50%),
+    var(--spotlight-color, rgba(255, 255, 255, 0.4)),
+    transparent 15%
+  );
+}
+
+.spotlight-card {
+  width: 20rem;
+  height: 15rem;
+  background: radial-gradient(
+    150rem circle at 0 0,
+    transparent,
+    transparent 0%
+  );
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.15s;
+  --xPos: 50%;
+  --yPos: 50%;
+  --spotlight-color: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(0, 127, 120, 0.2);
+  --bg-color: #13161c;
+}
+
+.spotlight-card:hover {
+  transform: scale(0.97);
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    60rem circle at var(--xPos, 50%) var(--yPos, 50%),
+    var(--border-color, rgba(255, 255, 255, 0.2)),
+    transparent 35%
+  );
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(
+    60rem circle at var(--xPos, 50%) var(--yPos, 50%),
+    rgba(255, 255, 255, 0.1),
+    transparent 35%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.spotlight-card-content {
+  background-color: var(--bg-color, #13161c);
+  border-radius: inherit;
+  transition: all 0.25s;
+  height: calc(100% - 0.1rem);
+  width: calc(100% - 0.1rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 1rem;
+  z-index: 1;
+}

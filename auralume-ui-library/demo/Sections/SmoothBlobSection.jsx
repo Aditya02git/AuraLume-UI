@@ -1,0 +1,549 @@
+import React, { useState, useEffect } from "react";
+import SmoothBlob from "../../src/components/ThreeJs/SmoothBlob";
+
+// Preview Toggle Component
+const PreviewToggle = ({ activeTab, onTabChange }) => {
+  const tabs = ["Preview", "TSX/JSX"];
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage?.getItem("darkMode");
+    if (saved) {
+      setIsDarkMode(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const saved = localStorage?.getItem("darkMode");
+      if (saved) {
+        setIsDarkMode(JSON.parse(saved));
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "4px",
+        backgroundColor: isDarkMode ? "#1e293b" : "#ffffff",
+        padding: "4px",
+        borderRadius: "8px",
+        marginBottom: "16px",
+        width: "fit-content",
+      }}
+    >
+      {tabs.map((tab) => (
+        <button
+          key={tab}
+          onClick={() => onTabChange(tab)}
+          style={{
+            padding: "clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 16px)",
+            border: "none",
+            borderRadius: "6px",
+            backgroundColor: activeTab === tab ? "#e33de0" : "transparent",
+            color:
+              activeTab === tab ? "white" : isDarkMode ? "#94a3b8" : "#64748b",
+            cursor: "pointer",
+            fontSize: "clamp(12px, 2.5vw, 14px)",
+            fontWeight: "500",
+            transition: "all 0.2s ease",
+          }}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// Code Display Component
+const CodeDisplay = ({ code, language }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard?.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        backgroundColor: "#1e293b",
+        borderRadius: "8px",
+        overflow: "hidden",
+        marginBottom: "16px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "12px 16px",
+          backgroundColor: "#334155",
+          borderBottom: "1px solid #475569",
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ef4444' }}></div>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#f59e0b' }}></div>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }}></div>
+          </div>
+          <span style={{ color: '#94a3b8', fontSize: '14px', fontWeight: '500', marginLeft: '8px' }}>
+            {language}
+          </span>
+        </div>
+        <button
+          onClick={handleCopy}
+          style={{
+            padding: "6px 12px",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            fontSize: "12px",
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+          }}
+        >
+          {copied ? <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><svg style={{color: '#43eb34'}} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
+          </svg><p>Copied</p></div>
+            : <div title='Copy'><svg style={{color: '#bdbdbd'}} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z" clip-rule="evenodd"/>
+            <path fill-rule="evenodd" d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z" clip-rule="evenodd"/>
+          </svg></div>
+          }
+        </button>
+      </div>
+      <pre
+        style={{
+          padding: "16px",
+          margin: 0,
+          color: "#e2e8f0",
+          fontSize: "14px",
+          lineHeight: "1.5",
+          overflow: "auto",
+        }}
+      >
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+};
+
+const SmoothBlobSectionWithPreview = ({ title, children, jsxCode }) => {
+  const [activeTab, setActiveTab] = useState("Preview");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage?.getItem("darkMode");
+    if (saved) {
+      setIsDarkMode(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const saved = localStorage?.getItem("darkMode");
+      if (saved) {
+        setIsDarkMode(JSON.parse(saved));
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  return (
+    <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
+      <h2
+        style={{
+          marginBottom: "clamp(1rem, 3vw, 2rem)",
+          color: isDarkMode ? "#ffffff" : "#000000",
+          fontSize: "clamp(1.25rem, 5vw, 1.5rem)",
+          fontWeight: "bold",
+        }}
+      >
+        {title}
+      </h2>
+
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {activeTab === "Preview" && (
+        <div
+          style={{
+            padding: "clamp(16px, 4vw, 32px)",
+            background: "linear-gradient(0deg, #8c76ed, #fca4c5)",
+            borderRadius: "12px",
+            border: `1px solid ${isDarkMode ? "#334155" : "#e2e8f0"}`,
+            transition: "all 0.3s ease",
+            minHeight: "clamp(300px, 50vh, 500px)",
+            position: "relative",
+          }}
+        >
+          {children}
+        </div>
+      )}
+
+      {activeTab === "TSX/JSX" && (
+        <CodeDisplay code={jsxCode} language="TSX/JSX" />
+      )}
+    </section>
+  );
+};
+
+const SmoothBlobSection = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage?.getItem("darkMode");
+    if (saved) {
+      setIsDarkMode(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const saved = localStorage?.getItem("darkMode");
+      if (saved) {
+        setIsDarkMode(JSON.parse(saved));
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const containerStyle = {
+    padding: "clamp(20px, 5vw, 40px)",
+    maxWidth: "1200px",
+    margin: "0 auto",
+    fontFamily: "Arial, sans-serif",
+    background: "transparent",
+    color: isDarkMode ? "#e2e8f0" : "#1a1a1a",
+    minHeight: "100vh",
+    transition: "all 0.3s ease",
+  };
+
+  const wireframeExamplesJSX = `import Blob from './Blob';
+
+// Wireframe Blob with low detail
+<Blob 
+  width="200px" 
+  height="200px"
+  color="#ff6b6b"
+  wireframe={true}
+  material="basic"
+  detail={2}
+  morphStrength={0.15}
+  animationSpeed={2}
+/>
+
+// Wireframe with custom rotation
+<Blob 
+  width="200px" 
+  height="200px"
+  color="#4ecdc4"
+  wireframe={true}
+  material="basic"
+  detail={3}
+  morphStrength={0.2}
+  animationSpeed={1.5}
+  rotationSpeed={{ x: 0.015, y: 0.02 }}
+/>`;
+
+  const materialShowcaseJSX = `import Blob from './Blob';
+
+// Normal Material (rainbow colors based on surface normals)
+<Blob 
+  material="normal"
+  morphStrength={0.12}
+  animationSpeed={0.8}
+/>`;
+
+  const animationControlJSX = `import Blob from './Blob';
+
+// Fast animated blob
+<Blob 
+  color="#1abc9c"
+  animationSpeed={3}
+  morphStrength={0.25}
+  rotationSpeed={{ x: 0.03, y: 0.02 }}
+  material="standard"
+/>
+
+// Static blob (no animation)
+<Blob 
+  color="#e67e22"
+  animation={false}
+  material="phong"
+  ambientLightIntensity={10}
+/>
+
+// Slow morphing blob
+<Blob 
+  color="#8e44ad"
+  animationSpeed={0.3}
+  morphStrength={0.3}
+  rotationSpeed={{ x: 0.005, y: 0.003 }}
+  material="standard"
+/>`;
+
+  const basicShapesJSX = `
+
+// Basic usage with default props
+<Blob />
+
+// Interactive Blob with custom configuration (as shown in preview)
+const handleBlobClick = (intersection) => {
+  console.log('Blob clicked!', intersection);
+};
+
+const handleBlobReady = ({ scene, camera, renderer, icosahedron }) => {
+  console.log('Blob is ready!', { scene, camera, renderer, icosahedron });
+};
+
+<SmoothBlob 
+  width="500px" 
+  height="300px"
+  color="#ffffff"
+  animationSpeed={0.5}
+  morphStrength={1}
+  rotationSpeed={{ x: 0.02, y: 0.01 }}
+  material="standard"
+  pointLightColor="#ffffff"
+  ambientLightIntensity={15}
+  pointLightIntensity={10}
+  onClick={handleBlobClick}
+  onReady={handleBlobReady}
+/>
+
+// Simple colored blob
+<SmoothBlob 
+  color="#ff6b6b"
+  width="400px"
+  height="400px"
+/>
+
+// Wireframe blob
+<SmoothBlob 
+  wireframe={true}
+  material="basic"
+  color="#4ecdc4"
+  detail={3}
+/>
+
+// Static blob (no animation)
+<SmoothBlob 
+  animation={false}
+  color="#9b59b6"
+  material="phong"
+/>`;
+
+  const propsTableData = [
+  // 🎨 Basic Styling
+  { prop: "color", type: "string", default: "'#ffffff'", desc: "Base color of the blob when gradient is not used" },
+  { prop: "gradientColors", type: "array", default: "['#ff006e', '#8338ec']", desc: "Array of colors for gradient shading (if useGradient is true)" },
+  { prop: "useGradient", type: "boolean", default: "false", desc: "Whether to use gradient color instead of a solid color" },
+  { prop: "width", type: "string", default: "'100%'", desc: "Width of the canvas container" },
+  { prop: "height", type: "string", default: "'400px'", desc: "Height of the canvas container" },
+
+  // ⚙️ Animation Controls
+  { prop: "animation", type: "boolean", default: "true", desc: "Enable or disable blob animation" },
+  { prop: "animationSpeed", type: "number", default: "1", desc: "Overall speed multiplier for blob animation" },
+  { prop: "rotationSpeed", type: "object", default: "{ x: 0.05, y: 0.1 }", desc: "Rotation speed of the blob around x and y axes" },
+  { prop: "morphStrength", type: "number", default: "0.3", desc: "Controls how strongly the blob deforms during morphing" },
+  { prop: "morphSpeed", type: "object", default: "{ x: 1.5, y: 1.3, z: 0.7 }", desc: "Speed of blob vertex morphing in each axis" },
+  { prop: "morphFrequency", type: "object", default: "{ x: 3, y: 4, z: 2 }", desc: "Frequency of blob morphing for each axis" },
+
+  // 🔷 Geometry
+  { prop: "resolution", type: "number", default: "128", desc: "Number of subdivisions used for blob geometry" },
+  { prop: "size", type: "number", default: "1", desc: "Overall scale of the blob" },
+
+  // 🎥 Camera
+  { prop: "cameraPosition", type: "object", default: "{ x: 0, y: 0, z: 3 }", desc: "Initial position of the camera in 3D space" },
+  { prop: "fov", type: "number", default: "75", desc: "Camera field of view" },
+
+  // 💡 Lighting
+  { prop: "ambientLightColor", type: "string", default: "'#404040'", desc: "Color of the ambient light" },
+  { prop: "ambientLightIntensity", type: "number", default: "1", desc: "Intensity of the ambient light" },
+  { prop: "directionalLightColor", type: "string", default: "'#ffffff'", desc: "Color of the directional light" },
+  { prop: "directionalLightIntensity", type: "number", default: "1", desc: "Intensity of the directional light" },
+  { prop: "directionalLightPosition", type: "object", default: "{ x: 1, y: 1, z: 1 }", desc: "Position of the directional light" },
+  { prop: "pointLightColor", type: "string", default: "'#ffffff'", desc: "Color of the point light" },
+  { prop: "pointLightIntensity", type: "number", default: "1", desc: "Intensity of the point light" },
+  { prop: "pointLightPosition", type: "object", default: "{ x: 2, y: 3, z: 4 }", desc: "Position of the point light source" },
+  { prop: "pointLightDistance", type: "number", default: "10", desc: "Distance at which the point light fades" },
+
+  // 🕹️ Controls
+  { prop: "orbitControl", type: "boolean", default: "false", desc: "Enables interactive orbit camera control" },
+
+  // 🧱 Material
+  { prop: "wireframe", type: "boolean", default: "false", desc: "Renders the blob in wireframe mode" },
+  { prop: "roughness", type: "number", default: "0.4", desc: "Defines the roughness of the material" },
+  { prop: "metalness", type: "number", default: "0.6", desc: "Defines the metallic property of the material" },
+  { prop: "flatShading", type: "boolean", default: "false", desc: "Renders the blob with flat shading for a faceted look" },
+  { prop: "material", type: "string", default: "'standard'", desc: "Material type to use for rendering (e.g., 'standard', 'phong')" },
+
+  // 🧩 Events
+  { prop: "onReady", type: "function", default: "null", desc: "Callback fired when the blob scene is ready" },
+  { prop: "onClick", type: "function", default: "null", desc: "Callback triggered when the blob is clicked" },
+
+  // 🎨 Custom Styles
+  { prop: "className", type: "string", default: "''", desc: "Custom CSS class for container" },
+  { prop: "style", type: "object", default: "{}", desc: "Inline style overrides for container" },
+];
+
+  const handleBlobClick = (intersection) => {
+    console.log('Blob clicked!', intersection);
+  };
+
+  const handleBlobReady = ({ scene, camera, renderer, icosahedron }) => {
+    console.log('Blob is ready!', { scene, camera, renderer, icosahedron });
+  };
+
+  return (
+    <div>
+      <div
+        style={{
+          backgroundColor: isDarkMode ? "#1e293b" : "#ffffff",
+          borderRadius: "12px",
+          border: `1px solid ${isDarkMode ? "#334155" : "#e2e8f0"}`,
+          overflow: "hidden",
+          marginBottom: "25px",
+          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+        }}
+      >
+        <div style={{overflowX: 'auto', WebkitOverflowScrolling: 'touch'}}>
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              fontSize: "clamp(12px, 2.5vw, 14px)",
+              minWidth: "600px"
+            }}
+          >
+            <thead>
+              <tr
+                style={{
+                  backgroundColor: isDarkMode ? "#334155" : "#f8fafc", 
+                  borderBottom: "1px solid #bababa"
+                }}
+              >
+                <th style={{ padding: "clamp(8px, 2vw, 16px)", textAlign: "left", fontWeight: "600" }}>Prop</th>
+                <th style={{ padding: "clamp(8px, 2vw, 16px)", textAlign: "left", fontWeight: "600" }}>Type</th>
+                <th style={{ padding: "clamp(8px, 2vw, 16px)", textAlign: "left", fontWeight: "600" }}>Default</th>
+                <th style={{ padding: "clamp(8px, 2vw, 16px)", textAlign: "left", fontWeight: "600" }}>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {propsTableData.map((row, index) => (
+                <tr
+                  key={index}
+                  style={{
+                    borderBottom: `1px solid ${isDarkMode ? "#475569" : "#e2e8f0"}`,
+                    backgroundColor:
+                      index % 2 === 0
+                        ? "transparent"
+                        : isDarkMode
+                        ? "#1e293b50"
+                        : "#f8fafc50",
+                  }}
+                >
+                  <td
+                    style={{
+                      padding: "clamp(8px, 2vw, 16px)",
+                      fontFamily: "monospace",
+                      color: isDarkMode ? "#fbbf24" : "#d97706",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    {row.prop}
+                  </td>
+                  <td
+                    style={{
+                      padding: "clamp(8px, 2vw, 16px)",
+                      fontFamily: "monospace",
+                      color: isDarkMode ? "#8b5cf6" : "#7c3aed",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    {row.type}
+                  </td>
+                  <td
+                    style={{
+                      padding: "clamp(8px, 2vw, 16px)",
+                      fontFamily: "monospace",
+                      color: isDarkMode ? "#06b6d4" : "#0891b2",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    {row.default}
+                  </td>
+                  <td style={{ padding: "clamp(8px, 2vw, 16px)", wordBreak: "break-word" }}>{row.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <SmoothBlobSectionWithPreview
+        title="Basic"
+        jsxCode={materialShowcaseJSX}
+      >
+        <div style={{ 
+          display: 'flex',  
+          alignItems: 'center', 
+          justifyContent: 'center',
+          height: '100%',
+          gap: '20px'
+        }}>
+          <SmoothBlob material="normal" />
+        </div>
+      </SmoothBlobSectionWithPreview>
+
+      <SmoothBlobSectionWithPreview
+        title="Custom Component"
+        jsxCode={basicShapesJSX}
+      >
+        <div style={{ 
+          display: 'flex',  
+          alignItems: 'center', 
+          justifyContent: 'center',
+          height: '100%',
+          gap: '20px'
+        }}>
+          <SmoothBlob color="#ff0000" />
+        </div>
+      </SmoothBlobSectionWithPreview>
+
+      <SmoothBlobSectionWithPreview
+        title="Wireframe Variations"
+        jsxCode={wireframeExamplesJSX}
+      >
+        <div style={{ 
+          display: 'flex',  
+          alignItems: 'center', 
+          justifyContent: 'center',
+          height: '100%',
+          gap: 'clamp(15px, 4vw, 30px)',
+          flexWrap: 'wrap',
+          padding: 'clamp(10px, 3vw, 20px)'
+        }}>
+          <SmoothBlob color="#ff0000" wireframe={true} material="phong"/>
+        </div>
+      </SmoothBlobSectionWithPreview>
+    </div>
+  );
+};
+
+export default SmoothBlobSection;

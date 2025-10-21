@@ -1,0 +1,213 @@
+/* ToggleGroup Base Styles */
+.toggle-group {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.toggle-button {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  position: relative;
+  border-right: 1px solid #e0e0e0;
+}
+
+.toggle-button:last-child {
+  border-right: none;
+}
+
+.toggle-button:hover {
+  background: var(--button-hover-bg, rgba(125, 125, 125, 0.1));
+  color: var(--button-hover-text, #333);
+}
+
+.toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-button i {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button .text {
+  white-space: nowrap;
+}
+
+/* Theme Styles */
+
+/* Light Theme (Default) */
+.toggle-group.togglegroup-light {
+  background: #fff;
+  border: 1px solid var(--active-color, #e0e0e0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-group.togglegroup-light .toggle-button {
+  background: var(--button-bg-color, transparent);
+  color: var(--button-text-color, #666);
+  border-right: 1px solid var(--active-color, #e0e0e0);
+}
+
+.toggle-group.togglegroup-light .toggle-button:hover {
+  background: var(--button-hover-bg, rgba(125, 125, 125, 0.1));
+  color: var(--button-hover-text, #333);
+}
+
+.toggle-group.togglegroup-light .toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+}
+
+/* Dark Theme */
+.toggle-group.togglegroup-dark {
+  background: #2d2d2d;
+  border: 1px solid var(--active-color, #404040);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-group.togglegroup-dark .toggle-button {
+  background: var(--button-bg-color, transparent);
+  color: var(--button-text-color, #ccc);
+  border-right: 1px solid var(--active-color, #404040);
+}
+
+.toggle-group.togglegroup-dark .toggle-button:hover {
+  background: var(--button-hover-bg, rgba(125, 125, 125, 0.1));
+  color: var(--button-hover-text, #fff);
+}
+
+.toggle-group.togglegroup-dark .toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Variant Styles */
+
+/* Outline Variant - Light Theme */
+.toggle-group.outline.togglegroup-light {
+  background: transparent;
+  border: 2px solid var(--active-color, #7d7d7d);
+}
+
+.toggle-group.outline.togglegroup-light .toggle-button {
+  color: var(--active-color, #7d7d7d);
+  border-right: 1px solid var(--active-color, #7d7d7d);
+}
+
+.toggle-group.outline.togglegroup-light .toggle-button:hover {
+  background: var(--hover-color, rgba(125, 125, 125, 0.1));
+}
+
+.toggle-group.outline.togglegroup-light .toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+}
+
+/* Outline Variant - Dark Theme */
+.toggle-group.outline.togglegroup-dark {
+  background: transparent;
+  border: 2px solid var(--active-color, #7d7d7d);
+}
+
+.toggle-group.outline.togglegroup-dark .toggle-button {
+  color: var(--light-color, #a0a0a0);
+  border-right: 1px solid var(--active-color, #7d7d7d);
+}
+
+.toggle-group.outline.togglegroup-dark .toggle-button:hover {
+  background: var(--hover-color, rgba(125, 125, 125, 0.1));
+}
+
+.toggle-group.outline.togglegroup-dark .toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+}
+
+/* Minimal Variant - Light Theme */
+.toggle-group.minimal.togglegroup-light {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  gap: 4px;
+}
+
+.toggle-group.minimal.togglegroup-light .toggle-button {
+  border-radius: 6px;
+  border-right: none;
+  margin: 0 2px;
+}
+
+.toggle-group.minimal.togglegroup-light .toggle-button:hover {
+  background: #f0f0f0;
+}
+
+.toggle-group.minimal.togglegroup-light .toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+  box-shadow: 0 2px 4px var(--hover-color, rgba(125, 125, 125, 0.3));
+}
+
+/* Minimal Variant - Dark Theme */
+.toggle-group.minimal.togglegroup-dark {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  gap: 4px;
+}
+
+.toggle-group.minimal.togglegroup-dark .toggle-button {
+  border-radius: 6px;
+  border-right: none;
+  margin: 0 2px;
+}
+
+.toggle-group.minimal.togglegroup-dark .toggle-button:hover {
+  background: #404040;
+}
+
+.toggle-group.minimal.togglegroup-dark .toggle-button.active {
+  background: var(--active-color, #7d7d7d);
+  color: var(--active-text-color, white);
+  box-shadow: 0 2px 4px var(--hover-color, rgba(125, 125, 125, 0.3));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .toggle-button {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .toggle-button .text {
+    display: none;
+  }
+  
+  .toggle-button i {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .toggle-button {
+    padding: 8px 10px;
+  }
+}

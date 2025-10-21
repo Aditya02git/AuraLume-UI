@@ -1,0 +1,409 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100);
+
+/* CRT Component Styles */
+.crt-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+.crt-background {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  background-color: var(--bg-color, none);
+}
+
+.crt-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color, #fff);
+}
+
+/* Scratch Effects */
+.crt-outer-scratch, 
+.crt-inner-scratch {
+  height: inherit;
+  position: relative;
+}
+
+.crt-scratch-overlay {
+  content: '';
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 100px;
+  opacity: 0.08;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/662025/scratch.png') repeat center center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.crt-scratch-quick {
+  animation: crt-scratch 0.45s steps(1) infinite;
+}
+
+.crt-scratch-slow {
+  left: 30%;
+  animation: crt-inner-scratch 2s infinite;
+}
+
+/* Grain Effect */
+.crt-grain-overlay {
+  content: '';
+  width: 110%;
+  height: 110%;
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  opacity: 0.11;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/662025/grain.jpg') repeat center center;
+  animation: crt-grain 0.5s steps(1) infinite;
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Scan Line Effect */
+.crt-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, var(--scan-line-opacity, 0.1)) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 15;
+  animation: crt-scanlines 10s linear infinite;
+}
+
+/* Flicker Effect */
+.crt-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, var(--flicker-intensity, 0.03));
+  pointer-events: none;
+  z-index: 16;
+  animation: crt-flicker 0.15s infinite;
+}
+
+/* Intensity Variants */
+.crt-light .crt-scratch-overlay {
+  opacity: 0.03;
+}
+
+.crt-light .crt-grain-overlay {
+  opacity: 0.05;
+}
+
+.crt-normal .crt-scratch-overlay {
+  opacity: 0.08;
+}
+
+.crt-normal .crt-grain-overlay {
+  opacity: 0.11;
+}
+
+.crt-heavy .crt-scratch-overlay {
+  opacity: 0.15;
+}
+
+.crt-heavy .crt-grain-overlay {
+  opacity: 0.2;
+}
+
+/* Film Animations */
+@keyframes crt-grain {
+  0%, 100% {
+    transform: translate(0, 0, 0);
+  }
+  10% {
+    transform: translate(-1%, -1%);
+  }
+  20% {
+    transform: translate(1%, 1%);
+  }
+  30% {
+    transform: translate(-2%, -2%);
+  }
+  40% {
+    transform: translate(3%, 3%);
+  }
+  50% {
+    transform: translate(-3%, -3%);
+  }
+  60% {
+    transform: translate(4%, 4%);
+  }
+  70% {
+    transform: translate(-4%, -4%);
+  }
+  80% {
+    transform: translate(2%, 2%);
+  }
+  90% {
+    transform: translate(-3%, -3%);
+  }
+}
+
+@keyframes crt-scratch {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.075;
+  }
+  10% {
+    transform: translateX(-1%);
+  }
+  20% {
+    transform: translateX(1%);
+  }
+  30% {
+    transform: translateX(-2%);
+    opacity: 0.09;
+  }
+  40% {
+    transform: translateX(3%);
+  }
+  50% {
+    transform: translateX(-3%);
+    opacity: 0.05;
+  }
+  60% {
+    transform: translateX(8%);
+  }
+  70% {
+    transform: translateX(-3%);
+  }
+  80% {
+    transform: translateX(10%);
+    opacity: 0.02;
+  }
+  90% {
+    transform: translateX(-2%);
+  }
+}
+
+@keyframes crt-inner-scratch {
+  0% {
+    transform: translateX(0);
+    opacity: 0.08;
+  }
+  10% {
+    transform: translateX(-1%);
+  }
+  20% {
+    transform: translateX(1%);
+  }
+  30% {
+    transform: translateX(-2%);
+  }
+  40% {
+    transform: translateX(3%);
+  }
+  50% {
+    transform: translateX(-3%);
+    opacity: 0.06;
+  }
+  60% {
+    transform: translateX(8%);
+  }
+  70% {
+    transform: translateX(-3%);
+  }
+  80% {
+    transform: translateX(10%);
+    opacity: 0.03;
+  }
+  90% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(30%);
+  }
+}
+
+@keyframes crt-scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes crt-flicker {
+  0% {
+    opacity: 0.27861;
+  }
+  5% {
+    opacity: 0.34769;
+  }
+  10% {
+    opacity: 0.23604;
+  }
+  15% {
+    opacity: 0.90626;
+  }
+  20% {
+    opacity: 0.18128;
+  }
+  25% {
+    opacity: 0.83891;
+  }
+  30% {
+    opacity: 0.65583;
+  }
+  35% {
+    opacity: 0.67807;
+  }
+  40% {
+    opacity: 0.26559;
+  }
+  45% {
+    opacity: 0.84693;
+  }
+  50% {
+    opacity: 0.96019;
+  }
+  55% {
+    opacity: 0.08594;
+  }
+  60% {
+    opacity: 0.20313;
+  }
+  65% {
+    opacity: 0.71988;
+  }
+  70% {
+    opacity: 0.53455;
+  }
+  75% {
+    opacity: 0.37288;
+  }
+  80% {
+    opacity: 0.71428;
+  }
+  85% {
+    opacity: 0.70419;
+  }
+  90% {
+    opacity: 0.7003;
+  }
+  95% {
+    opacity: 0.36108;
+  }
+  100% {
+    opacity: 0.24387;
+  }
+}
+
+/* Utility Classes */
+.crt-title {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 3em;
+  text-align: center;
+  color: var(--text-color, #fff);
+  animation: crt-fade 3s ease-in-out;
+  margin: 0;
+  padding: 0;
+}
+
+.crt-title-span {
+  display: inline-block;
+  position: relative;
+  padding: 0.5em 1em;
+}
+
+.crt-title-span::before {
+  display: block;
+  content: '';
+  width: 110%;
+  margin-left: -5%;
+  margin-bottom: 5%;
+  border-top: 1px solid var(--text-color, #fff);
+  animation: crt-draw 2.5s ease-out;
+}
+
+.crt-title-span::after {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--text-color, #fff);
+  animation: crt-draw-bottom 2.5s ease-out;
+}
+
+/* Title Animations */
+@keyframes crt-draw {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 110%;
+  }
+}
+
+@keyframes crt-draw-bottom {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes crt-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .crt-title {
+    font-size: 2em;
+  }
+  
+  .crt-title-span {
+    padding: 0.3em 0.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .crt-title {
+    font-size: 1.5em;
+  }
+  
+  .crt-title-span {
+    padding: 0.2em 0.6em;
+  }
+}

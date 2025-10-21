@@ -1,0 +1,53 @@
+.shader-wave-text {
+  font-weight: bold;
+  max-width: 600px;
+  height: auto;
+  font-family: 'Cabin Condensed', sans-serif;
+}
+
+/* Optional: Default container styles for standalone usage */
+.shader-wave-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Optional: Full screen loading variant */
+.shader-wave-text-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('https://farm9.staticflickr.com/8760/17195790401_ceeeafcddb_o.jpg');
+  background-size: cover;
+  z-index: 9999;
+}
+
+.shader-wave-text-fullscreen .shader-wave-text {
+  max-width: 600px;
+  width: 80vw;
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .shader-wave-text {
+    max-width: 300px;
+  }
+  
+  .shader-wave-text-fullscreen .shader-wave-text {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .shader-wave-text {
+    max-width: 200px;
+  }
+}

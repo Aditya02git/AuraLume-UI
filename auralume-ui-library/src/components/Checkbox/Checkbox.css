@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --checkbox-primary: #6366F1;
+  --checkbox-primary-light: #EEF2FF;
+  --checkbox-success: #10B981;
+  --checkbox-danger: #EF4444;
+  --checkbox-warning: #F59E0B;
+  --checkbox-info: #3B82F6;
+  --text-color: #1F2937;
+  --checkbox-light: #F9FAFB;
+  --checkbox-gray: #9CA3AF;
+  --checkbox-border: #e2e8f0;
+  --checkbox-border-radius: 12px;
+  --checkbox-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Checkbox Styles */
+.checkbox-wrapper {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper label {
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper.checkbox-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Basic Checkbox */
+.checkbox-basic {
+  gap: 10px;
+}
+
+.checkbox-basic input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--checkbox-gray);
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--checkbox-transition);
+  flex-shrink: 0;
+}
+
+/* .checkbox-basic input[type="checkbox"]:hover:not(:disabled) {
+  border-color: var(--checkbox-primary);
+  background-color: var(--checkbox-primary-hover, rgba(99, 102, 241, 0.05));
+} */
+
+.checkbox-basic input[type="checkbox"]:checked {
+  border-color: var(--checkbox-primary);
+  background-color: var(--checkbox-primary);
+}
+
+.checkbox-basic input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.checkbox-basic label {
+  font-weight: 500;
+  color: var(--text-color);
+  transition: var(--checkbox-transition);
+}
+
+.checkbox-basic input[type="checkbox"]:checked + label {
+  color: var(--checkbox-text);
+}
+
+/* Card Checkbox */
+.checkbox-card {
+  min-width: 180px;
+  max-width: 300px;
+}
+
+.checkbox-card input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-card label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--checkbox-border);
+  border-radius: var(--checkbox-border-radius);
+  padding: 24px 15px;
+  text-align: center;
+  transition: var(--checkbox-transition);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  min-height: 120px;
+}
+
+.checkbox-card label:hover {
+  border-color: var(--checkbox-info);
+  background-color: rgba(59, 130, 246, 0.02);
+}
+
+.checkbox-card label .icon {
+  margin-bottom: 12px;
+  font-size: 28px;
+  color: var(--checkbox-gray);
+  transition: var(--checkbox-transition);
+}
+
+.checkbox-card label .description {
+  font-size: 0.9rem;
+  color: var(--checkbox-gray);
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+.checkbox-card input[type="checkbox"]:checked + label {
+  border-color: var(--checkbox-info);
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.checkbox-card input[type="checkbox"]:checked + label .icon {
+  color: var(--checkbox-info);
+}
+
+.checkbox-card input[type="checkbox"]:checked + label::after {
+  content: "✓";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--checkbox-info);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Size Variations */
+.checkbox-small input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.checkbox-small label {
+  font-size: 0.875rem;
+}
+
+.checkbox-large input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+
+.checkbox-large label {
+  font-size: 1.125rem;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  display: flex;
+}
+
+.checkbox-group-column {
+  flex-direction: column;
+}
+
+.checkbox-group-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.checkbox-group-card {
+  flex-wrap: wrap;
+}
+
+.checkbox-group-button {
+  flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .checkbox-card {
+    max-width: 100%;
+    min-width: 100%;
+  }
+  
+  .checkbox-group-row {
+    flex-direction: column;
+  }
+}

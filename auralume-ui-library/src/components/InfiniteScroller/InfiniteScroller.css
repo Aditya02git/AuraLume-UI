@@ -1,0 +1,272 @@
+@property --background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #120020;
+}
+
+/* Type-1: Image Scroller Styles */
+.scroller-container {
+  --slide-width: clamp(150px, 20vw, 300px);
+  --slide-gap: calc(var(--slide-width) * 0.06);
+  --slide-border-radius: calc(var(--slide-width) * 0.06);
+  --animation-duration: 8s;
+  
+  overflow: hidden;
+  width: 90vw;
+  position: relative;
+}
+
+.scroller-container::before {
+  position: absolute;
+  content: "";
+  width: var(--slide-width);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  /* background: linear-gradient(90deg, var(--background-color), transparent); */
+  pointer-events: none;
+}
+
+.scroller-container::after {
+  position: absolute;
+  content: "";
+  width: var(--slide-width);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, transparent, var(--background-color));
+  pointer-events: none;
+}
+
+.scroller-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--slide-gap);
+  width: calc((var(--slide-width) + var(--slide-gap)) * 6);
+  animation: moveLeft var(--animation-duration) linear infinite;
+}
+
+.scroller-wrapper:hover {
+  animation-play-state: paused;
+}
+
+.scroller-slide {
+  flex: none;
+  width: var(--slide-width);
+  aspect-ratio: 9/16;
+  background: #eee;
+  border-radius: var(--slide-border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.scroller-slide:hover {
+  transform: scale(1.05);
+}
+
+.scroller-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Type-2: Tag List Scroller Styles */
+.tag-list {
+  width: 30rem;
+  max-width: 90vw;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 1rem 0;
+  position: relative;
+  padding: 1.5rem 0;
+  overflow: hidden;
+}
+
+.loop-slider .inner {
+  display: flex;
+  width: fit-content;
+  animation-name: loop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: var(--direction);
+  animation-duration: var(--duration);
+}
+
+.loop-slider:hover .inner {
+  animation-play-state: paused;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 0 0.2rem;
+  color: var(--btn-text-color, #e2e8f0);
+  font-size: 0.9rem;
+  background-color: var(--btn-color, #334155);
+  border-radius: 0.4rem;
+  padding: 0.7rem 1rem;
+  margin-right: 1rem;
+  box-shadow: 
+    0 0.1rem 0.2rem rgb(0 0 0 / 20%),
+    0 0.1rem 0.5rem rgb(0 0 0 / 30%),
+    0 0.2rem 1.5rem rgb(0 0 0 / 40%);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  /* background-color: var(--btn-hover-color, #475569); */
+}
+
+.tag span {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+.fade {
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--background-color, #1e293b), transparent 30%, transparent 70%, var(--background-color, #1e293b));
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Type-3: Horizontal Scroller Styles (Kevin Powell Style) */
+.horizontal-scroller {
+  --animation-duration: 15s;
+  --animation-direction: forwards;
+  
+  max-width: 600px;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  background-color: var(--background-color);
+  margin: 0 auto;
+}
+
+.horizontal-scroller__inner {
+  display: flex;
+  padding-block: 1rem;
+  gap: 1rem;
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: horizontalScroll var(--animation-duration) var(--animation-direction) linear infinite;
+  animation-delay: 1s;
+}
+
+.horizontal-scroller__inner:hover {
+  animation-play-state: paused;
+}
+
+.horizontal-scroller__item {
+  flex: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.horizontal-scroller__text {
+  padding: 1rem;
+  background: var(--btn-color, #364a71);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem -0.25rem var(--shadow-color, #010e28);
+  color: var(--btn-text-color, white);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.horizontal-scroller__text:hover,
+.horizontal-scroller__text:focus,
+.horizontal-scroller__text:active {
+  transform: translateY(-2px);
+  /* filter: saturate(3); */
+}
+
+.horizontal-scroller__item img {
+  max-height: 200px;
+  max-width: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.2);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.horizontal-scroller__item img:hover,
+.horizontal-scroller__item img:focus,
+.horizontal-scroller__item img:active {
+  transform: scale(1.1);
+  filter: saturate(1.5);
+}
+
+@keyframes horizontalScroll {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scroller-container {
+    width: 95vw;
+  }
+  
+  .horizontal-scroller {
+    max-width: 95vw;
+  }
+  
+  .horizontal-scroller__item img {
+    max-height: 150px;
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroller-container {
+    --slide-width: clamp(120px, 25vw, 200px);
+  }
+  
+  .horizontal-scroller__item img {
+    max-height: 120px;
+    max-width: 120px;
+  }
+  
+  .horizontal-scroller__text {
+    padding: 0.8rem;
+    font-size: 14px;
+  }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .scroller-wrapper,
+  .loop-slider .inner,
+  .horizontal-scroller__inner {
+    animation-play-state: paused;
+  }
+}

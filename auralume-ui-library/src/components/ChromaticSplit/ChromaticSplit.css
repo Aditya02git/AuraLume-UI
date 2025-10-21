@@ -1,0 +1,146 @@
+.chromatic-split-container {
+  position: relative;
+  display: inline-block;
+  /* cursor: none; */
+  overflow: hidden;
+  border-radius: 8px;
+  background: #000;
+}
+
+.chromatic-split-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chromatic-split-container:hover .chromatic-split-image-wrapper {
+  transform: scale(1.02);
+}
+
+.chromatic-split-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.1s ease;
+}
+
+.chromatic-split-red {
+  filter: sepia(1) hue-rotate(0deg) saturate(3);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.chromatic-split-green {
+  filter: sepia(1) hue-rotate(120deg) saturate(3);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.chromatic-split-blue {
+  filter: sepia(1) hue-rotate(240deg) saturate(3);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.chromatic-split-normal {
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+
+.chromatic-split-glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+.chromatic-split-glitch::before,
+.chromatic-split-glitch::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(220, 20, 60, 0.4) 25%,
+    transparent 50%,
+    rgba(34, 139, 34, 0.4) 75%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.chromatic-split-glitch::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(25, 25, 139, 0.4) 25%,
+    transparent 50%,
+    rgba(184, 134, 11, 0.4) 75%,
+    transparent 100%
+  );
+  animation-delay: 0.1s;
+}
+
+.chromatic-split-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.chromatic-split-container:hover .chromatic-split-overlay {
+  opacity: 1;
+}
+
+.chromatic-split-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  color: #999;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+.chromatic-split-loading::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border: 2px solid transparent;
+  border-top: 2px solid #999;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

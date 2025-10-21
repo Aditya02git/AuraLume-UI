@@ -1,0 +1,234 @@
+/* Shiny Button Variant - Clean Version (No Dots) */
+
+/* CSS Custom Properties */
+@property --shiny-gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --shiny-gradient-angle-offset {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --shiny-gradient-percent {
+  syntax: "<percentage>";
+  initial-value: 5%;
+  inherits: false;
+}
+
+@property --shiny-gradient-shine {
+  syntax: "<color>";
+  initial-value: white;
+  inherits: false;
+}
+
+/* Shiny Button Base Styles */
+.my-ui-btn--shiny {
+  --shiny-bg: #000000;
+  --shiny-bg-subtle: #1a1818;
+  --shiny-fg: #ffffff;
+  --shiny-highlight: var(--primary-color, #3b82f6);
+  --shiny-highlight-subtle: var(--secondary-color, #8484ff);
+  --shiny-animation: shiny-gradient-angle linear infinite;
+  --shiny-duration: 3s;
+  --shiny-shadow-size: 2px;
+
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+  outline-offset: 4px;
+  padding: 1.25rem 2.5rem;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  border-radius: 360px;
+  color: var(--shiny-fg);
+  background: linear-gradient(var(--shiny-bg), var(--shiny-bg)) padding-box,
+    conic-gradient(
+      from calc(var(--shiny-gradient-angle) - var(--shiny-gradient-angle-offset)),
+      transparent,
+      var(--shiny-highlight) var(--shiny-gradient-percent),
+      var(--shiny-gradient-shine) calc(var(--shiny-gradient-percent) * 2),
+      var(--shiny-highlight) calc(var(--shiny-gradient-percent) * 3),
+      transparent calc(var(--shiny-gradient-percent) * 4)
+    ) border-box;
+  box-shadow: inset 0 0 0 1px var(--shiny-bg-subtle);
+  transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition-property: --shiny-gradient-angle-offset, --shiny-gradient-percent, --shiny-gradient-shine;
+}
+
+/* Active State */
+.my-ui-btn--shiny:active {
+  transform: translateY(1px);
+}
+
+/* Text */
+.my-ui-btn--shiny .my-ui-btn__text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Shimmer & Glow Layers */
+.my-ui-btn--shiny .my-ui-btn__shiny-shimmer,
+.my-ui-btn--shiny .my-ui-btn__shiny-glow {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Inner Shimmer Layer */
+.my-ui-btn--shiny .my-ui-btn__shiny-shimmer {
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(-50deg, transparent, var(--shiny-highlight), transparent);
+  mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+  opacity: 0.6;
+}
+
+/* Inner Glow Layer */
+.my-ui-btn--shiny .my-ui-btn__shiny-glow {
+  width: calc(100% + 1rem);
+  height: calc(100% + 1rem);
+  box-shadow: inset 0 -1ex 2rem 4px var(--shiny-highlight);
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Animations */
+.my-ui-btn--shiny,
+.my-ui-btn--shiny .my-ui-btn__shiny-shimmer {
+  animation: var(--shiny-animation) var(--shiny-duration),
+    var(--shiny-animation) calc(var(--shiny-duration) / 0.4) reverse paused;
+  animation-composition: add;
+}
+
+.my-ui-btn--shiny .my-ui-btn__shiny-glow {
+  animation: calc(var(--shiny-duration) * 1.5) shiny-breathe linear infinite;
+}
+
+/* Hover/Focus States */
+.my-ui-btn--shiny:is(:hover, :focus-visible) {
+  --shiny-gradient-percent: 20%;
+  --shiny-gradient-angle-offset: 95deg;
+  --shiny-gradient-shine: var(--shiny-highlight-subtle);
+}
+
+.my-ui-btn--shiny:is(:hover, :focus-visible),
+.my-ui-btn--shiny:is(:hover, :focus-visible) .my-ui-btn__shiny-shimmer {
+  animation-play-state: running;
+}
+
+.my-ui-btn--shiny:is(:hover, :focus-visible) .my-ui-btn__shiny-glow {
+  opacity: 1;
+}
+
+/* Disabled State */
+.my-ui-btn--shiny.my-ui-btn--disabled {
+  --shiny-highlight: #6b7280;
+  --shiny-highlight-subtle: #9ca3af;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.my-ui-btn--shiny.my-ui-btn--disabled:hover {
+  --shiny-gradient-percent: 5%;
+  --shiny-gradient-angle-offset: 0deg;
+}
+
+.my-ui-btn--shiny.my-ui-btn--disabled,
+.my-ui-btn--shiny.my-ui-btn--disabled .my-ui-btn__shiny-shimmer {
+  animation-play-state: paused;
+}
+
+/* Loading State */
+.my-ui-btn--shiny.my-ui-btn--loading {
+  --shiny-highlight: #6b7280;
+  pointer-events: none;
+}
+
+/* Sizes */
+.my-ui-btn--shiny.my-ui-btn--small {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.my-ui-btn--shiny.my-ui-btn--large {
+  padding: 1.5rem 3rem;
+  font-size: 1.25rem;
+}
+
+/* Keyframes */
+@keyframes shiny-gradient-angle {
+  to {
+    --shiny-gradient-angle: 360deg;
+  }
+}
+
+@keyframes shiny-shimmer {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes shiny-breathe {
+  from,
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Base Button Styles */
+.my-ui-btn {
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.my-ui-btn:focus-visible {
+  outline: 2px solid var(--shiny-highlight, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* Icon Styles */
+.my-ui-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Loading Spinner */
+.my-ui-btn__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.my-ui-btn__text--loading {
+  opacity: 0.7;
+}

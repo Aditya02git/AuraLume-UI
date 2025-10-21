@@ -1,0 +1,159 @@
+/* Accordion Container */
+.accordion-container {
+  display: flex;
+  /* min-height: 100vh; */
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.accordion-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Header Styles */
+.accordion-header {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.accordion-badge {
+  border-radius: 9999px;
+  background-color: var(--badge-bg, #064e3b);
+  padding: 0.25rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  outline: 2px solid var(--badge-bg, #064e3b);
+}
+
+
+/* Accordion List */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Accordion Item */
+.accordion-item {
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background: var(--item-bg, #d1d5db);
+  color: var(--item-text, #000000);
+}
+
+.accordion-button {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease;
+}
+
+.accordion-button:hover {
+  background-color: var(--item-hover, #e0e0e0);
+}
+
+.accordion-button:focus {
+  outline: 1.5px solid var(--acc-border-color, rgb(131, 131, 131));
+  outline-offset: -2px;
+  border-radius: 0.5rem;
+}
+
+.accordion-question {
+  margin: 0;
+  font-weight: bold;
+  color: inherit;
+  text-align: left;
+  font-size: 1rem;
+}
+
+/* Icon Animation */
+.accordion-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordion-icon-open {
+  transform: rotate(180deg);
+}
+
+/* Content Animation */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+}
+
+.accordion-content-open {
+  max-height: 200px;
+  padding-bottom: 1.25rem;
+}
+
+.accordion-answer {
+  margin: 0;
+  padding: 0 1.25rem;
+  color: var(--item-text, #626469);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  transform: translateY(1rem);
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.accordion-content-open .accordion-answer {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .accordion-container {
+    padding: 1rem;
+    min-height: auto;
+  }
+  
+  .accordion-wrapper {
+    max-width: 100%;
+  }
+  
+  
+  .accordion-button {
+    padding: 1rem;
+  }
+  
+  .accordion-answer {
+    padding: 0 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Utility Classes */
+.accordion-no-background {
+  background: transparent;
+  min-height: auto;
+  padding: 0;
+}
+
+.accordion-compact .accordion-header {
+  margin-bottom: 1.5rem;
+}
+
+.accordion-compact .accordion-button {
+  padding: 1rem;
+}
+
+.accordion-compact .accordion-content-open {
+  padding-bottom: 1rem;
+}
