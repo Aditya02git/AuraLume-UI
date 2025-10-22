@@ -117,7 +117,7 @@ import WispSmokeEffectSection from "./Sections/WispSmokeEffectSection";
 import LeafSection from "./Sections/LeafSection";
 import SolarBackgroundSection from "./Sections/SolarBackgroundSection";
 import HaloBackgroundSection from "./Sections/HaloBackgroundSection";
-import Initialization from "./threejs/initialization";
+import Initialization from "./threejs/Initialization";
 import GlitchTextSection from "./Sections/GlitchTextSection";
 import ThemeLib from "./theming/ThemeLib";
 import TextMaskSection from "./Sections/TextMaskSection";
