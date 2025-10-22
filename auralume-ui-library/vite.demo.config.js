@@ -10,7 +10,7 @@ export default defineConfig({
   root: resolve(__dirname, 'demo'),
 
   // 🔑 Set base to relative paths for correct deployment
-  base: './',
+  base: '/',
 
   server: {
     port: 3001,
