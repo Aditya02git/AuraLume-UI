@@ -1344,7 +1344,7 @@ const getNextPrevious = () => {
         </div>
 
         {/* Navigation Items */}
-        <nav style={{ padding: "1rem 0", flex: 1, overflowY: "auto" }} onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <nav style={{ padding: "1rem 0", flex: 1, overflowY: "auto" }} onClick={() => setSidebarOpen(true)}>
           {/* Main Navigation */}
           <div style={{ marginBottom: "1.5rem" }}>
             {navigationStructure.main.map((item) => renderNavigationItem(item))}
