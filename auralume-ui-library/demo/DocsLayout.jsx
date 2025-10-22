@@ -115,7 +115,6 @@ import StellarBackgroundSection from "./Sections/StellarBackgroundSection";
 import NoiseBackgroundSection from "./Sections/NoiseBackgroundSection";
 import WispSmokeEffectSection from "./Sections/WispSmokeEffectSection";
 import LeafSection from "./Sections/LeafSection";
-import MistEffectSection from "./Sections/MistEffectSection";
 import SolarBackgroundSection from "./Sections/SolarBackgroundSection";
 import HaloBackgroundSection from "./Sections/HaloBackgroundSection";
 import Initialization from "./threejs/initialization";
@@ -284,7 +283,6 @@ function DocsLayout() {
       smokeEffects: 'threejs',
       fireEffects: 'threejs',
       leafs: 'threejs',
-      mistEffects: 'threejs',
       waterEffects: 'threejs',
       windEffects: 'threejs',
       fireFlies: 'threejs',
@@ -638,7 +636,6 @@ function DocsLayout() {
           { id: "smokeEffects", name: "Smoke" },
           { id: "fireEffects", name: "Fire" },
           { id: "leafs", name: "Leaves" },
-          { id: "mistEffects", name: "Mist" },
           { id: "waterEffects", name: "Water" },
           { id: "windEffects", name: "Wind" },
           { id: "fireFlies", name: "Fireflies" },
@@ -1347,7 +1344,7 @@ const getNextPrevious = () => {
         </div>
 
         {/* Navigation Items */}
-        <nav style={{ padding: "1rem 0", flex: 1, overflowY: "auto" }}>
+        <nav style={{ padding: "1rem 0", flex: 1, overflowY: "auto" }} onClick={() => setSidebarOpen(!sidebarOpen)}>
           {/* Main Navigation */}
           <div style={{ marginBottom: "1.5rem" }}>
             {navigationStructure.main.map((item) => renderNavigationItem(item))}
@@ -1443,364 +1440,364 @@ const getNextPrevious = () => {
             {/* Docs routes */}
             <Route index element={
               <ComponentWrapper>
-                <Introduction />
+                <Introduction isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/introduction" element={
               <ComponentWrapper>
-                <Introduction />
+                <Introduction isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/installation" element={
               <ComponentWrapper>
-                <Installation />
+                <Installation isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             {/* <Route path="/docs/cdn" element={
               <ComponentWrapper>
-                <CDN />
+                <CDN isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } /> */}
             <Route path="/docs/astro" element={
               <ComponentWrapper>
-                <Astro />
+                <Astro isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/laravel" element={
               <ComponentWrapper>
-                <Laravel />
+                <Laravel isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/manual" element={
               <ComponentWrapper>
-                <Manual />
+                <Manual isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/nextjs" element={
               <ComponentWrapper>
-                <Nextjs />
+                <Nextjs isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/reactrouter" element={
               <ComponentWrapper>
-                <ReactRouter />
+                <ReactRouter isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/docs/vite" element={
               <ComponentWrapper>
-                <Vite />
+                <Vite isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             
             {/* Component routes */}
             <Route path="/components/accordions" element={
               <ComponentWrapper>
-                <AccordionSection />
+                <AccordionSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/activityGrids" element={
               <ComponentWrapper>
-                <ActivityGridSection />
+                <ActivityGridSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/alertdialogs" element={
               <ComponentWrapper>
-                <AlertDialogSection />
+                <AlertDialogSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/avatars" element={
               <ComponentWrapper>
-                <AvatarSection />
+                <AvatarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/animatedcards" element={
               <ComponentWrapper>
-                <AnimatedCardSection />
+                <AnimatedCardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/animatedborderbuttons" element={
               <ComponentWrapper>
-                <AnimatedBorderButtonSection />
+                <AnimatedBorderButtonSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/auths" element={
               <ComponentWrapper>
-                <AuthSection />
+                <AuthSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/badges" element={
               <ComponentWrapper>
-                <BadgeSection />
+                <BadgeSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/breadcrumbs" element={
               <ComponentWrapper>
-                <BreadcrumbSection />
+                <BreadcrumbSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/buttons" element={
               <ComponentWrapper>
-                <ButtonSection />
+                <ButtonSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/calendars" element={
               <ComponentWrapper>
-                <CalendarSection />
+                <CalendarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/cards" element={
               <ComponentWrapper>
-                <CardSection />
+                <CardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/cardscapes" element={
               <ComponentWrapper>
-                <CardScapeSection />
+                <CardScapeSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/carousels" element={
               <ComponentWrapper>
-                <CarouselSection />
+                <CarouselSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/chatboxes" element={
               <ComponentWrapper>
-                <ChatBoxSection />
+                <ChatBoxSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/charts" element={
               <ComponentWrapper>
-                <ChartSection />
+                <ChartSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/checkboxes" element={
               <ComponentWrapper>
-                <CheckboxSection />
+                <CheckboxSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/codeblocks" element={
               <ComponentWrapper>
-                <CodeBlockSection />
+                <CodeBlockSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/contextmenus" element={
               <ComponentWrapper>
-                <ContextMenuSection />
+                <ContextMenuSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/confettibuttons" element={
               <ComponentWrapper>
-                <ConfettiButtonSection />
+                <ConfettiButtonSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/cosmicCards" element={
               <ComponentWrapper>
-                <CosmicCardSection />
+                <CosmicCardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/counters" element={
               <ComponentWrapper>
-                <CounterSection />
+                <CounterSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/datatables" element={
               <ComponentWrapper>
-                <DataTableSection />
+                <DataTableSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/drawers" element={
               <ComponentWrapper>
-                <DropdownSection />
+                <DropdownSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/dialogs" element={
               <ComponentWrapper>
-                <DialogSection />
+                <DialogSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/endlessreviews" element={
               <ComponentWrapper>
-                <EndlessReviewSection />
+                <EndlessReviewSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/fabIcons" element={
               <ComponentWrapper>
-                <FabIconSection />
+                <FabIconSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/focusCards" element={
               <ComponentWrapper>
-                <FocusCardSection />
+                <FocusCardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/fluidbuttons" element={
               <ComponentWrapper>
-                <FluidButtonSection />
+                <FluidButtonSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/footers" element={
               <ComponentWrapper>
-                <FooterSection />
+                <FooterSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/glowbuttons" element={
               <ComponentWrapper>
-                <GlowTrackButtonSection />
+                <GlowTrackButtonSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/gradienttexts" element={
               <ComponentWrapper>
-                <GradientTextSection />
+                <GradientTextSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/infinitegallery" element={
               <ComponentWrapper>
-                <InfiniteGallerySection />
+                <InfiniteGallerySection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/infinitescrollers" element={
               <ComponentWrapper>
-                <InfiniteScrollerSection />
+                <InfiniteScrollerSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/inputotps" element={
               <ComponentWrapper>
-                <InputOTPSection />
+                <InputOTPSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/inputs" element={
               <ComponentWrapper>
-                <InputSection />
+                <InputSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/linkPreviews" element={
               <ComponentWrapper>
-                <LinkPreviewSection />
+                <LinkPreviewSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/lumeButtons" element={
               <ComponentWrapper>
-                <LumeButtonSection />
+                <LumeButtonSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/navigationmenus" element={
               <ComponentWrapper>
-                <NavbarSection />
+                <NavbarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/paginations" element={
               <ComponentWrapper>
-                <PaginationSection />
+                <PaginationSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/pricingcards" element={
               <ComponentWrapper>
-                <PricingCardSection />
+                <PricingCardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/progressbars" element={
               <ComponentWrapper>
-                <ProgressBarSection />
+                <ProgressBarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/radarcharts" element={
               <ComponentWrapper>
-                <RadarChartSection />
+                <RadarChartSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/radiogroups" element={
               <ComponentWrapper>
-                <RadioGroupSection />
+                <RadioGroupSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/reacthookforms" element={
               <ComponentWrapper>
-                <ReactHookFormSection />
+                <ReactHookFormSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/resizables" element={
               <ComponentWrapper>
-                <ResizableSection />
+                <ResizableSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/roadmaps" element={
               <ComponentWrapper>
-                <RoadmapSection />
+                <RoadmapSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/searchbars" element={
               <ComponentWrapper>
-                <SearchBarSection />
+                <SearchBarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/shinetexts" element={
               <ComponentWrapper>
-                <ShineTextSection />
+                <ShineTextSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/sidebars" element={
               <ComponentWrapper>
-                <SidebarSection />
+                <SidebarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/skeletons" element={
               <ComponentWrapper>
-                <SkeletonLoaderSection />
+                <SkeletonLoaderSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/skillbars" element={
               <ComponentWrapper>
-                <SkillbarSection />
+                <SkillbarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/sliders" element={
               <ComponentWrapper>
-                <SliderSection />
+                <SliderSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/spotlightCards" element={
               <ComponentWrapper>
-                <SpotLightCardSection />
+                <SpotLightCardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/switches" element={
               <ComponentWrapper>
-                <SwitchSection />
+                <SwitchSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/tabs" element={
               <ComponentWrapper>
-                <TabSection />
+                <TabSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/testimonials" element={
               <ComponentWrapper>
-                <TestimonialSection />
+                <TestimonialSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/textareas" element={
               <ComponentWrapper>
-                <TextAreaSection />
+                <TextAreaSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/textMasks" element={
               <ComponentWrapper>
-                <TextMaskSection />
+                <TextMaskSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/threedcards" element={
               <ComponentWrapper>
-                <ThreeDCardSection />
+                <ThreeDCardSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/timelines" element={
               <ComponentWrapper>
-                <TimelineSection />
+                <TimelineSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/toasts" element={
               <ComponentWrapper>
-                <ToastSection />
+                <ToastSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/themeButtons" element={
@@ -1812,215 +1809,210 @@ const getNextPrevious = () => {
             } />
             <Route path="/components/togglegroups" element={
               <ComponentWrapper>
-                <ToggleGroupSection />
+                <ToggleGroupSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/tooltips" element={
               <ComponentWrapper>
-                <TooltipSection />
+                <TooltipSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/trees" element={
               <ComponentWrapper>
-                <TreeSection />
+                <TreeSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/triesearches" element={
               <ComponentWrapper>
-                <TrieSearchSection />
+                <TrieSearchSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/components/typographies" element={
               <ComponentWrapper>
-                <TypographySection />
+                <TypographySection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
 
             {/* Background routes */}
             <Route path="/background/gradientBackgrounds" element={
               <ComponentWrapper>
-                <GradientBackgroundSection />
+                <GradientBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/spotlightBackgrounds" element={
               <ComponentWrapper>
-                <SpotlightBackgroundSection />
+                <SpotlightBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/auroraBackgrounds" element={
               <ComponentWrapper>
-                <AuroraBackgroundSection />
+                <AuroraBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/cosmicBackgrounds" element={
               <ComponentWrapper>
-                <CosmicBackgroundSection />
+                <CosmicBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/haloBackgrounds" element={
               <ComponentWrapper>
-                <HaloBackgroundSection />
+                <HaloBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/glassmorphicBackgrounds" element={
               <ComponentWrapper>
-                <GlassmorphicBackgroundSection />
+                <GlassmorphicBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/matrixBackgrounds" element={
               <ComponentWrapper>
-                <MatrixSection />
+                <MatrixSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/noiseBackgrounds" element={
               <ComponentWrapper>
-                <NoiseBackgroundSection />
+                <NoiseBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/solarBackgrounds" element={
               <ComponentWrapper>
-                <SolarBackgroundSection />
+                <SolarBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/stellarBackgrounds" element={
               <ComponentWrapper>
-                <StellarBackgroundSection />
+                <StellarBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/tileBackgrounds" element={
               <ComponentWrapper>
-                <TileBackgroundSection />
+                <TileBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/background/waveBackgrounds" element={
               <ComponentWrapper>
-                <WaveBackgroundSection />
+                <WaveBackgroundSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
 
             {/* Shader routes */}
             <Route path="/shader/fakeShaders" element={
               <ComponentWrapper>
-                <FakeShaderSection />
+                <FakeShaderSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/shader/glitchTexts" element={
               <ComponentWrapper>
-                <GlitchTextSection />
+                <GlitchTextSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/shader/vhs" element={
               <ComponentWrapper>
-                <VHSSection />
+                <VHSSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/shader/crts" element={
               <ComponentWrapper>
-                <CRTSection />
+                <CRTSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/shader/chromaticsplits" element={
               <ComponentWrapper>
-                <ChromaticSplitSection />
+                <ChromaticSplitSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
 
             {/* Three.js routes */}
             <Route path="/threejs/initializations" element={
               <ComponentWrapper>
-                <Initialization />
+                <Initialization isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/polyhedras" element={
               <ComponentWrapper>
-                <PolyhedraSection />
+                <PolyhedraSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/blobs" element={
               <ComponentWrapper>
-                <BlobSection />
+                <BlobSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/smoothBlobs" element={
               <ComponentWrapper>
-                <SmoothBlobSection />
+                <SmoothBlobSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/threeBars" element={
               <ComponentWrapper>
-                <ThreeBarSection />
+                <ThreeBarSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/smokeeffects" element={
               <ComponentWrapper>
-                <SmokeEffectSection />
+                <SmokeEffectSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/fireeffects" element={
               <ComponentWrapper>
-                <FireEffectSection />
+                <FireEffectSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/leafs" element={
               <ComponentWrapper>
-                <LeafSection />
-              </ComponentWrapper>
-            } />
-            <Route path="/threejs/mistEffects" element={
-              <ComponentWrapper>
-                <MistEffectSection />
+                <LeafSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/watereffects" element={
               <ComponentWrapper>
-                <WaterEffectSection />
+                <WaterEffectSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/windeffects" element={
               <ComponentWrapper>
-                <WindEffectSection />
+                <WindEffectSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/fireflies" element={
               <ComponentWrapper>
-                <FireFliesSection />
+                <FireFliesSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/clouds" element={
               <ComponentWrapper>
-                <CloudSection />
+                <CloudSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/raineffects" element={
               <ComponentWrapper>
-                <RainEffectSection />
+                <RainEffectSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/threejs/wispSmokeEffects" element={
               <ComponentWrapper>
-                <WispSmokeEffectSection />
+                <WispSmokeEffectSection isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
 
 
             <Route path="/themeGenerator" element={
               <ComponentWrapper>
-                <ThemeGenerator />
+                <ThemeGenerator isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/store" element={
               <ComponentWrapper>
-                <Store />
+                <Store isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/blog" element={
               <ComponentWrapper>
-                <Blog />
+                <Blog isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/resource" element={
               <ComponentWrapper>
-                <Resource />
+                <Resource isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
 
@@ -2032,17 +2024,17 @@ const getNextPrevious = () => {
             } />
             <Route path="/theming/normalThemes" element={
               <ComponentWrapper>
-                <NormalTheming />
+                <NormalTheming isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/theming/multiThemes" element={
               <ComponentWrapper>
-                <MultiTheming />
+                <MultiTheming isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             <Route path="/theming/customThemes" element={
               <ComponentWrapper>
-                <CustomTheming />
+                <CustomTheming isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode}/>
               </ComponentWrapper>
             } />
             

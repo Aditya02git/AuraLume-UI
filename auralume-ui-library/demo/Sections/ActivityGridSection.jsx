@@ -170,30 +170,8 @@ const ActivityGridSectionWithPreview = ({ title, children, jsxCode, isDarkMode }
 };
 
 // ------------------- Main ActivityGrid Section -------------------
-const ActivityGridSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const ActivityGridSection = ({isDarkMode, setIsDarkMode}) => {
   const [hue, setHue] = useState(280);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   // Generate sample data for custom data example
   const sampleData = Array.from({ length: 365 }, (_, index) => {

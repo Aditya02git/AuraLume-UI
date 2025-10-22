@@ -149,28 +149,7 @@ const ToastSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   );
 };
 
-const ToastSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-    // Get theme from localStorage
-    useEffect(() => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    }, []);
-  
-    // Listen for storage changes to sync theme across components
-    useEffect(() => {
-      const handleStorageChange = () => {
-        const saved = localStorage.getItem('darkMode');
-        if (saved) {
-          setIsDarkMode(JSON.parse(saved));
-        }
-      };
-  
-      window.addEventListener('storage', handleStorageChange);
-      return () => window.removeEventListener('storage', handleStorageChange);
-    }, []);
+const ToastSection = ({isDarkMode, setIsDarkMode}) => {
 
   const { toasts, success, error, warning, info, removeToast } = useToast();
 

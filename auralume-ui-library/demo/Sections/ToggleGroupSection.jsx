@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ToggleGroup from '../../src/components/ToggleGroup';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const ToggleGroupSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
+const ToggleGroupSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const ToggleGroupSectionWithPreview = ({ title, children, htmlCode, jsxCode }) =
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -189,29 +145,7 @@ const ToggleGroupSectionWithPreview = ({ title, children, htmlCode, jsxCode }) =
   );
 };
 
-const ToggleGroupSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const ToggleGroupSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '40px',
@@ -271,7 +205,7 @@ export default App;`;
   ];
 
   const handleToggle = (index, button) => {
-    alert(`Selected: ${button.text}`);
+    console.log(`Selected: ${button.text}`);
   };
 
   return (
@@ -376,6 +310,7 @@ export default App;`;
       <ToggleGroupSectionWithPreview
         title="Basic ToggleGroup"
         jsxCode={basicToggleJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ alignItems: 'center', justifyContent:'center', display:'flex'}}>
         <div style={{width: '400px'}}>

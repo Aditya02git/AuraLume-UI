@@ -2,28 +2,8 @@ import React, { useState, useEffect } from 'react';
 import SkeletonLoader from '../../src/components/SkeletonLoader';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -146,28 +126,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const SwitchSectionWithPreview = ({ title, children, jsxCode, description }) => {
+const SwitchSectionWithPreview = ({ title, children, jsxCode, description, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '5rem' }}>
@@ -193,7 +153,7 @@ const SwitchSectionWithPreview = ({ title, children, jsxCode, description }) => 
         )}
       </div>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -218,27 +178,7 @@ const SwitchSectionWithPreview = ({ title, children, jsxCode, description }) => 
   );
 };
 
-const SkeletonLoaderSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const SkeletonLoaderSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '60px 40px',
@@ -416,6 +356,7 @@ const SkeletonLoaderSection = () => {
         title="Basic Usage"
         description=""
         jsxCode={basicSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <SkeletonLoader 
           theme={isDarkMode ? 'skeleton-dark' : 'skeleton-light'}
@@ -428,6 +369,7 @@ const SkeletonLoaderSection = () => {
         title="Multiple Lines"
         description=""
         jsxCode={multipleSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <SkeletonLoader 
           theme={isDarkMode ? 'skeleton-dark' : 'skeleton-light'}
@@ -442,6 +384,7 @@ const SkeletonLoaderSection = () => {
         title="Avatar Skeleton"
         description=""
         jsxCode={avatarSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
           <SkeletonLoader 
@@ -469,6 +412,7 @@ const SkeletonLoaderSection = () => {
         title="Card Skeleton"
         description=""
         jsxCode={cardSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <SkeletonLoader 
           theme={isDarkMode ? 'skeleton-dark' : 'skeleton-light'}
@@ -482,6 +426,7 @@ const SkeletonLoaderSection = () => {
         title="Button Skeleton"
         description=""
         jsxCode={buttonSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <SkeletonLoader 
@@ -509,6 +454,7 @@ const SkeletonLoaderSection = () => {
         title="Wave Animation"
         description=""
         jsxCode={waveSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <SkeletonLoader 
@@ -530,6 +476,7 @@ const SkeletonLoaderSection = () => {
         title="User Card Skeleton"
         description=""
         jsxCode={userCardSkeletonJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

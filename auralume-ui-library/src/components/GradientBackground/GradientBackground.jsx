@@ -16,7 +16,9 @@ const GradientBackground = ({
 
   return (
     <div className={`gradient-background ${className}`} style={gradientStyle}>
-      {children}
+      <div className="gradient-background-content">
+        {children}
+      </div>
     </div>
   );
 };

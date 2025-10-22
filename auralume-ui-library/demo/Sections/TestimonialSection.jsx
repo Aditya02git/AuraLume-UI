@@ -3,30 +3,8 @@ import Testimonial from "../../src/components/Testimonial";
 
 // ------------------- Preview Toggle -------------------
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -192,24 +170,7 @@ const TestimonialSectionWithPreview = ({
 };
 
 // ------------------- Main Accordion Section -------------------
-const TestimonialSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const TestimonialSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",

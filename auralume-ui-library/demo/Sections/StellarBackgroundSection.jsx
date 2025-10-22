@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import StellarBackground from "../../src/components/StellarBackground";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -214,30 +192,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const StellarBackgroundSectionWithPreview = ({ title, children, jsxCode }) => {
+const StellarBackgroundSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -252,7 +208,7 @@ const StellarBackgroundSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -275,29 +231,7 @@ const StellarBackgroundSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const StellarBackgroundSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const StellarBackgroundSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -457,7 +391,7 @@ const StellarBackgroundSection = () => {
       </div>
 
       <div>
-        <StellarBackgroundSectionWithPreview title="" jsxCode={stellarJSX}>
+        <StellarBackgroundSectionWithPreview title="" jsxCode={stellarJSX} isDarkMode={isDarkMode}>
           <div style={{ height: "100vh", position: "relative" }}>
             <StellarBackground>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', height: '100vh'}}>

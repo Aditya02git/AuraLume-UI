@@ -2,29 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CodeBlock from '../../src/components/CodeBlock';
 
 
-const Initialization = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-  
-    // Get theme from localStorage
-    useEffect(() => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    }, []);
-  
-    // Listen for storage changes to sync theme across components
-    useEffect(() => {
-      const handleStorageChange = () => {
-        const saved = localStorage.getItem("darkMode");
-        if (saved) {
-          setIsDarkMode(JSON.parse(saved));
-        }
-      };
-  
-      window.addEventListener("storage", handleStorageChange);
-      return () => window.removeEventListener("storage", handleStorageChange);
-    }, []);
+const Initialization = ({isDarkMode, setIsDarkMode}) => {
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -57,7 +36,7 @@ const Initialization = () => {
           </p>
 
           <div style={{ marginBottom: '48px' }}>
-            <CodeBlock language='npm'>{`npm install aura-lume-three@latest`}</CodeBlock>
+            <CodeBlock language='npm'>{`npm install auralume-three-ui@latest`}</CodeBlock>
           </div>
 
           <p style={{

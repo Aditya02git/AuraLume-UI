@@ -5,7 +5,6 @@ import Input from '../../src/components/Input';
 const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
 
-  
   return (
     <div style={{ 
       display: 'flex', 
@@ -158,7 +157,7 @@ const InputSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   );
 };
 
-const InputSection = () => {
+const InputSection = ({isDarkMode, setIsDarkMode}) => {
   const [basicInputValue, setBasicInputValue] = useState('');
   const [emailInputValue, setEmailInputValue] = useState('');
   const [passwordInputValue, setPasswordInputValue] = useState('');
@@ -166,25 +165,6 @@ const InputSection = () => {
   const [mediumInputValue, setMediumInputValue] = useState('');
   const [largeInputValue, setLargeInputValue] = useState('');
   const [fullInputValue, setFullInputValue] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Remove localStorage usage to prevent browser storage issues
-  // Instead, add a toggle button for demonstration
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',

@@ -3,30 +3,8 @@ import Tooltip from '../../src/components/Tooltip';
 import { Button } from '../../src';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -133,30 +111,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const SwitchSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
+const SwitchSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -169,7 +125,7 @@ const SwitchSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -190,29 +146,7 @@ const SwitchSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
   );
 };
 
-const TooltipSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const TooltipSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '40px',
@@ -375,6 +309,7 @@ const TooltipSection = () => {
       <SwitchSectionWithPreview
         title="Basic Tooltip"
         jsxCode={basicTooltipJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', "--tooltip-bg": isDarkMode ? '#000000' : '#dedede', '--tooltip-bs': isDarkMode? '#333333' : '#ddd' }}>
           <Tooltip text="Hello World!" color= {isDarkMode ? '#334155' : '#ddd'}>
@@ -389,6 +324,7 @@ const TooltipSection = () => {
       <SwitchSectionWithPreview
         title="Left Tooltip"
         jsxCode={leftTooltipJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', "--tooltip-bg": isDarkMode ? '#000000' : '#dedede', '--tooltip-bs': isDarkMode? '#333333' : '#ddd' }}>
           <Tooltip text="I'm on the left!" position="left" color= {isDarkMode ? '#334155' : '#ddd'}>
@@ -403,6 +339,7 @@ const TooltipSection = () => {
       <SwitchSectionWithPreview
         title="Right Tooltip"
         jsxCode={rightTooltipJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', "--tooltip-bg": isDarkMode ? '#000000' : '#dedede', '--tooltip-bs': isDarkMode? '#333333' : '#ddd' }}>
           <Tooltip text="I'm on the right!" position="right" color= {isDarkMode ? '#334155' : '#ddd'}>
@@ -417,6 +354,7 @@ const TooltipSection = () => {
       <SwitchSectionWithPreview
         title="Up Tooltip"
         jsxCode={basicTooltipJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', "--tooltip-bg": isDarkMode ? '#000000' : '#dedede', '--tooltip-bs': isDarkMode? '#333333' : '#ddd' }}>
           <Tooltip text="I'm on the up!" position="up" color= {isDarkMode ? '#334155' : '#ddd'}>
@@ -431,6 +369,7 @@ const TooltipSection = () => {
       <SwitchSectionWithPreview
         title="Down Tooltip"
         jsxCode={downTooltipJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', "--tooltip-bg": isDarkMode ? '#000000' : '#dedede', '--tooltip-bs': isDarkMode? '#333333' : '#ddd' }}>
           <Tooltip text="I'm on the down!" position="down" color= {isDarkMode ? '#334155' : '#ddd'}>
@@ -445,6 +384,7 @@ const TooltipSection = () => {
       <SwitchSectionWithPreview
         title="Large Tooltip"
         jsxCode={downTooltipJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', "--tooltip-bg": isDarkMode ? '#000000' : '#dedede', '--tooltip-bs': isDarkMode? '#333333' : '#ddd' }}>
           <Tooltip 

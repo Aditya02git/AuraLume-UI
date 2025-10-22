@@ -218,27 +218,7 @@ const TableSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   );
 };
 
-const DataTableSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Remove localStorage usage to prevent browser storage issues
-  // Instead, add a toggle button for demonstration
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
+const DataTableSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '40px',

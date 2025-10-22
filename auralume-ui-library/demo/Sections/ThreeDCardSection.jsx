@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import ThreeDCard from "../../src/components/ThreeDCard";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -214,30 +192,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const CardSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
+const CardSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -252,7 +208,7 @@ const CardSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -275,29 +231,7 @@ const CardSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
   );
 };
 
-const ThreeDCardSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const ThreeDCardSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -545,7 +479,7 @@ const ThreeDCardSection = () => {
       </div>
 
       {/* 3D Cards */}
-      <CardSectionWithPreview title="Basic usage" jsxCode={basiccard3DJSX}>
+      <CardSectionWithPreview title="Basic usage" jsxCode={basiccard3DJSX} isDarkMode={isDarkMode}>
         <div
           style={{
             display: "flex",
@@ -569,7 +503,7 @@ const ThreeDCardSection = () => {
         </div>
       </CardSectionWithPreview>
 
-      <CardSectionWithPreview title="Custom Contents" jsxCode={customcard3DJSX}>
+      <CardSectionWithPreview title="Custom Contents" jsxCode={customcard3DJSX} isDarkMode={isDarkMode}>
         <div
           style={{
             display: "flex",
@@ -600,6 +534,7 @@ const ThreeDCardSection = () => {
       <CardSectionWithPreview
         title="Large Rounded Card"
         jsxCode={largecard3DJSX}
+        isDarkMode={isDarkMode}
       >
         <div
           style={{

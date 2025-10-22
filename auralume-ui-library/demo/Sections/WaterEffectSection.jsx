@@ -482,27 +482,7 @@ const CodeDisplay = ({ code, language }) => {
 };
 
 // Preview Section Component
-const PreviewSection = ({ title, modelPath, waterProps }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const PreviewSection = ({ title, modelPath, waterProps, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -549,27 +529,7 @@ const PreviewSection = ({ title, modelPath, waterProps }) => {
 };
 
 // Code Section Component
-const CodeSection = ({ title, jsxCode }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const CodeSection = ({ title, jsxCode, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -590,27 +550,7 @@ const CodeSection = ({ title, jsxCode }) => {
 };
 
 // Main Component
-const WaterEffectSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const WaterEffectSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "clamp(20px, 5vw, 40px)",
@@ -906,12 +846,14 @@ export default App;`;
         title=""
         modelPath="https://cdn.jsdelivr.net/gh/Aditya02git/3d-models-cdn/island.glb"
         waterProps={{}}
+        isDarkMode={isDarkMode}
       />
 
       {/* Code Section */}
       <CodeSection
         title="Code"
         jsxCode={animatedWaterEffectJSX}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

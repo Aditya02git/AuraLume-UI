@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Slider from '../../src/components/Slider';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const SliderSectionWithPreview = ({ title, children, Code }) => {
+const SliderSectionWithPreview = ({ title, children, Code, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const SliderSectionWithPreview = ({ title, children, Code }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -189,29 +145,7 @@ const SliderSectionWithPreview = ({ title, children, Code }) => {
   );
 };
 
-const SliderSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const SliderSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '40px',
@@ -391,6 +325,7 @@ const SliderSection = () => {
       <SliderSectionWithPreview
         title="Default Single Range Slider"
         Code={defaultSliderJSX}
+        isDarkMode={isDarkMode}
       >
         <div>
         <Slider
@@ -407,6 +342,7 @@ const SliderSection = () => {
       <SliderSectionWithPreview
         title="Dual Range Slider"
         Code={dualRangeJSX}
+        isDarkMode={isDarkMode}
       >
         <Slider 
           variant="dual"
@@ -422,6 +358,7 @@ const SliderSection = () => {
       <SliderSectionWithPreview
         title="Slider Without Output"
         Code={rtlSliderJSX}
+        isDarkMode={isDarkMode}
       >
         <Slider 
           min={0} 
@@ -436,6 +373,7 @@ const SliderSection = () => {
       <SliderSectionWithPreview
         title="Disabled Slider"
         Code={disabledSliderJSX}
+        isDarkMode={isDarkMode}
       >
         <Slider 
           disabled={true}

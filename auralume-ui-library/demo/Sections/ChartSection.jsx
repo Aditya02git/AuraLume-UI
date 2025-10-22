@@ -3,30 +3,8 @@ import Chart from '../../src/components/Chart';
 import copyIcon from '/copy.png';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview','TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -46,7 +24,7 @@ const PreviewToggle = ({ activeTab, onTabChange }) => {
             padding: '8px 16px',
             border: 'none',
             borderRadius: '6px',
-            backgroundColor: activeTab === tab ? '#3b82f6' : 'transparent',
+            backgroundColor: activeTab === tab ? '#e33de0' : 'transparent',
             color: activeTab === tab ? 'white' : (isDarkMode ? '#94a3b8' : '#64748b'),
             cursor: 'pointer',
             fontSize: '14px',
@@ -133,30 +111,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const CardSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
+const CardSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -169,7 +125,7 @@ const CardSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -187,29 +143,7 @@ const CardSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
   );
 };
 
-const ChartSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const ChartSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '40px',
@@ -476,29 +410,73 @@ const ChartDemo = () => {
             npm install chart.js react-chartjs-2
           </code>
         </div>
-        <button
-          onClick={handleCopy}
-          style={{
-            marginLeft: "10px",
-            padding: "8px 12px",
-            borderRadius: "6px",
-            border: "none",
-            cursor: "pointer",
-            backgroundColor: isDarkMode ? "#334155" : "#dbe3e8",
-            color: isDarkMode ? "#f3f6f9" : "#334a51",
-            fontSize: "10px",
-            fontWeight: "500"
-          }}
-        >
-          {copied ? "Copied!" : 
-          <img 
-            src={copyIcon} 
-            height="15px" 
-            width="15px" 
-            style={{ filter: isDarkMode ? 'brightness(0) invert(1)' : 'none' }} 
-          />
-}
-        </button>
+          <button
+            onClick={handleCopy}
+            style={{
+              marginLeft: "10px",
+              padding: "8px 12px",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer",
+              backgroundColor: isDarkMode ? "#334155" : "#dbe3e8",
+              color: isDarkMode ? "#f3f6f9" : "#334a51",
+              fontSize: "10px",
+              fontWeight: "500",
+            }}
+          >
+            {copied ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "4px",
+                }}
+              >
+                <svg
+                  style={{ color: "#43eb34" }}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 11.917 9.724 16.5 19 7.5"
+                  />
+                </svg>
+                <p style={{ margin: 0 }}>Copied</p>
+              </div>
+            ) : (
+              <div title="Copy">
+                <svg
+                  style={{ color: isDarkMode ? "white" : "black" }}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            )}
+          </button>
       </div>
 
 <div>
@@ -506,6 +484,7 @@ const ChartDemo = () => {
       <CardSectionWithPreview
         title="Line Chart"
         jsxCode={lineChartJSX}
+        isDarkMode={isDarkMode}
       >    
         <div style={{ 
           display: 'flex', 
@@ -536,6 +515,7 @@ const ChartDemo = () => {
       <CardSectionWithPreview
         title="Pie Chart"
         jsxCode={pieChartJSX}
+        isDarkMode={isDarkMode}
       >    
         <div style={{ 
           display: 'flex', 
@@ -567,6 +547,7 @@ const ChartDemo = () => {
       <CardSectionWithPreview
         title="Bar Chart"
         jsxCode={barChartJSX}
+        isDarkMode={isDarkMode}
       >    
         <div style={{ 
           display: 'flex', 

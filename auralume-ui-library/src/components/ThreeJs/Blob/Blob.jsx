@@ -95,7 +95,7 @@ const Blob = ({
   
   // Material
   wireframe = false,
-  material = 'normal', // 'normal', 'basic', 'standard', 'phong'
+  material = 'normal',
   
   // Events
   onReady = null,
@@ -108,6 +108,7 @@ const Blob = ({
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
+  const cameraRef = useRef(null);
   const icosahedronRef = useRef(null);
   const animationIdRef = useRef(null);
   const noiseRef = useRef(new SimplexNoise());
@@ -116,211 +117,222 @@ const Blob = ({
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    sceneRef.current = scene;
+    // Wait for container to have dimensions
+    const initScene = () => {
+      const container = mountRef.current;
+      if (!container || container.clientWidth === 0) {
+        // Retry if container doesn't have dimensions yet
+        setTimeout(initScene, 50);
+        return;
+      }
 
-    // Camera setup
-    const aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
-    const camera = new THREE.PerspectiveCamera(fov, aspect, 0.1, 1000);
-    camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-    camera.lookAt(scene.position);
+      // Scene setup
+      const scene = new THREE.Scene();
+      sceneRef.current = scene;
 
-    // Renderer setup
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
-      alpha: true
-    });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-    rendererRef.current = renderer;
+      // Get actual container dimensions
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
 
-    // Geometry
-    const geometry = new THREE.IcosahedronGeometry(size, detail);
-    
-    // Material
-    let mat;
-    switch (material) {
-      case 'basic':
-        mat = new THREE.MeshBasicMaterial({ 
-          color: new THREE.Color(color),
-          wireframe 
-        });
-        break;
-      case 'standard':
-        mat = new THREE.MeshStandardMaterial({ 
-          color: new THREE.Color(color),
-          wireframe 
-        });
-        break;
-      case 'phong':
-        mat = new THREE.MeshPhongMaterial({ 
-          color: new THREE.Color(color),
-          wireframe 
-        });
-        break;
-      default:
-        mat = new THREE.MeshNormalMaterial({ wireframe });
-    }
+      // Camera setup with proper aspect ratio
+      const aspect = containerWidth / containerHeight;
+      const camera = new THREE.PerspectiveCamera(fov, aspect, 0.1, 1000);
+      camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+      camera.lookAt(scene.position);
+      cameraRef.current = camera;
 
-    const icosahedron = new THREE.Mesh(geometry, mat);
-    icosahedron.name = 'Blob';
-    scene.add(icosahedron);
-    icosahedronRef.current = icosahedron;
+      // Renderer setup
+      const renderer = new THREE.WebGLRenderer({ 
+        antialias: true,
+        alpha: true
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2 for performance
+      renderer.setSize(containerWidth, containerHeight);
+      rendererRef.current = renderer;
 
-    // Store original vertices for morphing
-    const originalVertices = [];
-    const positionAttribute = geometry.getAttribute('position');
-    for (let i = 0; i < positionAttribute.count; i++) {
-      originalVertices.push(new THREE.Vector3(
-        positionAttribute.getX(i),
-        positionAttribute.getY(i),
-        positionAttribute.getZ(i)
-      ));
-    }
+      // Geometry
+      const geometry = new THREE.IcosahedronGeometry(size, detail);
+      
+      // Material
+      let mat;
+      switch (material) {
+        case 'basic':
+          mat = new THREE.MeshBasicMaterial({ 
+            color: new THREE.Color(color),
+            wireframe 
+          });
+          break;
+        case 'standard':
+          mat = new THREE.MeshStandardMaterial({ 
+            color: new THREE.Color(color),
+            wireframe 
+          });
+          break;
+        case 'phong':
+          mat = new THREE.MeshPhongMaterial({ 
+            color: new THREE.Color(color),
+            wireframe 
+          });
+          break;
+        default:
+          mat = new THREE.MeshNormalMaterial({ wireframe });
+      }
 
-    // Lights
-    const ambientLight = new THREE.HemisphereLight(
-      ambientLightColor, 
-      '#000000', 
-      ambientLightIntensity
-    );
-    const pointLight = new THREE.PointLight(
-      pointLightColor, 
-      pointLightIntensity
-    );
-    pointLight.position.set(
-      pointLightPosition.x, 
-      pointLightPosition.y, 
-      pointLightPosition.z
-    );
-    pointLight.castShadow = true;
-    
-    scene.add(ambientLight);
-    scene.add(pointLight);
+      const icosahedron = new THREE.Mesh(geometry, mat);
+      icosahedron.name = 'Blob';
+      scene.add(icosahedron);
+      icosahedronRef.current = icosahedron;
 
-    // Orbit controls (if enabled)
-    let controls;
-    if (orbitControl) {
-      // Note: In a real implementation, you'd import OrbitControls
-      // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-      // controls = new OrbitControls(camera, renderer.domElement);
-    }
+      // Store original vertices for morphing
+      const originalVertices = [];
+      const positionAttribute = geometry.getAttribute('position');
+      for (let i = 0; i < positionAttribute.count; i++) {
+        originalVertices.push(new THREE.Vector3(
+          positionAttribute.getX(i),
+          positionAttribute.getY(i),
+          positionAttribute.getZ(i)
+        ));
+      }
 
-    // Click handler
-    const handleClick = (event) => {
+      // Lights
+      const ambientLight = new THREE.HemisphereLight(
+        ambientLightColor, 
+        '#000000', 
+        ambientLightIntensity
+      );
+      const pointLight = new THREE.PointLight(
+        pointLightColor, 
+        pointLightIntensity
+      );
+      pointLight.position.set(
+        pointLightPosition.x, 
+        pointLightPosition.y, 
+        pointLightPosition.z
+      );
+      pointLight.castShadow = true;
+      
+      scene.add(ambientLight);
+      scene.add(pointLight);
+
+      // Click handler
+      const handleClick = (event) => {
+        if (onClick && mountRef.current) {
+          const rect = mountRef.current.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+          
+          const raycaster = new THREE.Raycaster();
+          raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
+          const intersects = raycaster.intersectObject(icosahedron);
+          
+          if (intersects.length > 0) {
+            onClick(intersects[0]);
+          }
+        }
+      };
+
+      // Animation loop
+      const animate = () => {
+        timeRef.current += 0.005 * animationSpeed;
+
+        if (animation) {
+          // Rotation
+          icosahedron.rotation.x += rotationSpeed.x * animationSpeed;
+          icosahedron.rotation.y += rotationSpeed.y * animationSpeed;
+
+          // Morphing
+          const positionAttribute = icosahedron.geometry.getAttribute('position');
+          const k = 2;
+          
+          for (let i = 0; i < originalVertices.length; i++) {
+            const vertex = originalVertices[i].clone();
+            const noise = noiseRef.current.perlin3(
+              vertex.x * k + timeRef.current,
+              vertex.y * k,
+              vertex.z * k
+            );
+            
+            vertex.normalize().multiplyScalar(1 + morphStrength * noise);
+            
+            positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
+          }
+          
+          positionAttribute.needsUpdate = true;
+          icosahedron.geometry.computeVertexNormals();
+        }
+
+        renderer.render(scene, camera);
+        animationIdRef.current = requestAnimationFrame(animate);
+      };
+
+      // Handle resize
+      const handleResize = () => {
+        if (!mountRef.current || !cameraRef.current || !rendererRef.current) return;
+        
+        const newWidth = mountRef.current.clientWidth;
+        const newHeight = mountRef.current.clientHeight;
+        
+        // Ensure we have valid dimensions
+        if (newWidth === 0 || newHeight === 0) return;
+        
+        const newAspect = newWidth / newHeight;
+        
+        cameraRef.current.aspect = newAspect;
+        cameraRef.current.updateProjectionMatrix();
+        rendererRef.current.setSize(newWidth, newHeight);
+      };
+
+      // Add to DOM first
+      container.appendChild(renderer.domElement);
+
+      // Start animation
+      animate();
+
+      // Add event listeners after DOM insertion
       if (onClick) {
-        const rect = mountRef.current.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-        
-        const raycaster = new THREE.Raycaster();
-        raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
-        const intersects = raycaster.intersectObject(icosahedron);
-        
-        if (intersects.length > 0) {
-          onClick(intersects[0]);
-        }
+        renderer.domElement.addEventListener('click', handleClick);
       }
-    };
 
-    // Animation loop
-    const animate = () => {
-      timeRef.current += 0.005 * animationSpeed;
+      window.addEventListener('resize', handleResize);
 
-      if (animation) {
-        // Rotation
-        icosahedron.rotation.x += rotationSpeed.x * animationSpeed;
-        icosahedron.rotation.y += rotationSpeed.y * animationSpeed;
+      // Call onReady callback
+      if (onReady) {
+        onReady({ scene, camera, renderer, icosahedron });
+      }
 
-        // Morphing
-        const positionAttribute = icosahedron.geometry.getAttribute('position');
-        const k = 2;
-        
-        for (let i = 0; i < originalVertices.length; i++) {
-          const vertex = originalVertices[i].clone();
-          const noise = noiseRef.current.perlin3(
-            vertex.x * k + timeRef.current,
-            vertex.y * k,
-            vertex.z * k
-          );
-          
-          vertex.normalize().multiplyScalar(1 + morphStrength * noise);
-          
-          positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
+      // Cleanup function
+      return () => {
+        if (animationIdRef.current) {
+          cancelAnimationFrame(animationIdRef.current);
         }
         
-        positionAttribute.needsUpdate = true;
-        icosahedron.geometry.computeVertexNormals();
-      }
-
-      if (controls) {
-        controls.update();
-      }
-
-      renderer.render(scene, camera);
-      animationIdRef.current = requestAnimationFrame(animate);
+        window.removeEventListener('resize', handleResize);
+        
+        if (onClick && renderer.domElement) {
+          renderer.domElement.removeEventListener('click', handleClick);
+        }
+        
+        if (container && renderer.domElement && container.contains(renderer.domElement)) {
+          container.removeChild(renderer.domElement);
+        }
+        
+        // Dispose of Three.js resources
+        if (icosahedronRef.current) {
+          icosahedronRef.current.geometry.dispose();
+          icosahedronRef.current.material.dispose();
+        }
+        
+        if (rendererRef.current) {
+          rendererRef.current.dispose();
+        }
+      };
     };
 
-    // Start animation
-    animate();
+    const cleanup = initScene();
 
-    // Add to DOM
-    mountRef.current.appendChild(renderer.domElement);
-
-    // Add click listener
-    if (onClick) {
-      renderer.domElement.addEventListener('click', handleClick);
-    }
-
-    // Handle resize
-    const handleResize = () => {
-      if (!mountRef.current) return;
-      
-      const newWidth = mountRef.current.clientWidth;
-      const newHeight = mountRef.current.clientHeight;
-      const newAspect = newWidth / newHeight;
-      
-      camera.aspect = newAspect;
-      camera.updateProjectionMatrix();
-      renderer.setSize(newWidth, newHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Call onReady callback
-    if (onReady) {
-      onReady({ scene, camera, renderer, icosahedron });
-    }
-
-    // Cleanup
     return () => {
-      if (animationIdRef.current) {
-        cancelAnimationFrame(animationIdRef.current);
-      }
-      
-      window.removeEventListener('resize', handleResize);
-      
-      if (onClick && renderer.domElement) {
-        renderer.domElement.removeEventListener('click', handleClick);
-      }
-      
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      
-      // Dispose of Three.js resources
-      if (icosahedronRef.current) {
-        icosahedronRef.current.geometry.dispose();
-        icosahedronRef.current.material.dispose();
-      }
-      
-      if (rendererRef.current) {
-        rendererRef.current.dispose();
-      }
-
-      if (controls) {
-        controls.dispose();
+      if (cleanup && typeof cleanup === 'function') {
+        cleanup();
       }
     };
   }, [
@@ -340,6 +352,7 @@ const Blob = ({
         height,
         position: 'relative',
         overflow: 'hidden',
+        display: 'block',
         ...style
       }}
     />

@@ -145,24 +145,7 @@ const RadioGroupSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) 
   );
 };
 
-const RadioGroupSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const RadioGroupSection = ({isDarkMode, setIsDarkMode}) => {
   
   const containerStyle = {
     padding: '40px',

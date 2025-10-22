@@ -2,30 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button, Dialog, } from '../../src';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const DialogSectionWithPreview = ({ title, children, jsxCode }) => {
+const DialogSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const DialogSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -189,34 +145,12 @@ const DialogSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const DialogSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const DialogSection = ({isDarkMode, setIsDarkMode}) => {
   const [showUserDialog, setShowUserDialog] = useState(false);
   const [showSettingsDialog, setShowSettingsDialog] = useState(false);
   const [showCustomDialog, setShowCustomDialog] = useState(false);
   const [userData, setUserData] = useState({});
   const [settingsData, setSettingsData] = useState({});
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -425,6 +359,7 @@ const autoDialogJSX = `<Dialog
       <DialogSectionWithPreview
         title="Default Confirm Dialog"
         jsxCode={defaultDialogJSX}
+        isDarkMode={isDarkMode}
       >
       <div style={sectionStyle}>
         <div style={{"--background-blur" : '0px', "--background-overlay": 'transparent'}}>
@@ -457,6 +392,7 @@ const autoDialogJSX = `<Dialog
       <DialogSectionWithPreview
         title="Default Confirm Dialog With Blur Overlay"
         jsxCode={defaultBlurDialogJSX}
+        isDarkMode={isDarkMode}
       >
       <div style={sectionStyle}>
         <Dialog
@@ -489,6 +425,7 @@ const autoDialogJSX = `<Dialog
       <DialogSectionWithPreview
         title="Dialog with Cross Button"
         jsxCode={crossDialogJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={sectionStyle}>
 
@@ -510,6 +447,7 @@ const autoDialogJSX = `<Dialog
       <DialogSectionWithPreview
         title="Auto-close Dialog"
         jsxCode={autoDialogJSX}
+        isDarkMode={isDarkMode}
       >
       <div style={sectionStyle}>
       {/* Dialog with Cross Button */}

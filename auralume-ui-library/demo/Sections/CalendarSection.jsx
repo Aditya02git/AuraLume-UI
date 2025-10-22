@@ -141,35 +141,12 @@ const CalendarSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) =>
   );
 };
 
-const CalendarSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  
+const CalendarSection = ({isDarkMode, setIsDarkMode}) => {  
   // Calendar states
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [pickerDate, setPickerDate] = useState(null);
   const [dateTimeValue, setDateTimeValue] = useState(null);
   const [submittedDate, setSubmittedDate] = useState(null);
-  
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
     const containerStyle = {
     padding: '40px',

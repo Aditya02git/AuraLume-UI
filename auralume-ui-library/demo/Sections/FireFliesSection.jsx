@@ -378,16 +378,8 @@ const ThreeCanvas = ({ modelPath }) => {
 };
 
 // Code Display Component
-const CodeDisplay = ({ code, language, title }) => {
+const CodeDisplay = ({ code, language, title, isDarkMode }) => {
   const [copied, setCopied] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
 
   const handleCopy = () => {
     navigator.clipboard?.writeText(code);
@@ -476,15 +468,7 @@ const CodeDisplay = ({ code, language, title }) => {
 };
 
 // Preview Section Component
-const PreviewSection = ({ title, modelPath, firefliesProps }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
+const PreviewSection = ({ title, modelPath, firefliesProps, isDarkMode }) => {
 
   return (
     <div style={{ marginBottom: "clamp(2rem, 5vw, 3rem)" }}>
@@ -517,15 +501,7 @@ const PreviewSection = ({ title, modelPath, firefliesProps }) => {
 };
 
 // Main Component
-const FireFliesSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
+const FireFliesSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "clamp(20px, 5vw, 40px)",
@@ -820,6 +796,7 @@ export default App;`;
         title=""
         modelPath="https://cdn.jsdelivr.net/gh/Aditya02git/3d-models-cdn/fireflies.glb"
         firefliesProps={firefliesConfig1}
+        isDarkMode={isDarkMode}
       />
 
       {/* Code Examples */}
@@ -828,6 +805,7 @@ export default App;`;
           title="Code"
           code={basicUsageCode}
           language="TSX/JSX"
+          isDarkMode={isDarkMode}
         />
       </div>
     </div>

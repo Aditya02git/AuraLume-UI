@@ -2,31 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Resizable from '../../src/components/Resizable';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-  
   return (
     <div style={{ 
       display: 'flex', 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const ResizableSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
+const ResizableSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const ResizableSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => 
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -244,35 +200,13 @@ const useResponsiveDimensions = () => {
   return { maxDimensions, initialDimensions, isMobile: viewportWidth < 768 };
 };
 
-const ResizableSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const ResizableSection = ({isDarkMode, setIsDarkMode}) => {
   const { maxDimensions, initialDimensions, isMobile } = useResponsiveDimensions();
   
   // State for maintaining resized dimensions - initialize with static values first
   const [basicDimensions, setBasicDimensions] = useState({ width: 300, height: 200 });
   const [sidebarWidth, setSidebarWidth] = useState(250);
   const [multiDimensions, setMultiDimensions] = useState({ width: 300, height: 250 });
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   // Update dimensions when initialDimensions change (viewport resize)
   useEffect(() => {
@@ -649,6 +583,7 @@ const ResizableSection = () => {
       <ResizableSectionWithPreview
         title="Basic Resizable Container"
         jsxCode={basicResizableJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ overflow: 'hidden', width: '100%' }}>
           <Resizable 
@@ -687,6 +622,7 @@ const ResizableSection = () => {
       <ResizableSectionWithPreview
         title="Flexbox Integration"
         jsxCode={flexboxResizableJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ 
           display: 'flex', 
@@ -744,6 +680,7 @@ const ResizableSection = () => {
       <ResizableSectionWithPreview
         title="Multi-Direction Resize with Constraints"
         jsxCode={multiDirectionJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ overflow: 'hidden', width: '100%' }}>
           <Resizable 

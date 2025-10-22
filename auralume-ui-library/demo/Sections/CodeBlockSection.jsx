@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import CodeBlock from "../../src/components/CodeBlock";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -141,30 +119,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const CodeBlockSectionWithPreview = ({ title, children, jsxCode }) => {
+const CodeBlockSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -179,7 +135,7 @@ const CodeBlockSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -202,29 +158,7 @@ const CodeBlockSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const CodeBlockSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const CodeBlockSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -377,6 +311,7 @@ export default Counter;\`}
       <CodeBlockSectionWithPreview
         title="Basic Usage"
         jsxCode={basicCodeBlockJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
           <CodeBlock language="javascript">
@@ -398,6 +333,7 @@ export default Counter;\`}
       <CodeBlockSectionWithPreview
         title="Advanced Features"
         jsxCode={advancedCodeBlockJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
           <CodeBlock language="css" showLineNumbers>

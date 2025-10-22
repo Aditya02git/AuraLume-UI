@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../../src/components/SearchBar'; // Adjust path as needed
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const SearchBarSectionWithPreview = ({ title, children, jsxCode }) => {
+const SearchBarSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const SearchBarSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -189,33 +145,11 @@ const SearchBarSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const SearchBarSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const SearchBarSection = ({isDarkMode, setIsDarkMode}) => {
   const [basicValue, setBasicValue] = useState('');
   const [animatedValue, setAnimatedValue] = useState('');
   const [sizeValue, setSizeValue] = useState('');
   const [variantValue, setVariantValue] = useState('');
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -426,6 +360,7 @@ const SearchBarSection = () => {
       <SearchBarSectionWithPreview
         title="Basic SearchBar"
         jsxCode={basicSearchBarJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <SearchBar
@@ -443,6 +378,7 @@ const SearchBarSection = () => {
       <SearchBarSectionWithPreview
         title="Animated SearchBar"
         jsxCode={animatedSearchBarJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <SearchBar
@@ -459,6 +395,7 @@ const SearchBarSection = () => {
       <SearchBarSectionWithPreview
         title="Size Variants"
         jsxCode={sizeVariantsJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
           <SearchBar
@@ -485,6 +422,7 @@ const SearchBarSection = () => {
       <SearchBarSectionWithPreview
         title="Style Variants"
         jsxCode={styleVariantsJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
           <SearchBar
@@ -511,6 +449,7 @@ const SearchBarSection = () => {
       <SearchBarSectionWithPreview
         title="Advanced Features"
         jsxCode={advancedFeaturesJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
           <SearchBar

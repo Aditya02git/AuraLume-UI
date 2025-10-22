@@ -175,7 +175,11 @@ const Navbar = ({
           {item.icon && <span className="menu-item-icon">{item.icon}</span>}
           <span>{item.label}</span>
           {item.badge && <span className="menu-badge">{item.badge}</span>}
-          {hasDropdown && <span className="dropdown-arrow"><img src="https://cdn.jsdelivr.net/gh/Aditya02git/Icons/down.png" alt="" height="10px" width="10px"/></span>}
+          {hasDropdown && <span className="dropdown-arrow">
+            <svg style={{color: 'gray'}} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+            </svg>
+            </span>}
         </button>
         
         {hasDropdown && (

@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Pagination from '../../src/components/Pagination';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const PaginationSectionWithPreview = ({ title, children, jsxCode }) => {
+const PaginationSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const PaginationSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -189,33 +145,11 @@ const PaginationSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const PaginationSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const PaginationSection = ({isDarkMode, setIsDarkMode}) => {
   const [basicCurrentPage, setBasicCurrentPage] = useState(2);
   const [borderedCurrentPage, setBorderedCurrentPage] = useState(3);
   const [hoverableCurrentPage, setHoverableCurrentPage] = useState(1);
   const [smartCurrentPage, setSmartCurrentPage] = useState(5);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -364,6 +298,7 @@ const PaginationSection = () => {
       <PaginationSectionWithPreview
         title="Basic Pagination"
         jsxCode={basicPaginationJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <Pagination 
@@ -379,6 +314,7 @@ const PaginationSection = () => {
       <PaginationSectionWithPreview
         title="Dark Theme with Bordered Style"
         jsxCode={borderedPaginationJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <Pagination 
@@ -395,6 +331,7 @@ const PaginationSection = () => {
       <PaginationSectionWithPreview
         title="Hoverable Variant without Prev/Next"
         jsxCode={hoverablePaginationJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <Pagination 
@@ -412,6 +349,7 @@ const PaginationSection = () => {
       <PaginationSectionWithPreview
         title="Smart Pagination for Large Datasets"
         jsxCode={smartPaginationJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <Pagination 

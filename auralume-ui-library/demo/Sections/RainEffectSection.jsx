@@ -379,7 +379,7 @@ const RainCanvas = ({ modelPath, effectProps, canvasId }) => {
 };
 
 // Code Display Component
-const CodeDisplay = ({ code, language }) => {
+const CodeDisplay = ({ code, language, isDarkMode }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -458,27 +458,7 @@ const CodeDisplay = ({ code, language }) => {
 };
 
 // Main Component
-const RainEffectSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const RainEffectSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "clamp(20px, 5vw, 40px)",
@@ -842,7 +822,7 @@ export default App;`;
           Code
         </h2>
 
-        <CodeDisplay code={rainEffectJSX} language="TSX/JSX" />
+        <CodeDisplay code={rainEffectJSX} language="TSX/JSX" isDarkMode={isDarkMode}/>
       </section>
     </div>
   );

@@ -2,29 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CodeBlock from '../../src/components/CodeBlock';
 
 
-const Nextjs = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+const Nextjs = ({isDarkMode, setIsDarkMode}) => {
   
-    // Get theme from localStorage
-    useEffect(() => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    }, []);
-  
-    // Listen for storage changes to sync theme across components
-    useEffect(() => {
-      const handleStorageChange = () => {
-        const saved = localStorage.getItem("darkMode");
-        if (saved) {
-          setIsDarkMode(JSON.parse(saved));
-        }
-      };
-  
-      window.addEventListener("storage", handleStorageChange);
-      return () => window.removeEventListener("storage", handleStorageChange);
-    }, []);
   return (
     <div style={{
       minHeight: '100vh',
@@ -81,16 +60,16 @@ const Nextjs = () => {
           </p>
 
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='pnpm'>bunx --bun aura-lume@latest init</CodeBlock>
+            <CodeBlock language='pnpm'>bunx --bun auralume-ui@latest init</CodeBlock>
           </div>
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='npm'>npx aura-lume@latest init</CodeBlock>
+            <CodeBlock language='npm'>npx auralume-ui@latest init</CodeBlock>
           </div>
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='yarn'>yarn aura-lume@latest init</CodeBlock>
+            <CodeBlock language='yarn'>yarn auralume-ui@latest init</CodeBlock>
           </div>
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='bun'>bunx --bun aura-lume@latest init</CodeBlock>
+            <CodeBlock language='bun'>bunx --bun auralume-ui@latest init</CodeBlock>
           </div>
 
           <p style={{
@@ -134,7 +113,7 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias["@ui"] = path.resolve(
       __dirname,
-      "node_modules/aura-lume/dist"
+      "node_modules/auralume-ui/dist"
     );
     return config;
   },
@@ -168,7 +147,7 @@ export default nextConfig;
 
           <div style={{ marginBottom: '32px' }}>
             <CodeBlock language='css'>
-              {`@import '@ui/aura-lume1.css';`}
+              {`@import '@ui/auralume-ui.css';`}
             </CodeBlock>
           </div>
 
@@ -208,7 +187,7 @@ export default nextConfig;
             <CodeBlock language="tsx">
               {`"use client";
 
-import { Button } from "aura-lume";
+import { Button } from "auralume-ui";
 
 export default function HomePage() {
   return (

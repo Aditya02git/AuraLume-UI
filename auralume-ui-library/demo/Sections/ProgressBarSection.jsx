@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ProgressBar from '../../src/components/ProgressBar';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -133,30 +111,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const ProgressSectionWithPreview = ({ title, children, jsxCode }) => {
+const ProgressSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '3rem' }}>
@@ -169,7 +125,7 @@ const ProgressSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -192,30 +148,8 @@ const ProgressSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const ProgressBarSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const ProgressBarSection = ({isDarkMode, setIsDarkMode}) => {
   const [progress, setProgress] = useState(65);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -399,6 +333,7 @@ const ProgressBarSection = () => {
       <ProgressSectionWithPreview
         title="Progress Control"
         jsxCode={progressControlJSX}
+        isDarkMode={isDarkMode}
       >
 <div
   style={{
@@ -462,6 +397,7 @@ const ProgressBarSection = () => {
       <ProgressSectionWithPreview
         title="Linear Progress Bar Sizes"
         jsxCode={`${linearSmallJSX}\n\n${linearMediumJSX}\n\n${linearLargeJSX}`}
+        isDarkMode={isDarkMode}
       >   
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div>
@@ -516,6 +452,7 @@ const ProgressBarSection = () => {
       <ProgressSectionWithPreview
         title="Custom Label"
         jsxCode={customLabelJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ width: '100%', "--progress-color": '#008000' }}>
           <h4 style={{ 
@@ -538,6 +475,7 @@ const ProgressBarSection = () => {
       <ProgressSectionWithPreview
         title="Spinner Progress Bars"
         jsxCode={spinnerJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ width: '100%' }}>
           <div style={{ 
@@ -616,6 +554,7 @@ const ProgressBarSection = () => {
       <ProgressSectionWithPreview
         title="Edge Cases"
         jsxCode={edgeCasesJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div>

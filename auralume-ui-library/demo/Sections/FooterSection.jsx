@@ -4,30 +4,8 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -135,30 +113,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const FooterSectionWithPreview = ({ title, children, jsxCode }) => {
+const FooterSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -171,7 +127,7 @@ const FooterSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -192,29 +148,7 @@ const FooterSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const FooterSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const FooterSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: '40px',
@@ -525,6 +459,7 @@ function App() {
         <FooterSectionWithPreview
           title="Company Footer with Newsletter"
           jsxCode={basicFooterJSX}
+          isDarkMode={isDarkMode}
         >
           <Footer 
             backgroundColor = {isDarkMode ? 'rgb(15, 23, 42)' : '#dedede'}
@@ -605,6 +540,7 @@ function App() {
         <FooterSectionWithPreview
           title="Multi-Column Footer"
           jsxCode={multiColumnFooterJSX}
+          isDarkMode={isDarkMode}
         >
           <Footer 
             backgroundColor = {isDarkMode ? 'rgb(15, 23, 42)' : '#f2f2f2'}
@@ -658,6 +594,7 @@ function App() {
         <FooterSectionWithPreview
           title="Footer with Social Links & Custom Content"
           jsxCode={socialFooterJSX}
+          isDarkMode={isDarkMode}
         >
           <Footer
             backgroundColor = {isDarkMode ? 'rgb(15, 23, 42)' : '#e3e9f1'}

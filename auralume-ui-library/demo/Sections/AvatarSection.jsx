@@ -153,29 +153,7 @@ const AvatarSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   );
 };
 
-const AvatarSection = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-  
-    // Get theme from localStorage
-    useEffect(() => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    }, []);
-  
-    // Listen for storage changes to sync theme across components
-    useEffect(() => {
-      const handleStorageChange = () => {
-        const saved = localStorage.getItem('darkMode');
-        if (saved) {
-          setIsDarkMode(JSON.parse(saved));
-        }
-      };
-  
-      window.addEventListener('storage', handleStorageChange);
-      return () => window.removeEventListener('storage', handleStorageChange);
-    }, []);
+const AvatarSection = ({isDarkMode, setIsDarkMode}) => {
 
   // Sample users list
   const usersList = [
@@ -359,7 +337,7 @@ const AvatarSection = () => {
       </div>
       </div>
 
-    <div style={containerStyle}>
+    <div>
   
       {/* Single Avatar */}
       <AvatarSectionWithPreview

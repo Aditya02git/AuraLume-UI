@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Aura from '../../src/components/Aura';
 
-const Introduction = () => {
+const Introduction = ({isDarkMode, setIsDarkMode}) => {
 
   const prosData = [
     'Want to build beautiful 2D and 3D interfaces without sacrificing development speed',
@@ -26,27 +26,27 @@ const Introduction = () => {
   ];
 
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-    // Get theme from localStorage
-    useEffect(() => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    }, []);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+  //   // Get theme from localStorage
+  //   useEffect(() => {
+  //     const saved = localStorage.getItem('darkMode');
+  //     if (saved) {
+  //       setIsDarkMode(JSON.parse(saved));
+  //     }
+  //   }, []);
   
-    // Listen for storage changes to sync theme across components
-    useEffect(() => {
-      const handleStorageChange = () => {
-        const saved = localStorage.getItem('darkMode');
-        if (saved) {
-          setIsDarkMode(JSON.parse(saved));
-        }
-      };
+  //   // Listen for storage changes to sync theme across components
+  //   useEffect(() => {
+  //     const handleStorageChange = () => {
+  //       const saved = localStorage.getItem('darkMode');
+  //       if (saved) {
+  //         setIsDarkMode(JSON.parse(saved));
+  //       }
+  //     };
   
-      window.addEventListener('storage', handleStorageChange);
-      return () => window.removeEventListener('storage', handleStorageChange);
-    }, []);
+  //     window.addEventListener('storage', handleStorageChange);
+  //     return () => window.removeEventListener('storage', handleStorageChange);
+  //   }, []);
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 

@@ -1,29 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const Blog = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const Blog = ({isDarkMode, setIsDarkMode}) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
-  // Handle theme + resize
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) setIsDarkMode(JSON.parse(saved));
-
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Sync theme changes across tabs
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   const items = [
     "Why to use AuraLume ? ",

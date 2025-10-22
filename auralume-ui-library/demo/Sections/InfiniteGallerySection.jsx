@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import InfiniteGallery from '../../src/components/InfiniteGallery';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const GallerySectionWithPreview = ({ title, children, jsxCode }) => {
+const GallerySectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const GallerySectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -191,33 +147,11 @@ const GallerySectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const InfiniteGallerySection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const InfiniteGallerySection = ({isDarkMode, setIsDarkMode}) => {
   const [currentEffect, setCurrentEffect] = useState('zoomIn1');
   const [imageSize, setImageSize] = useState('small'); // Changed to small for preview
   const [rows, setRows] = useState(4); // Reduced for preview
   const [columns, setColumns] = useState(6); // Reduced for preview
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -411,6 +345,7 @@ export default GalleryDemo;`;
       <GallerySectionWithPreview
         title=""
         jsxCode={JSX}
+        isDarkMode={isDarkMode}
       >
       <InfiniteGallery 
         images={sampleImages}
@@ -423,7 +358,7 @@ export default GalleryDemo;`;
         centerDuration={700} // Animation duration in ms
         imageSize={0.20} // 35% of viewport
         gutter={0.05} // 5% of viewport
-        theme={isDarkMode ? "minimal" : "light"} // Try: 'dark', 'light', 'minimal'
+        theme={isDarkMode ? "dramatic" : "light"} // Try: 'dark', 'light', 'minimal'
         onImageClick={handleImageClick}
         loadingPlaceholder={true}
         friction={0.85} // Inertia friction (0-1)

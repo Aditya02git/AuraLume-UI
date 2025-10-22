@@ -302,30 +302,20 @@ const CodeDisplay = ({ code, language }) => {
 };
 
 // Preview Section Component
-const PreviewSection = ({ title, barData, barProps }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const PreviewSection = ({ title, barData, barProps, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
+            <h2
+        style={{
+          marginBottom: "clamp(1rem, 3vw, 2rem)",
+          color: isDarkMode ? "#ffffff" : "#000000",
+          fontSize: "clamp(1.25rem, 5vw, 1.5rem)",
+          fontWeight: "bold",
+        }}
+      >
+        {title}
+      </h2>
       <div
         style={{
           transition: "all 0.3s ease",
@@ -334,24 +324,7 @@ const PreviewSection = ({ title, barData, barProps }) => {
           minHeight: "500px",
           width: "100%",
         }}
-      >
-        {title && (
-          <h3 
-            style={{ 
-              color: isDarkMode ? '#333' : '#333', 
-              fontWeight: 'bold',
-              margin: 0, 
-              fontSize: 'clamp(1.125rem, 4vw, 1.5rem)', 
-              position: 'absolute',
-              top: '20px', 
-              left: '20px',
-              zIndex: 20,
-            }}
-          >
-            {title}
-          </h3>
-        )}
-        
+      >       
         <div style={{ 
           width: '100%',
           height: '100%',
@@ -369,27 +342,7 @@ const PreviewSection = ({ title, barData, barProps }) => {
 };
 
 // Code Section Component
-const CodeSection = ({ title, jsxCode }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const CodeSection = ({ title, jsxCode, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -410,27 +363,7 @@ const CodeSection = ({ title, jsxCode }) => {
 };
 
 // Main Component
-const ThreeBarSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const ThreeBarSection = ({isDarkMode, setIsDarkMode}) => {
 
   // JSX Code Example
 const threeBarJSX1 = `
@@ -903,6 +836,7 @@ export default function Demo() {
       {/* Preview Section - Color Gradient */}
       <PreviewSection
         title="3D Bar Chart - Color Gradient"
+        isDarkMode={isDarkMode}
         barData={[
           [3, 2, 1],
           [6, 5, 4],
@@ -924,11 +858,13 @@ export default function Demo() {
       <CodeSection
         title="Code"
         jsxCode={threeBarJSX1}
+        isDarkMode={isDarkMode}
       />
 
       {/* Preview Section - With Texture */}
       <PreviewSection
         title="3D Bar Chart - With Texture"
+        isDarkMode={isDarkMode}
         barData={[
           [3, 2, 1],
           [6, 5, 4],
@@ -950,6 +886,7 @@ export default function Demo() {
       <CodeSection
         title="Code"
         jsxCode={threeBarJSX2}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

@@ -453,27 +453,7 @@ const CodeDisplay = ({ code, language }) => {
 };
 
 // Preview Section Component
-const PreviewSection = ({ title, modelPath, effectProps }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const PreviewSection = ({ title, modelPath, effectProps, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -520,27 +500,7 @@ const PreviewSection = ({ title, modelPath, effectProps }) => {
 };
 
 // Code Section Component
-const CodeSection = ({ title, jsxCode }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const CodeSection = ({ title, jsxCode, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -561,27 +521,7 @@ const CodeSection = ({ title, jsxCode }) => {
 };
 
 // Main Component
-const WispSmokeEffectSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const WispSmokeEffectSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "clamp(20px, 5vw, 40px)",
@@ -849,6 +789,7 @@ export default App;
         effectProps={{
           position: {x: -0.75, y: 7.5, z: -1.85}
         }}
+        isDarkMode={isDarkMode}
       />
 
       {/* Code Section */}
@@ -856,6 +797,7 @@ export default App;
       <CodeSection
         title="Code"
         jsxCode={wispSmokeEffectJSX}
+        isDarkMode={isDarkMode}
       />
       </div>
     </div>

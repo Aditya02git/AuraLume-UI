@@ -464,27 +464,7 @@ const CodeDisplay = ({ code, language }) => {
 };
 
 // Preview Section Component
-const PreviewSection = ({ title, modelPath, effectType, effectProps }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const PreviewSection = ({ title, modelPath, effectType, effectProps, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -532,27 +512,7 @@ const PreviewSection = ({ title, modelPath, effectType, effectProps }) => {
 };
 
 // Code Section Component
-const CodeSection = ({ title, jsxCode }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const CodeSection = ({ title, jsxCode, isDarkMode }) => {
 
   return (
     <section style={{ marginBottom: "clamp(2rem, 5vw, 4rem)" }}>
@@ -573,27 +533,7 @@ const CodeSection = ({ title, jsxCode }) => {
 };
 
 // Main Component
-const FireEffectSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage?.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage?.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const FireEffectSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "clamp(20px, 5vw, 40px)",
@@ -948,12 +888,14 @@ export default App;`;
         modelPath="https://cdn.jsdelivr.net/gh/Aditya02git/3d-models-cdn/camp_fire.glb"
         effectType="fire"
         effectProps={{}}
+        isDarkMode={isDarkMode}
       />
 
       {/* Code Section */}
       <CodeSection
         title="Code"
         jsxCode={fireEffectJSX}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

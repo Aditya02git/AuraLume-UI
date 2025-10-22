@@ -221,24 +221,7 @@ const Settings = () => (
 );
 
 // ------------------- Main Accordion Section -------------------
-const FabIconSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const FabIconSection = ({isDarkMode, setIsDarkMode}) => {
 
   const menuItems = [
     { icon: <Heart />, label: 'Favorites', id: 'favorites' },

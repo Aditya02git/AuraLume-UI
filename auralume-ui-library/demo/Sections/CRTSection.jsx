@@ -171,24 +171,7 @@ const CRTSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
 };
 
 // ------------------- Main CRT Section -------------------
-const CRTSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const CRTSection = ({isDarkMode, setIsDarkMode}) => {
 
   const jsxCode1 = `<CRT 
   intensity="heavy"

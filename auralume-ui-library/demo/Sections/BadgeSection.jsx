@@ -141,34 +141,13 @@ const BadgeSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   );
 };
 
-const BadgeSection = () => {
+const BadgeSection = ({isDarkMode, setIsDarkMode}) => {
   const [tags, setTags] = useState([
     { id: 1, label: 'React', variant: 'primary' },
     { id: 2, label: 'JavaScript', variant: 'warning' },
     { id: 3, label: 'CSS', variant: 'info' }
   ]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const removeTag = (id) => {
     setTags(tags.filter(tag => tag.id !== id));

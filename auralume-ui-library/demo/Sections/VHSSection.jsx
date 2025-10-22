@@ -172,24 +172,7 @@ const VHSSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
 };
 
 // ------------------- Main Accordion Section -------------------
-const VHSSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const VHSSection = ({isDarkMode, setIsDarkMode}) => {
 
   const jsxCode1 = `<VHS 
   playText="Record"

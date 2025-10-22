@@ -1,27 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const Resource = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const Resource = ({ isDarkMode, setIsDarkMode }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) setIsDarkMode(JSON.parse(saved));
-
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
 const items = ["video 1", "video 2", "video 3", "video 4", "video 5", "video 6", "video 7"];
 const descriptions = [

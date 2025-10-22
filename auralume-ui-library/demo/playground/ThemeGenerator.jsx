@@ -268,6 +268,9 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
               borderRadius: "12px",
               backgroundColor: cssVars["--background"],
               boxShadow: `0 0 0 1px ${cssVars["--border-level-2"]}`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
             <div
@@ -286,7 +289,9 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
                   fontSize: "14px",
                 }}
               >
-                Pricing
+                <svg style={{color: cssVars["--text-secondary"]}} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd"/>
+                </svg>
               </a>
               <a
                 href="#"
@@ -297,7 +302,10 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
                   fontSize: "14px",
                 }}
               >
-                Docs
+                <svg style={{color: cssVars["--text-secondary"]}} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M4 3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1v2a1 1 0 0 0 1.707.707L9.414 13H15a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4Z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M8.023 17.215c.033-.03.066-.062.098-.094L10.243 15H15a3 3 0 0 0 3-3V8h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1v2a1 1 0 0 1-1.707.707L14.586 18H9a1 1 0 0 1-.977-.785Z" clip-rule="evenodd"/>
+                </svg>
               </a>
               <a
                 href="#"
@@ -308,7 +316,22 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
                   fontSize: "14px",
                 }}
               >
-                Blog
+                <svg style={{color: cssVars["--text-secondary"]}} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/>
+                </svg>
+              </a>
+              <a
+                href="#"
+                style={{
+                  padding: "4px 12px",
+                  color: cssVars["--text-primary"],
+                  textDecoration: "none",
+                  fontSize: "14px",
+                }}
+              >
+                <svg style={{color: cssVars["--text-secondary"]}} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M12 2a7 7 0 0 0-7 7 3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1V9a5 5 0 1 1 10 0v7.083A2.919 2.919 0 0 1 14.083 19H14a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1a2 2 0 0 0 1.732-1h.351a4.917 4.917 0 0 0 4.83-4H19a3 3 0 0 0 3-3v-2a3 3 0 0 0-3-3 7 7 0 0 0-7-7Zm1.45 3.275a4 4 0 0 0-4.352.976 1 1 0 0 0 1.452 1.376 2.001 2.001 0 0 1 2.836-.067 1 1 0 1 0 1.386-1.442 4 4 0 0 0-1.321-.843Z" clip-rule="evenodd"/>
+                </svg>
               </a>
             </div>
           </nav>
@@ -333,7 +356,7 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
                 lineHeight: "1.1",
               }}
             >
-              A go-to template for a DevTool startup
+              Welcome To AuraLume Playground
             </h1>
             <p
               style={{
@@ -343,8 +366,7 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
                 color: cssVars["--text-secondary"],
               }}
             >
-              Use this template to launch your next developer tool or open
-              source project.
+              Use this to make your custom themes and play with it.
             </p>
             <div
               style={{
@@ -376,26 +398,12 @@ const ThemeGenerator = ({ isDarkMode, setIsDarkMode }) => {
                   border: "none",
                   cursor: "pointer",
                   fontSize: "14px",
-                  backgroundColor: cssVars["--accent-b"],
-                  color: cssVars["--accent"],
-                }}
-              >
-                Secondary
-              </button>
-              <button
-                style={{
-                  padding: "10px 20px",
-                  borderRadius: "8px",
-                  fontWeight: "500",
-                  border: "none",
-                  cursor: "pointer",
-                  fontSize: "14px",
                   backgroundColor: "transparent",
                   color: cssVars["--text-secondary"],
                   boxShadow: `0 0 0 1px ${cssVars["--border-level-3"]}`,
                 }}
               >
-                Tertiary
+                Secondary
               </button>
             </div>
             <div

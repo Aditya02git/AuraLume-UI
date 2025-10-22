@@ -169,24 +169,7 @@ const FluidButtonSectionWithPreview = ({ title, children, jsxCode, isDarkMode })
 };
 
 // ------------------- Main Accordion Section -------------------
-const FluidButtonSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const FluidButtonSection = ({isDarkMode, setIsDarkMode}) => {
 
   const sizeCode = `
   const handleClick = () => {

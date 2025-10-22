@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import InfiniteScroller from "../../src/components/InfiniteScroller";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -144,7 +122,6 @@ const CodeDisplay = ({ code, language }) => {
 const ButtonSectionWithPreview = ({
   title,
   children,
-  htmlCode,
   jsxCode,
   isDarkMode = false,
 }) => {
@@ -165,7 +142,7 @@ const ButtonSectionWithPreview = ({
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -190,15 +167,7 @@ const ButtonSectionWithPreview = ({
   );
 };
 
-const InfiniteScrollerSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
+const InfiniteScrollerSection = ({isDarkMode, setIsDarkMode}) => {
 
   // Optional: Custom tag rows for type-2
   const customTagRows = [

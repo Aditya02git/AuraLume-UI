@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import SimpleContextMenu from "../../src/components/ContextMenu/ContextMenu";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -144,32 +122,10 @@ const CodeDisplay = ({ code, language }) => {
 const ContextMenuSectionWithPreview = ({
   title,
   children,
-  htmlCode,
   jsxCode,
+  isDarkMode
 }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -184,7 +140,7 @@ const ContextMenuSectionWithPreview = ({
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -204,29 +160,7 @@ const ContextMenuSectionWithPreview = ({
   );
 };
 
-const ContextMenuSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const ContextMenuSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -469,6 +403,7 @@ export default App;`;
         <ContextMenuSectionWithPreview
           title=""
           jsxCode={contextMenuJSX}
+          isDarkMode={isDarkMode}
         >
           <div
             style={{

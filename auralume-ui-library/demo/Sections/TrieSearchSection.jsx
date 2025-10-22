@@ -101,42 +101,8 @@ const TrieSearch = ({ data, placeholder, maxResults, showStats, searchMode, onRe
 };
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Also listen for custom event for same-window updates
-    const handleCustomStorageChange = (e) => {
-      if (e.detail && e.detail.key === 'darkMode') {
-        setIsDarkMode(e.detail.value);
-      }
-    };
-    window.addEventListener('localStorageUpdate', handleCustomStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('localStorageUpdate', handleCustomStorageChange);
-    };
-  }, []);
   
   return (
     <div style={{ 
@@ -243,42 +209,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const TrieSearchSectionWithPreview = ({ title, children, htmlCode, jsxCode }) => {
+const TrieSearchSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Also listen for custom event for same-window updates
-    const handleCustomStorageChange = (e) => {
-      if (e.detail && e.detail.key === 'darkMode') {
-        setIsDarkMode(e.detail.value);
-      }
-    };
-    window.addEventListener('localStorageUpdate', handleCustomStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('localStorageUpdate', handleCustomStorageChange);
-    };
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -291,7 +223,7 @@ const TrieSearchSectionWithPreview = ({ title, children, htmlCode, jsxCode }) =>
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -312,43 +244,9 @@ const TrieSearchSectionWithPreview = ({ title, children, htmlCode, jsxCode }) =>
   );
 };
 
-const TrieSearchSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const TrieSearchSection = ({isDarkMode, setIsDarkMode}) => {
   const [selectedResult, setSelectedResult] = useState('');
   const [searchMode, setSearchMode] = useState('prefix');
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    
-    // Also listen for custom event for same-window updates
-    const handleCustomStorageChange = (e) => {
-      if (e.detail && e.detail.key === 'darkMode') {
-        setIsDarkMode(e.detail.value);
-      }
-    };
-    window.addEventListener('localStorageUpdate', handleCustomStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('localStorageUpdate', handleCustomStorageChange);
-    };
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -563,6 +461,7 @@ function App() {
       <TrieSearchSectionWithPreview
         title="Interactive Trie Search Component"
         jsxCode={basicTrieSearchJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ marginBottom: '20px' }}>
           <h3 style={{ 

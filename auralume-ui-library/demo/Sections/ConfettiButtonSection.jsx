@@ -6,30 +6,8 @@ import {
 } from "../../src/components/Confetti/Confetti";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -148,32 +126,10 @@ const CodeDisplay = ({ code, language }) => {
 const ConfettiButtonSectionWithPreview = ({
   title,
   children,
-  htmlCode,
   jsxCode,
+  isDarkMode
 }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -188,7 +144,7 @@ const ConfettiButtonSectionWithPreview = ({
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -212,30 +168,8 @@ const ConfettiButtonSectionWithPreview = ({
 };
 
 // Dependency Install Component
-const DependencyInstall = ({ command, description }) => {
+const DependencyInstall = ({ command, description, isDarkMode }) => {
   const [copied, setCopied] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(command);
@@ -307,29 +241,7 @@ const DependencyInstall = ({ command, description }) => {
   );
 };
 
-const ConfettiButtonSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const ConfettiButtonSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -510,32 +422,76 @@ const ConfettiButtonSection = () => {
             npm install canvas-confetti
           </code>
         </div>
-        <button
-          onClick={handleCopy}
-          style={{
-            marginLeft: "10px",
-            padding: "8px 12px",
-            borderRadius: "6px",
-            border: "none",
-            cursor: "pointer",
-            backgroundColor: isDarkMode ? "#334155" : "#dbe3e8",
-            color: isDarkMode ? "#f3f6f9" : "#334a51",
-            fontSize: "10px",
-            fontWeight: "500",
-          }}
-        >
-          {copied ? <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><svg style={{color: '#43eb34'}} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
-          </svg><p>Copied</p></div>
-            : <div title='Copy'><svg style={{color: isDarkMode ? 'white' : 'black'}} class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd" d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z" clip-rule="evenodd"/>
-            <path fill-rule="evenodd" d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z" clip-rule="evenodd"/>
-          </svg></div>
-          }
-        </button>
+          <button
+            onClick={handleCopy}
+            style={{
+              marginLeft: "10px",
+              padding: "8px 12px",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer",
+              backgroundColor: isDarkMode ? "#334155" : "#dbe3e8",
+              color: isDarkMode ? "#f3f6f9" : "#334a51",
+              fontSize: "10px",
+              fontWeight: "500",
+            }}
+          >
+            {copied ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "4px",
+                }}
+              >
+                <svg
+                  style={{ color: "#43eb34" }}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 11.917 9.724 16.5 19 7.5"
+                  />
+                </svg>
+                <p style={{ margin: 0 }}>Copied</p>
+              </div>
+            ) : (
+              <div title="Copy">
+                <svg
+                  style={{ color: isDarkMode ? "white" : "black" }}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            )}
+          </button>
       </div>
 
-      <ConfettiButtonSectionWithPreview title="Basic" jsxCode={basicJSX}>
+      <ConfettiButtonSectionWithPreview title="Basic" jsxCode={basicJSX} isDarkMode={isDarkMode}>
         <div
           style={{
             display: "flex",
@@ -547,7 +503,7 @@ const ConfettiButtonSection = () => {
         </div>
       </ConfettiButtonSectionWithPreview>
 
-      <ConfettiButtonSectionWithPreview title="Success" jsxCode={successJSX}>
+      <ConfettiButtonSectionWithPreview title="Success" jsxCode={successJSX} isDarkMode={isDarkMode}>
         <div
           style={{
             display: "flex",
@@ -559,7 +515,7 @@ const ConfettiButtonSection = () => {
         </div>
       </ConfettiButtonSectionWithPreview>
 
-      <ConfettiButtonSectionWithPreview title="Party" jsxCode={partyJSX}>
+      <ConfettiButtonSectionWithPreview title="Party" jsxCode={partyJSX} isDarkMode={isDarkMode}>
         <div
           style={{
             display: "flex",
@@ -574,6 +530,7 @@ const ConfettiButtonSection = () => {
       <ConfettiButtonSectionWithPreview
         title="Fireworks"
         jsxCode={fireworksJSX}
+        isDarkMode={isDarkMode}
       >
         <div
           style={{

@@ -33,7 +33,7 @@ const Home = () => {
   const [isCanvasVisible, setIsCanvasVisible] = useState(true);
 
   const copy = useCallback(() => {
-    navigator.clipboard.writeText("npm install aura-lume@latest");
+    navigator.clipboard.writeText("npm install auralume-ui@latest");
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   }, []);
@@ -714,7 +714,7 @@ const Home = () => {
                   }}
                   onClick={copy}
                 >
-                  npm install aura-lume@latest
+                  npm install auralume-ui@latest
                   {copied && <div
                     style={{
                       width: "15px",
@@ -1093,7 +1093,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              npm i -D aura-lume@latest
+              npm i -D auralume-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1113,7 +1113,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              pnpm add -D aura-lume@latest
+              pnpm add -D auralume-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1128,7 +1128,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              yarn add -D aura-lume@latest
+              yarn add -D auralume-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1153,7 +1153,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              bun add -D aura-lume@latest
+              bun add -D auralume-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1168,7 +1168,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              deno i -D npm:aura-lume@latest
+              deno i -D npm:auralume-ui@latest
             </TabPanel>
           </Tab>
         </div>
@@ -1201,7 +1201,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              npm i -D aura-lume-three@latest
+              npm i -D auralume-three-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1221,7 +1221,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              pnpm add -D aura-lume-three@latest
+              pnpm add -D auralume-three-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1236,7 +1236,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              yarn add -D aura-lume-three@latest
+              yarn add -D auralume-three-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1261,7 +1261,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              bun add -D aura-lume-three@latest
+              bun add -D auralume-three-ui@latest
             </TabPanel>
 
             <TabPanel label={
@@ -1276,7 +1276,7 @@ const Home = () => {
                 </div>
               </>
             }>
-              deno i -D npm:aura-lume-three@latest
+              deno i -D npm:auralume-three-ui@latest
             </TabPanel>
           </Tab>
         </div>

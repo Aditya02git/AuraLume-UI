@@ -2,29 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CodeBlock from '../../src/components/CodeBlock';
 
 
-const Vite = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+const Vite = ({isDarkMode, setIsDarkMode}) => {
   
-    // Get theme from localStorage
-    useEffect(() => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    }, []);
-  
-    // Listen for storage changes to sync theme across components
-    useEffect(() => {
-      const handleStorageChange = () => {
-        const saved = localStorage.getItem("darkMode");
-        if (saved) {
-          setIsDarkMode(JSON.parse(saved));
-        }
-      };
-  
-      window.addEventListener("storage", handleStorageChange);
-      return () => window.removeEventListener("storage", handleStorageChange);
-    }, []);
   return (
     <div style={{
       minHeight: '100vh',
@@ -81,16 +60,16 @@ const Vite = () => {
           </p>
 
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='pnpm'>bunx --bun aura-lume@latest init</CodeBlock>
+            <CodeBlock language='pnpm'>bunx --bun auralume-ui@latest init</CodeBlock>
           </div>
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='npm'>npx aura-lume@latest init</CodeBlock>
+            <CodeBlock language='npm'>npx auralume-ui@latest init</CodeBlock>
           </div>
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='yarn'>yarn aura-lume@latest init</CodeBlock>
+            <CodeBlock language='yarn'>yarn auralume-ui@latest init</CodeBlock>
           </div>
           <div style={{ marginBottom: '32px' }}>
-            <CodeBlock language='bun'>bunx --bun aura-lume@latest init</CodeBlock>
+            <CodeBlock language='bun'>bunx --bun auralume-ui@latest init</CodeBlock>
           </div>
 
           <p style={{
@@ -136,7 +115,7 @@ export default defineConfig({
   plugins: [react()],
     resolve: {
     alias: {
-      '@ui': '/node_modules/aura-lume/dist'
+      '@ui': '/node_modules/auralume-ui/dist'
     }
   }
 })`}</CodeBlock>
@@ -204,7 +183,7 @@ export default defineConfig({
           <div style={{ marginBottom: '32px' }}>
             <CodeBlock language="jsx">
               {`
-              import { Button } from '@aura-lume';
+              import { Button } from '@auralume-ui';
   <Button 
     variant="primary" 
     onClick={() => console.log('Clicked!')}

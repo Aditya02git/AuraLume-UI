@@ -148,24 +148,7 @@ const CardSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   );
 };
 
-const AnimatedCardSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const AnimatedCardSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: 'clamp(16px, 4vw, 40px)',

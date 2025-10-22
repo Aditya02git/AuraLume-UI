@@ -2,28 +2,8 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "../../src/components/Sidebar";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -173,28 +153,8 @@ const FakeScreen = ({ backgroundColor = "#f8f9fa", children }) => {
 };
 
 // Section with Preview/TSX/JSX tabs
-const SidebarSectionWithPreview = ({ title, jsxCode, children }) => {
+const SidebarSectionWithPreview = ({ title, jsxCode, children, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -209,7 +169,7 @@ const SidebarSectionWithPreview = ({ title, jsxCode, children }) => {
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -235,29 +195,7 @@ const SidebarSectionWithPreview = ({ title, jsxCode, children }) => {
   );
 };
 
-const SidebarSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const SidebarSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -445,6 +383,7 @@ const SidebarSection = () => {
       <SidebarSectionWithPreview
         title="Basic Sidebar"
         jsxCode={basicSidebarJSX}
+        isDarkMode={isDarkMode}
       >
         <FakeScreen backgroundColor="#f8f9fa">
           <div style={{ 
@@ -492,6 +431,7 @@ const SidebarSection = () => {
       <SidebarSectionWithPreview
         title="Right Sidebar with Custom Styling"
         jsxCode={rightSidebarJSX}
+        isDarkMode={isDarkMode}
       >
         <FakeScreen backgroundColor="#2c3e50">
           <div style={{ 

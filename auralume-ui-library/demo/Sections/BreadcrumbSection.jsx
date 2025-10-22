@@ -141,29 +141,7 @@ const BreadcrumbSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) 
   );
 };
 
-const BreadcrumbSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
+const BreadcrumbSection = ({isDarkMode, setIsDarkMode}) => {
 
 const breadcrumbItems = [
   { label: 'Home', href: '#' },

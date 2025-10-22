@@ -1,19 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Installation = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const Installation = ({isDarkMode, setIsDarkMode}) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const Icon = ({ src, alt, name, path }) => {
     const [hover, setHover] = useState(false);

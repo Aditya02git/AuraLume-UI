@@ -1,27 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-const Store = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const Store = ({isDarkMode, setIsDarkMode}) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) setIsDarkMode(JSON.parse(saved));
-
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   const items = ["Authentication", "Dashboard", "Documentation Page", "Landing Page"];
   const borderColor = isDarkMode ? "#666" : "#dddddd";

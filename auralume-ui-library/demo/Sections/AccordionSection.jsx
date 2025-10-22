@@ -169,24 +169,8 @@ const AccordionSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) =
 };
 
 // ------------------- Main Accordion Section -------------------
-const AccordionSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const AccordionSection = ({isDarkMode, setIsDarkMode}) => {
 
-  // Sync theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) setIsDarkMode(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) setIsDarkMode(JSON.parse(saved));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const faqItems = [
     { question: 'What is data encryption?', answer: 'Data encryption converts readable information into unreadable code. Only authorized users with the correct key can access it.' },

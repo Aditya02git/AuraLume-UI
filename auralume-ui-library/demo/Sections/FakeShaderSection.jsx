@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FakeShader } from "../../src";
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ["Preview", "TSX/JSX"];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <div
@@ -141,30 +119,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const FakeShaderSectionWithPreview = ({ title, children, jsxCode }) => {
+const FakeShaderSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState("Preview");
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: "4rem" }}>
@@ -179,7 +135,7 @@ const FakeShaderSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
 
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
 
       {activeTab === "Preview" && (
         <div
@@ -202,29 +158,7 @@ const FakeShaderSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const FakeShaderSection = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode");
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem("darkMode");
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+const FakeShaderSection = ({isDarkMode, setIsDarkMode}) => {
 
   const containerStyle = {
     padding: "40px",
@@ -504,6 +438,7 @@ const FakeShaderSection = () => {
       <FakeShaderSectionWithPreview
         title="Default variant"
         jsxCode={defaultJSX}
+        isDarkMode={isDarkMode}
       >
         <FakeShader
           variant="default"
@@ -519,6 +454,7 @@ const FakeShaderSection = () => {
       <FakeShaderSectionWithPreview
         title="Vivid variant"
         jsxCode={vividJSX}
+        isDarkMode={isDarkMode}
       >
         <FakeShader
           variant="vivid"
@@ -534,6 +470,7 @@ const FakeShaderSection = () => {
       <FakeShaderSectionWithPreview
         title="Metal variant"
         jsxCode={metalJSX}
+        isDarkMode={isDarkMode}
       >
         <FakeShader
           variant="metal"
@@ -549,6 +486,7 @@ const FakeShaderSection = () => {
       <FakeShaderSectionWithPreview
         title="Silk variant"
         jsxCode={silkJSX}
+        isDarkMode={isDarkMode}
       >
         <FakeShader
           variant="silk"

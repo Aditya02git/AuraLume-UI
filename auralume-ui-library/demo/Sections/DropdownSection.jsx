@@ -2,30 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from '../../src/components/Dropdown';
 
 // Preview Toggle Component
-const PreviewToggle = ({ activeTab, onTabChange }) => {
+const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
   const tabs = ['Preview', 'TSX/JSX'];
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
   
   return (
     <div style={{ 
@@ -132,30 +110,8 @@ const CodeDisplay = ({ code, language }) => {
   );
 };
 
-const SwitchSectionWithPreview = ({ title, children, jsxCode }) => {
+const SwitchSectionWithPreview = ({ title, children, jsxCode, isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Preview');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <section style={{ marginBottom: '4rem' }}>
@@ -168,7 +124,7 @@ const SwitchSectionWithPreview = ({ title, children, jsxCode }) => {
         {title}
       </h2>
       
-      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} />
+      <PreviewToggle activeTab={activeTab} onTabChange={setActiveTab} isDarkMode={isDarkMode}/>
       
       {activeTab === 'Preview' && (
         <div style={{
@@ -189,10 +145,9 @@ const SwitchSectionWithPreview = ({ title, children, jsxCode }) => {
   );
 };
 
-const DropdownSection = () => {
+const DropdownSection = ({isDarkMode, setIsDarkMode}) => {
   const [selectedItem, setSelectedItem] = useState('');
   const [selectedMultiItems, setSelectedMultiItems] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Simple dropdown options
   const socialOptions = [
@@ -216,27 +171,6 @@ const DropdownSection = () => {
     { label: 'Option C', value: 'optionC' },
     { label: 'Option D', value: 'optionD' }
   ];
-
-  // Get theme from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode');
-    if (saved) {
-      setIsDarkMode(JSON.parse(saved));
-    }
-  }, []);
-
-  // Listen for storage changes to sync theme across components
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const saved = localStorage.getItem('darkMode');
-      if (saved) {
-        setIsDarkMode(JSON.parse(saved));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   const containerStyle = {
     padding: '40px',
@@ -422,6 +356,7 @@ const MultiSelectDropdownExample = () => {
       <SwitchSectionWithPreview
         title="Simple Dropdown"
         jsxCode={simpleDropdownJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
           <Dropdown
@@ -438,6 +373,7 @@ const MultiSelectDropdownExample = () => {
       <SwitchSectionWithPreview
         title="Select Dropdown"
         jsxCode={selectDropdownJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
           <Dropdown
@@ -457,6 +393,7 @@ const MultiSelectDropdownExample = () => {
       <SwitchSectionWithPreview
         title="Multi-Select Dropdown"
         jsxCode={multiSelectDropdownJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
           <Dropdown
@@ -476,6 +413,7 @@ const MultiSelectDropdownExample = () => {
       <SwitchSectionWithPreview
         title="Disabled Dropdown"
         jsxCode={selectDropdownJSX}
+        isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
           <Dropdown
@@ -497,6 +435,7 @@ const MultiSelectDropdownExample = () => {
   <p>Selected item: {selectedItem}</p>
   <p>Selected multi items: {selectedMultiItems.join(', ')}</p>
 </div>`}
+isDarkMode={isDarkMode}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
           <div style={{ 
