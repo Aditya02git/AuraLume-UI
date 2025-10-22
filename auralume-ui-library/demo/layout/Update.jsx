@@ -87,7 +87,7 @@ const Update = ({ isDarkMode, setIsDarkMode, sidebarOpen }) => {
         className={isDarkMode ? 'dialog-dark' : 'dialog-light'}
         // onClose={() => console.log('Dialog closed!')}
         >
-        <p>Aura Lume is an UI library , the new version <span style={{ color: 'red'}}>1.0.0</span> is released.</p>
+        <p>Aura Lume is an UI library , the new version <span style={{ color: 'red'}}>1.0.1</span> is released.</p>
         <p style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><b>More updates soon!</b></p>
         </Dialog>
       </div>

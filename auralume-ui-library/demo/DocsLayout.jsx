@@ -1387,7 +1387,7 @@ const getNextPrevious = () => {
               renderNavigationItem(item)
             )}
           </div>
-          <p style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'gray', fontWeight: '300px', padding: '5px', fontSize: isMobile ? '8px' : '12px'}}>{sidebarOpen ? <p>version 1.0.0</p> : <p>v 0.1.0</p>}
+          <p style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'gray', fontWeight: '300px', padding: '5px', fontSize: isMobile ? '8px' : '12px'}}>{sidebarOpen ? <p>version 1.0.1</p> : <p>v 1.0.1</p>}
 </p>
         </nav>
       </div>
