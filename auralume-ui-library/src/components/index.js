@@ -37,6 +37,7 @@ export {
   DateTimePicker,
   DatePickerWithSubmit,
 } from "./Calendar";
+export { default as CardScape } from './CardScape';
 export { default as Carousel } from "./Carousel";
 export { default as Chart } from "./Chart";
 export { default as ChatBox } from "./ChatBox";

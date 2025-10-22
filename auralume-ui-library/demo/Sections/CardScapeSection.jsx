@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CardScape from '../../src/components/Cardscape';
+import { CardScape } from '../../src';
 
 // Preview Toggle Component
 const PreviewToggle = ({ activeTab, onTabChange, isDarkMode }) => {
