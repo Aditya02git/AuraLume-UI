@@ -1,7 +1,0 @@
-{
-  "name": "auralume-ui",
-  "compatibility_date": "2026-09-26",
-  "assets": {
-    "directory": "./dist"
-  }
-}
