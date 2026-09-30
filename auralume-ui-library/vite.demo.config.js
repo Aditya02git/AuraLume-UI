@@ -19,7 +19,7 @@ export default defineConfig({
 
   build: {
     // Output folder for production build
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(__dirname, 'dist-demo'),
     emptyOutDir: true, // Clean previous build
     rollupOptions: {
       input: resolve(__dirname, 'demo', 'index.html'),
